@@ -1,24 +1,18 @@
 # Example configuration file for use with urn-randomization package
 # To use, rename to config.yaml and edit as necessary
 
-# Default values
-# db: sqlite:///urn-randomization.db
-# alpha: 0
-# beta: 1
-# Possible values include range or variance
-# D: range
-# Method 1 sets p=1 for urn with largest value of D, with random selection in
-# case of tied values
-# urn_selection: method1
-
 # A short string identifying the study
 "Example Study":
     
+    # Default values
     # db: sqlite:///urn-randomization.db
     # alpha: 0
     # beta: 1
     # starting_seed: 
+    # Possible values include range or variance
     # D: range
+    # Method 1 sets p=1 for urn with largest value of D, with random selection in
+    # case of tied values
     # urn_selection: method1
     
     treatments:
