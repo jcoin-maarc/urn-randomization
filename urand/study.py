@@ -12,6 +12,8 @@ class Study:
         self.study_name = study_name
         config, self.asgmt, self.session = db.get_tables(study_name)
         
+        # TODO Allow w, alpha and beta to be sequence of integers
+        self.w = int(db.get_param(config, self.session, 'w'))
         self.alpha = int(db.get_param(config, self.session, 'alpha'))
         self.beta = int(db.get_param(config, self.session, 'beta'))
         starting_seed = db.get_param(config, self.session, 'starting_seed')
@@ -22,7 +24,7 @@ class Study:
         self.factors = json.loads(db.get_param(config, self.session, 'factors'))
     
     def print_config(self):
-        attrs = ['study_name', 'alpha', 'beta', 'starting_seed', 'D',
+        attrs = ['study_name', 'w', 'alpha', 'beta', 'starting_seed', 'D',
                  'urn_selection', 'treatments', 'factors']
         for attr in attrs:
             print('{}: {}'.format(attr, getattr(self, attr)))

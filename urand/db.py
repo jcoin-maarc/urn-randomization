@@ -65,6 +65,9 @@ def populate_config(study_name, config_tbl, session):
     else:
         study_config = config[study_name]
         
+        # TODO Allow w, alpha and beta to be sequence of integers
+        w = (study_config['w'].get(int) if 'w' in study_config
+                 else config['w'].get(int))
         alpha = (study_config['alpha'].get(int) if 'alpha' in study_config
                  else config['alpha'].get(int))
         beta = (study_config['beta'].get(int) if 'beta' in study_config
@@ -91,6 +94,7 @@ def populate_config(study_name, config_tbl, session):
             raise
         
         session.add_all([
+            config_tbl(param='w', value=w),
             config_tbl(param='alpha', value=alpha),
             config_tbl(param='beta', value=beta),
             config_tbl(param='starting_seed', value=starting_seed),

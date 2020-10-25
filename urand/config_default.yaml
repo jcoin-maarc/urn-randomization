@@ -1,5 +1,6 @@
 # Default configuration file
 db: sqlite:///urn-randomization.db
+w: 1
 alpha: 0
 beta: 1
 # Possible values include range or variance

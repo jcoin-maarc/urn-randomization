@@ -6,6 +6,7 @@
     
     # Default values
     # db: sqlite:///urn-randomization.db
+    # w: 0
     # alpha: 0
     # beta: 1
     # starting_seed: 
