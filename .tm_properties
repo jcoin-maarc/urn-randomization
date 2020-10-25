@@ -1,0 +1,4 @@
+TM_PYTHON="/usr/local/virtualenv/urn-randomization/bin/python"
+
+excludeInBrowser = "{tmp,*.pyc,__pycache__,*.egg-info}"
+excludeInFolderSearch = "{tmp,*.pyc,__pycache__,*.egg-info}"

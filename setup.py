@@ -14,6 +14,7 @@ setuptools.setup(
     include_package_data=True,
     license_file='LICENSE',
     install_requires=[
+        'confuse',
         'SQLAlchemy',
         'click',
     ],
@@ -22,4 +23,5 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
+    package_data={'urand': ['config_default.yaml']}
 )

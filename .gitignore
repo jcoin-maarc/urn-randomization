@@ -5,3 +5,4 @@ __pycache__/
 urn_randomization.egg-info
 /build
 /dist
+urn-randomization.db
