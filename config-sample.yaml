@@ -15,7 +15,8 @@
     # Method 1 sets p=1 for urn with largest value of D, with random selection in
     # case of tied values
     # urn_selection: method1
-    
+
+    starting_seed: 100
     treatments:
         - 1
         - 2

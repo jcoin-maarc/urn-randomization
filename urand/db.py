@@ -1,14 +1,18 @@
 """Utilities for interacting with SQLite DB containing study information"""
 
-from urand.config import config
+import json
+import re
+
+from confuse import NotFoundError
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy import Table, Column, String, Enum, DateTime, PickleType, or_
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy import Table, Column, String, Enum, DateTime, PickleType
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import null
-from confuse import NotFoundError
-import json
-import re
+import pandas as pd
+
+from urand.config import config
 
 clean = lambda s: re.sub('\W|^(?=\d)','_', s)
 
@@ -106,6 +110,17 @@ def populate_config(study_name, config_tbl, session):
         
         session.commit()
 
+
+def populate_asgmt(asgmt_tbl, lstdct_participant, session):
+    """Populate asgmt table
+
+    """
+    try:
+        session.add_all([asgmt_tbl(**dct_participant) for dct_participant in lstdct_participant])
+        session.commit()
+    except IntegrityError as ex:
+        print(ex)
+
 def get_tables(study_name):
     """Return study tables, initializing if necessary"""
     
@@ -134,6 +149,14 @@ def get_tables(study_name):
     populate_config(study_name, config_tbl, session)
     
     return (config_tbl, asgmt_tbl, session)
+
+def load_asgmt(agmt_table, session, **factorlevels):
+    """Retrieve assignments from the db. Filter by factor values, if present"""
+    query = session.query(agmt_table)
+    query = query.filter(or_(*[getattr(agmt_table, attr) == value for attr, value in factorlevels.items()]))
+    pdf_results = pd.read_sql(query.statement, session.bind)
+    return pdf_results
+
 
 def get_param(tbl, session, param):
     """Retrieve value of parameter from configuration table"""
