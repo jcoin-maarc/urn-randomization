@@ -62,7 +62,7 @@ class Study:
         """
         dct_participant = participant.__dict__
         dct_factors = dict((k, dct_participant[k]) for k in dct_participant if k.startswith('f_'))
-        pdf_urns = pd.DataFrame([{'factor': factor,
+        pdf_urn_assignments = pd.DataFrame([{'factor': factor,
                                   'factor_level': dct_factors["f_" + factor],
                                   'trt': trt,
                                   'n_assignments': 0}
@@ -70,18 +70,37 @@ class Study:
                                                             self.treatments)])
 
         pdf_asgmts = db.load_asgmt(self.asgmt, self.session, **dct_factors)
-        pdf_urns = pd.concat([pd.concat([pdf_asgmts[['f_' + factor, 'trt']]
+        pdf_urn_assignments = pd.concat([pd.concat([pdf_asgmts[['f_' + factor, 'trt']]
                                         .loc[pdf_asgmts['f_' + factor] == dct_factors["f_" + factor]]
                                         .rename(columns={'f_' + factor: 'factor_level'})
                                         .assign(factor=factor)
                                                 for factor in self.factors]
                                         ).groupby(['factor', 'factor_level', 'trt'])\
                                          .size().reset_index().rename(columns={0: 'n_assignments'}),
-                                pdf_urns],
+                                pdf_urn_assignments],
                              ignore_index=True)\
-                        .groupby(['factor', 'factor_level', 'trt'])['n_assignments'].sum().reset_index()
+                        .groupby(['factor', 'factor_level', 'trt'])['n_assignments'].sum().reset_index(drop=False)
+        pdf_urn_assignments = pdf_urn_assignments.pivot_table(index=['factor', 'factor_level'],
+                                        columns=['trt'],
+                                        values=['n_assignments'])
+
+        pdf_urn_assignments.columns = [(i[0] + '_' + i[1]).replace('n_assignments', 'trt') for i in pdf_urn_assignments.columns]
+        pdf_urn_assignments = pdf_urn_assignments.reset_index()
+        pdf_urns = pdf_urn_assignments.assign(
+            **dict([("balls_" + col, self.w + self.alpha * pdf_urn_assignments[col] +
+                                              self.beta * pdf_urn_assignments[:,
+                                                          pdf_urn_assignments.columns.str.startswith('trt_')].sum(axis=1)
+                                                            - pdf_urn_assignments[col])
+                    for col in pdf_urn_assignments.columns if col.startswith('trt_')]))
+        pdf_urns = pdf_urns.assign(total_balls =
+                                   pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
+                                   ].sum(axis=1))
+        pdf_urns = pdf_urns.assign(d = (pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
+                                   ].max(axis=1) - pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
+                                   ].min(axis=1)).div(pdf_urn_assignments['total_balls']))
         return pdf_urns
-    
+
+
     def upload_history(self, file):
         """Load existing history from study that has already started recruiting"""
         pdf_asgmt = pd.read_csv(file, dtype=object, encoding='utf8')
@@ -97,4 +116,8 @@ class Study:
     
     def randomize(self, participant):
         """Randomize participant"""
+        pdf_urns = self.get_urns(participant)
+        pdf_selected_urn = pdf_urns.loc[pdf_urns['d']==pdf_urns['d'].min()
+                                        ].sample(frac=1, seed=participant.seed).iloc[[0]]
+
         pass
