@@ -4,6 +4,7 @@ from urand.config import config
 from urand import db, participant
 import json
 import random
+import numpy as np
 from itertools import product
 from datetime import datetime, timezone
 import pickle
@@ -37,7 +38,7 @@ class Study:
                                      for factor_index, factor in enumerate(lst_factor)] +
                                     [('user', 'dummy'),
                                      ('datetime', datetime.now(timezone.utc)),
-                                     ('seed', pickle.dumps(random.getstate()))]
+                                     ('seed', pickle.dumps(np.random.RandomState()))]
                                     ) for lst_factor, tpl_participant in
                                             product([['f_' + factorlevel
                                                       for factorlevel in self.factors.keys()] +
@@ -86,18 +87,16 @@ class Study:
 
         pdf_urn_assignments.columns = [(i[0] + '_' + i[1]).replace('n_assignments', 'trt') for i in pdf_urn_assignments.columns]
         pdf_urn_assignments = pdf_urn_assignments.reset_index()
+        lst_trt_col = ['trt_' + trt for trt in self.treatments]
+        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
         pdf_urns = pdf_urn_assignments.assign(
-            **dict([("balls_" + col, self.w + self.alpha * pdf_urn_assignments[col] +
-                                              self.beta * pdf_urn_assignments[:,
-                                                          pdf_urn_assignments.columns.str.startswith('trt_')].sum(axis=1)
-                                                            - pdf_urn_assignments[col])
-                    for col in pdf_urn_assignments.columns if col.startswith('trt_')]))
+            **dict([("balls_" + col,
+                     self.w +
+                     (self.alpha * pdf_urn_assignments[col]) +
+                     (self.beta * (pdf_urn_assignments[lst_trt_col].sum(axis=1) - pdf_urn_assignments[col])))
+                    for col in lst_trt_col]))
         pdf_urns = pdf_urns.assign(total_balls =
-                                   pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
-                                   ].sum(axis=1))
-        pdf_urns = pdf_urns.assign(d = (pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
-                                   ].max(axis=1) - pdf_urn_assignments[:, pdf_urn_assignments.columns.str.startswith('balls_')
-                                   ].min(axis=1)).div(pdf_urn_assignments['total_balls']))
+                                   pdf_urns[lst_balls_col].sum(axis=1))
         return pdf_urns
 
 
@@ -115,9 +114,29 @@ class Study:
 
     
     def randomize(self, participant):
-        """Randomize participant"""
+        """Randomize participant
+            * Calculates d (level of imbalance) for all urns the patient is a candidate for
+            * picks the urn with the least imbalance (ties are broken with random selection)
+                with probability p_l as per urn_selection method
+            * Randomly picks one of the treatment balls, k_i, in the selected urn
+            * Patient is then assigned to the treatment type represented by the ball
+        """
         pdf_urns = self.get_urns(participant)
+        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
+        if self.D == 'range':
+            pdf_urns = pdf_urns.assign(d = (pdf_urns[lst_balls_col].max(axis=1) - pdf_urns[lst_balls_col].min(axis=1))
+                                                .div(pdf_urns['total_balls']))
+        else:
+            pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].var(axis=1)).div(pdf_urns['total_balls']))
         pdf_selected_urn = pdf_urns.loc[pdf_urns['d']==pdf_urns['d'].min()
-                                        ].sample(frac=1, seed=participant.seed).iloc[[0]]
-
-        pass
+                                        ].sample(frac=1, random_state=pickle.loads(participant.seed)).iloc[[0]]
+        random = pickle.loads(participant.seed)
+        trt = random.choice(lst_balls_col, 1,
+                            replace=True,
+                            p = pdf_selected_urn[lst_balls_col].div(pdf_selected_urn['total_balls'].values,
+                                                                    axis=0).values.flatten().tolist()
+                            )[0]
+        trt = trt.replace('balls_trt_', '')
+        participant.trt = trt
+        db.populate_asgmt(self.asgmt, [participant.__dict__], self.session, )
+        return participant
