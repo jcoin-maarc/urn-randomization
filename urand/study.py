@@ -17,7 +17,7 @@ class Study:
     def __init__(self, study_name):
         
         self.study_name = study_name
-        config, self.asgmt, self.session = db.get_tables(study_name)
+        config, self.participant, self.session = db.get_tables(study_name)
         
         # TODO Allow w, alpha and beta to be sequence of integers
         self.w = int(db.get_param(config, self.session, 'w'))
@@ -30,22 +30,33 @@ class Study:
         self.treatments = json.loads(db.get_param(config, self.session, 'treatments'))
         self.factors = json.loads(db.get_param(config, self.session, 'factors'))
 
+    def get_seed(self):
+        seed = db.get_seed(self.participant, self.session)
+        if seed is None:
+            return pickle.dumps(np.random.RandomState(self.starting_seed))
+        else:
+            return seed.seed
+
     def generate_dummy_participants(self, n_participants, seed):
         """Adds dummy participants to study database for using in development mode"""
         random.seed(seed)
-        lst_factorlevels = [self.factors[factor] for factor in self.factors] + [self.treatments]
+        lst_factorlevels = [self.factors[factor] for factor in self.factors] #+ [self.treatments]
         lstdct_participants = [dict([(factor, tpl_participant[factor_index])
                                      for factor_index, factor in enumerate(lst_factor)] +
                                     [('user', 'dummy'),
-                                     ('datetime', datetime.now(timezone.utc)),
-                                     ('seed', pickle.dumps(np.random.RandomState()))]
+                                     # ('datetime', datetime.now(timezone.utc)),
+                                     # ('seed', pickle.dumps(np.random.RandomState()))
+                                     ]
                                     ) for lst_factor, tpl_participant in
                                             product([['f_' + factorlevel
                                                       for factorlevel in self.factors.keys()] +
-                                                     ['trt', 'id']],
+                                                     ['id']],
                                                      [tpl + (idx,) for idx, tpl in enumerate(random.sample(set(product(*lst_factorlevels)),
                                                                    n_participants))])]
-        db.populate_asgmt(self.asgmt, lstdct_participants, self.session,)
+        for dct in lstdct_participants:
+            dct_participant = dict(dct)
+            dct_participant['datetime'] = datetime.now(timezone.utc)
+            self.randomize(self.participant(**dct_participant))
 
 
 
@@ -70,7 +81,7 @@ class Study:
                                  for factor, trt in product(list(self.factors.keys()),
                                                             self.treatments)])
 
-        pdf_asgmts = db.load_asgmt(self.asgmt, self.session, **dct_factors)
+        pdf_asgmts = db.fetch_participants(self.participant, self.session, **dct_factors)
         pdf_urn_assignments = pd.concat([pd.concat([pdf_asgmts[['f_' + factor, 'trt']]
                                         .loc[pdf_asgmts['f_' + factor] == dct_factors["f_" + factor]]
                                         .rename(columns={'f_' + factor: 'factor_level'})
@@ -110,7 +121,7 @@ class Study:
         pdf_asgmt = pdf_asgmt.assign(datetime = pd.to_datetime(pdf_asgmt['datetime'],
                                                                utc=True),
                                      seed=pdf_asgmt['seed'].apply(ast.literal_eval))
-        db.populate_asgmt(self.asgmt, pdf_asgmt.to_dict('records'), self.session, )
+        db.populate_participant(self.participant, pdf_asgmt.to_dict('records'), self.session, )
 
     
     def randomize(self, participant):
@@ -121,14 +132,17 @@ class Study:
             * Randomly picks one of the treatment balls, k_i, in the selected urn
             * Patient is then assigned to the treatment type represented by the ball
         """
+
         pdf_urns = self.get_urns(participant)
+        participant.seed = self.get_seed()
         lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
         if self.D == 'range':
             pdf_urns = pdf_urns.assign(d = (pdf_urns[lst_balls_col].max(axis=1) - pdf_urns[lst_balls_col].min(axis=1))
                                                 .div(pdf_urns['total_balls']))
         else:
             pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].var(axis=1)).div(pdf_urns['total_balls']))
-        pdf_selected_urn = pdf_urns.loc[pdf_urns['d']==pdf_urns['d'].min()
+        ### Shuffling is done here to break ties when multiple urns have the lowest d
+        pdf_selected_urn = pdf_urns.loc[pdf_urns['d']==pdf_urns['d'].max()
                                         ].sample(frac=1, random_state=pickle.loads(participant.seed)).iloc[[0]]
         random = pickle.loads(participant.seed)
         trt = random.choice(lst_balls_col, 1,
@@ -138,5 +152,6 @@ class Study:
                             )[0]
         trt = trt.replace('balls_trt_', '')
         participant.trt = trt
-        db.populate_asgmt(self.asgmt, [participant.__dict__], self.session, )
+        participant.seed = pickle.dumps(random)
+        db.populate_participant(self.participant, participant, self.session, )
         return participant

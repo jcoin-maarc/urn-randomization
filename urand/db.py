@@ -27,7 +27,7 @@ def config_table(engine, metadata, study_name):
     
     return table_name
 
-def asgmt_table(engine, metadata, study_name):
+def participant_table(engine, metadata, study_name):
     """Define table holding history of treatment assignments"""
     
     table_name = '{}_history'.format(clean(study_name))
@@ -111,12 +111,12 @@ def populate_config(study_name, config_tbl, session):
         session.commit()
 
 
-def populate_asgmt(asgmt_tbl, lstdct_participant, session):
+def populate_participant(participant_tbl, participant, session):
     """Populate asgmt table
 
     """
     try:
-        session.add_all([asgmt_tbl(**dct_participant) for dct_participant in lstdct_participant])
+        session.add(participant)
         session.commit()
     except IntegrityError as ex:
         print(ex)
@@ -132,7 +132,7 @@ def get_tables(study_name):
     metadata = MetaData()
     
     config_table_name = config_table(engine, metadata, study_name)
-    asgmt_table_name = asgmt_table(engine, metadata, study_name)
+    participant_table_name = participant_table(engine, metadata, study_name)
     
     metadata.reflect(engine)
     
@@ -141,24 +141,28 @@ def get_tables(study_name):
     metadata.create_all(engine)
     
     config_tbl = getattr(Base.classes, config_table_name)
-    asgmt_tbl = getattr(Base.classes, asgmt_table_name)
+    participant_tbl = getattr(Base.classes, participant_table_name)
     
     Session = sessionmaker(bind=engine)
     session = Session()
     
     populate_config(study_name, config_tbl, session)
     
-    return (config_tbl, asgmt_tbl, session)
+    return (config_tbl, participant_tbl, session)
 
-def load_asgmt(agmt_table, session, **factorlevels):
+def fetch_participants(participant_table, session, **factorlevels):
     """Retrieve assignments from the db. Filter by factor values, if present"""
-    query = session.query(agmt_table)
-    query = query.filter(or_(*[getattr(agmt_table, attr) == value for attr, value in factorlevels.items()]))
+    query = session.query(participant_table)
+    query = query.filter(or_(*[getattr(participant_table, attr) == value for attr, value in factorlevels.items()]))
     pdf_results = pd.read_sql(query.statement, session.bind)
     return pdf_results
 
 
+def get_seed(participant_table, session):
+    query = session.query(participant_table.seed).order_by(participant_table.datetime.desc())
+    return query.first()
+
+
 def get_param(tbl, session, param):
     """Retrieve value of parameter from configuration table"""
-    
     return session.query(tbl).filter_by(param=param).first().value
