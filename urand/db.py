@@ -49,7 +49,7 @@ def participant_table(engine, metadata, study_name):
         cols.extend([Column('trt', Enum(*[str(t) for t in trts]), nullable=False),
                      Column('datetime', DateTime, nullable=False),
                      Column('user', String, nullable=False),
-                     Column('seed', PickleType, nullable=False)])
+                     Column('seed', PickleType, nullable=True)])
         
         Table(table_name, metadata, *cols)
     
@@ -109,6 +109,18 @@ def populate_config(study_name, config_tbl, session):
         ])
         
         session.commit()
+
+
+def populate_participants(participant_tbl, lstdct_participant, session):
+    """Populate asgmt table
+
+    """
+    try:
+        session.add_all([participant_tbl(**dct_participant) for dct_participant in lstdct_participant])
+        session.commit()
+    except IntegrityError as ex:
+        print(ex)
+
 
 
 def populate_participant(participant_tbl, participant, session):
