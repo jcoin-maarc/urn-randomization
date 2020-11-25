@@ -71,7 +71,7 @@ class Study:
         attrs = ['study_name', 'w', 'alpha', 'beta', 'starting_seed', 'D',
                  'urn_selection', 'treatments', 'factors']
         for attr in attrs:
-            print('{}: {}'.format(attr, getattr(self, attr)))
+            return '{}'.format(getattr(self, attr))
     
     def get_urns(self, participant):
         """Get urns required to randomize participant

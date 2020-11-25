@@ -17,6 +17,9 @@ setuptools.setup(
         'confuse',
         'SQLAlchemy',
         'click',
+        'Flask',
+        'pandas',
+        'numpy',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
