@@ -133,13 +133,16 @@ def populate_participant(participant_tbl, participant, session):
     except IntegrityError as ex:
         print(ex)
 
-def get_tables(study_name):
+def get_tables(study_name, db_fname=None):
     """Return study tables, initializing if necessary"""
-    
-    try:
-        engine = create_engine(config[study_name]['db'].get())
-    except NotFoundError:
-        engine = create_engine(config['db'].get())
+    db_url = 'sqlite:///' + db_fname if db_fname else (
+        config[study_name]['db'].get() if (study_name in config) else config['db'].get())
+    engine = create_engine(db_url)
+
+    # try:
+    #     engine = create_engine(config[study_name]['db'].get())
+    # except NotFoundError:
+    #     engine = create_engine(config['db'].get())
     
     metadata = MetaData()
     

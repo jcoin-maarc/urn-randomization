@@ -14,10 +14,10 @@ import pandas as pd
 class Study:
     """Study for which treatments are to be assigned"""
     
-    def __init__(self, study_name):
-        
+    def __init__(self, study_name, db_fname=None):
         self.study_name = study_name
-        config, self.participant, self.session = db.get_tables(study_name)
+        self.db_fname = db_fname
+        config, self.participant, self.session = db.get_tables(study_name, db_fname)
         
         # TODO Allow w, alpha and beta to be sequence of integers
         self.w = int(db.get_param(config, self.session, 'w'))
@@ -63,7 +63,7 @@ class Study:
             dct_participant = dict(dct)
             dct_participant['datetime'] = datetime.now(timezone.utc)
             self.randomize(self.participant(**dct_participant))
-
+        return
 
 
     
@@ -142,7 +142,7 @@ class Study:
 
         return
 
-
+    ## TODO: get study status - multiple studies, npatients, print urn assignments
     def upload_new_participants(self, **dct_participants):
 
         assert ('file' in dct_participants) | ('pdf' in dct_participants), 'Neither filename nor dataframe eith patient ' \
