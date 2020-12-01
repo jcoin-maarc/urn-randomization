@@ -14,10 +14,10 @@ import pandas as pd
 class Study:
     """Study for which treatments are to be assigned"""
     
-    def __init__(self, study_name, db_fname=None):
+    def __init__(self, study_name, memory=False):
+        
         self.study_name = study_name
-        self.db_fname = db_fname
-        config, self.participant, self.session = db.get_tables(study_name, db_fname)
+        config, self.participant, self.session = db.get_tables(study_name, memory)
         
         # TODO Allow w, alpha and beta to be sequence of integers
         self.w = int(db.get_param(config, self.session, 'w'))
@@ -33,7 +33,7 @@ class Study:
     def get_seed(self):
         """Returns the latest state of the random number generator. Returns a random state with study's
         starting seed as the seed for the first patient"""
-        seed = db.get_seed(self.participant, self.session)
+        seed = db.get_last_state(self.participant, self.session)
         if seed is None:
             random.seed(self.starting_seed)
             return pickle.dumps(np.random.RandomState(self.starting_seed))
@@ -87,7 +87,7 @@ class Study:
                                  for factor, trt in product(list(self.factors.keys()),
                                                             self.treatments)])
 
-        pdf_asgmts = db.fetch_participants(self.participant, self.session, **dct_factors)
+        pdf_asgmts = db.get_participants(self.participant, self.session, **dct_factors)
         pdf_urn_assignments = pd.concat([pd.concat([pdf_asgmts[['f_' + factor, 'trt']]
                                         .loc[pdf_asgmts['f_' + factor] == dct_factors["f_" + factor]]
                                         .rename(columns={'f_' + factor: 'factor_level'})
@@ -119,7 +119,7 @@ class Study:
 
     def export_history(self, file):
         """Exports patient assignment history table as a csv file"""
-        db.fetch_participants(self.participant, self.session).to_csv(file, index=False)
+        db.get_participants(self.participant, self.session).to_csv(file, index=False)
 
     def upload_existing_history(self, file):
         """Load existing history from study that has already started recruiting"""
@@ -132,13 +132,13 @@ class Study:
                                                                utc=True))
         if 'seed' in pdf_asgmt.columns:
             pdf_asgmt = pdf_asgmt.assign(seed=pdf_asgmt['seed'].apply(ast.literal_eval))
-            db.populate_participants(self.participant, pdf_asgmt.to_dict('records'), self.session, )
+            db.add_participants(self.participant, pdf_asgmt.to_dict('records'), self.session, )
         else:
             lstdct_participants = pdf_asgmt.to_dict('records')
-            db.populate_participants(self.participant, lstdct_participants[:(pdf_asgmt.shape[0] - 1)], self.session, )
+            db.add_participants(self.participant, lstdct_participants[:(pdf_asgmt.shape[0] - 1)], self.session, )
             dct_participant = lstdct_participants[pdf_asgmt.shape[0] - 1]
             dct_participant['seed'] = pickle.dumps(np.random.RandomState(self.starting_seed))
-            db.populate_participants(self.participant, [dct_participant], self.session, )
+            db.add_participants(self.participant, [dct_participant], self.session, )
 
         return
 
@@ -196,5 +196,5 @@ class Study:
         trt = trt.replace('balls_trt_', '')
         participant.trt = trt
         participant.seed = pickle.dumps(nprandom)
-        db.populate_participant(self.participant, participant, self.session, )
+        db.add_participant(participant, self.session)
         return participant

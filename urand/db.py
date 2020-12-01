@@ -1,18 +1,16 @@
 """Utilities for interacting with SQLite DB containing study information"""
 
-import json
-import re
-
-from confuse import NotFoundError
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy import Table, Column, String, Enum, DateTime, PickleType, or_
+from urand.config import config
 from sqlalchemy import create_engine, MetaData
+from sqlalchemy import Table, Column, String, Enum, DateTime, PickleType, or_
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import null
+from confuse import NotFoundError
+import json
+import re
 import pandas as pd
-
-from urand.config import config
 
 clean = lambda s: re.sub('\W|^(?=\d)','_', s)
 
@@ -110,39 +108,16 @@ def populate_config(study_name, config_tbl, session):
         
         session.commit()
 
-
-def populate_participants(participant_tbl, lstdct_participant, session):
-    """Populate asgmt table
-
-    """
-    try:
-        session.add_all([participant_tbl(**dct_participant) for dct_participant in lstdct_participant])
-        session.commit()
-    except IntegrityError as ex:
-        print(ex)
-
-
-
-def populate_participant(participant_tbl, participant, session):
-    """Populate asgmt table
-
-    """
-    try:
-        session.add(participant)
-        session.commit()
-    except IntegrityError as ex:
-        print(ex)
-
-def get_tables(study_name, db_fname=None):
+def get_tables(study_name, memory=False):
     """Return study tables, initializing if necessary"""
-    db_url = 'sqlite:///' + db_fname if db_fname else (
-        config[study_name]['db'].get() if (study_name in config) else config['db'].get())
-    engine = create_engine(db_url)
-
-    # try:
-    #     engine = create_engine(config[study_name]['db'].get())
-    # except NotFoundError:
-    #     engine = create_engine(config['db'].get())
+    
+    if memory:
+        engine = create_engine('sqlite://')
+    else:
+        try:
+            engine = create_engine(config[study_name]['db'].get())
+        except NotFoundError:
+            engine = create_engine(config['db'].get())
     
     metadata = MetaData()
     
@@ -165,19 +140,41 @@ def get_tables(study_name, db_fname=None):
     
     return (config_tbl, participant_tbl, session)
 
-def fetch_participants(participant_table, session, **factorlevels):
-    """Retrieve assignments from the db. Filter by factor values, if present"""
-    query = session.query(participant_table)
-    query = query.filter(or_(*[getattr(participant_table, attr) == value for attr, value in factorlevels.items()]))
-    pdf_results = pd.read_sql(query.statement, session.bind)
-    return pdf_results
-
-
-def get_seed(participant_table, session):
-    query = session.query(participant_table.seed).order_by(participant_table.datetime.desc())
-    return query.first()
-
-
-def get_param(tbl, session, param):
+def get_param(config_tbl, session, param):
     """Retrieve value of parameter from configuration table"""
-    return session.query(tbl).filter_by(param=param).first().value
+    
+    return session.query(config_tbl).filter_by(param=param).first().value
+
+def get_last_state(participant_tbl, session):
+    """Get state of RNG following last assignment in pickled format"""
+    
+    return session.query(participant_tbl.seed).\
+                   order_by(participant_tbl.datetime.desc()).first()
+
+def get_participants(participant_tbl, session, **factor_levels):
+    """Get existing participants, optionally filtered by factor levels"""
+    
+    filter = [getattr(participant_tbl, attr) == value for attr, value \
+              in factor_levels.items()]
+    query = session.query(participant_tbl).filter(or_(*filter))
+    df = pd.read_sql(query.statement, session.bind)
+    return df
+
+def add_participant(participant, session):
+    """Add new participant to participants table"""
+    
+    try:
+        session.add(participant)
+        session.commit()
+    except IntegrityError as e:
+        print(e)
+
+def add_participants(participant_tbl, plist, session):
+    """Add list of participants stored as dictionaries to participants table"""
+    
+    participants = [participant_tbl(**p) for p in plist]
+    try:
+        session.add_all(participants)
+        session.commit()
+    except IntegrityError as e:
+        print(e)
