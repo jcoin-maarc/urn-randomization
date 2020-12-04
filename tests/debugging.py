@@ -1,15 +1,19 @@
 from urand import Study
 
 study = Study('Example Study')
-#study.generate_dummy_participants(1000, 100)
-study.export_history('test.csv')
 study.print_config()
-# participant = study.asgmt(id="80",
-#                           user="test",
-#                           datetime=
-#                           f_institute="10",
-#                           f_pretreatment="prior radiotherapy",
-#                           f_sex="male",
-#                           )
-#study.randomize(participant)
-#study.upload_history('test.csv')
+participant1 = study.participant(id='001',
+                                 user='testing',
+                                 f_institute='4',
+                                 f_pretreatment='no prior treatment',
+                                 f_sex='male'
+                                )
+participant2 = study.participant(id='002',
+                                 user='testing',
+                                 f_institute='7',
+                                 f_pretreatment='prior radiotherapy',
+                                 f_sex='female'
+                                )
+study.randomize(participant1)
+study.randomize(participant2)
+study.export_history('history.csv')
