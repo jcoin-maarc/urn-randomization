@@ -2,7 +2,7 @@
 
 from urand.config import config
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy import Table, Column, String, Enum, DateTime, PickleType, or_
+from sqlalchemy import Table, Column, String, Enum, DateTime, JSON, or_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
@@ -47,7 +47,7 @@ def participant_table(engine, metadata, study_name):
         cols.extend([Column('trt', Enum(*[str(t) for t in trts]), nullable=False),
                      Column('datetime', DateTime, nullable=False),
                      Column('user', String, nullable=False),
-                     Column('seed', PickleType, nullable=True)])
+                     Column('bg_state', JSON, nullable=True)])
         
         Table(table_name, metadata, *cols)
     
@@ -146,9 +146,9 @@ def get_param(config_tbl, session, param):
     return session.query(config_tbl).filter_by(param=param).first().value
 
 def get_last_state(participant_tbl, session):
-    """Get state of RNG following last assignment in pickled format"""
+    """Get state of RNG following last assignment"""
     
-    return session.query(participant_tbl.seed).\
+    return session.query(participant_tbl.bg_state).\
                    order_by(participant_tbl.datetime.desc()).first()
 
 def get_participants(participant_tbl, session, **factor_levels):
