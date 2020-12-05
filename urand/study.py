@@ -1,6 +1,5 @@
 """Urn randomization for group assignment in randomized experiments"""
 
-from urand.config import config
 from urand import db
 import json
 import random
