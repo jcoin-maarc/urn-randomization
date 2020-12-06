@@ -1,6 +1,5 @@
 """Urn randomization for group assignment in randomized experiments"""
 
-from urand.config import config
 from urand import db
 import json
 import random
@@ -9,6 +8,7 @@ from itertools import product
 from datetime import datetime, timezone
 import ast
 import pandas as pd
+import sys
 
 class Study:
     """Study for which treatments are to be assigned"""
@@ -76,50 +76,53 @@ class Study:
         for attr in attrs:
             return '{}'.format(getattr(self, attr))
     
-    def get_urns(self, participant):
-        """Get urns required to randomize participant
+    def _get_assignments(self, fdict):
+        """Assignments for those matching each factor, in urn format"""
         
-        Build list of urns from assignment history.
-        """
-        dct_participant = participant.__dict__
-        dct_factors = dict((k, dct_participant[k]) for k in dct_participant if k.startswith('f_'))
-        pdf_urn_assignments = pd.DataFrame([{'factor': factor,
-                                  'factor_level': dct_factors["f_" + factor],
-                                  'trt': trt,
-                                  'n_assignments': 0}
-                                 for factor, trt in product(list(self.factors.keys()),
-                                                            self.treatments)])
-
-        pdf_asgmts = db.get_participants(self.participant, self.session, **dct_factors)
-        pdf_urn_assignments = pd.concat([pd.concat([pdf_asgmts[['f_' + factor, 'trt']]
-                                        .loc[pdf_asgmts['f_' + factor] == dct_factors["f_" + factor]]
-                                        .rename(columns={'f_' + factor: 'factor_level'})
-                                        .assign(factor=factor)
-                                                for factor in self.factors]
-                                        ).groupby(['factor', 'factor_level', 'trt'])\
-                                         .size().reset_index().rename(columns={0: 'n_assignments'}),
-                                pdf_urn_assignments],
-                             ignore_index=True)\
-                        .groupby(['factor', 'factor_level', 'trt'])['n_assignments'].sum().reset_index(drop=False)
-        pdf_urn_assignments = pdf_urn_assignments.pivot_table(index=['factor', 'factor_level'],
-                                        columns=['trt'],
-                                        values=['n_assignments'])
-
-        pdf_urn_assignments.columns = [(i[0] + '_' + i[1]).replace('n_assignments', 'trt') for i in pdf_urn_assignments.columns]
-        pdf_urn_assignments = pdf_urn_assignments.reset_index()
-        lst_trt_col = ['trt_' + trt for trt in self.treatments]
-        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
-        pdf_urns = pdf_urn_assignments.assign(
-            **dict([("balls_" + col,
-                     self.w +
-                     (self.alpha * pdf_urn_assignments[col]) +
-                     (self.beta * (pdf_urn_assignments[lst_trt_col].sum(axis=1) - pdf_urn_assignments[col])))
-                    for col in lst_trt_col]))
-        pdf_urns = pdf_urns.assign(total_balls =
-                                   pdf_urns[lst_balls_col].sum(axis=1))
-        return pdf_urns
-
-
+        # Start with empty data frame with all treatment columns in order
+        idx = pd.MultiIndex.from_tuples([], names=['factor', 'factor_level'])
+        dfs = [pd.DataFrame(columns=['trt_' + t for t in self.treatments],
+                            index=idx)]
+        
+        df = db.get_participants(self.participant, self.session, **fdict)
+        for factor in fdict:
+            subset = df.loc[df[factor]==fdict[factor], [factor,'trt']]
+            if not subset.empty:
+                subset.rename(columns={factor:'factor_level'}, inplace=True)
+                subset['factor'] = factor.lstrip('f_')
+                subset['trt'] = 'trt_' + subset.trt
+                dfs.append(subset.value_counts(['factor','factor_level','trt']).\
+                                  to_frame().unstack(level=-1, fill_value=0).\
+                                  droplevel(level=0, axis=1))
+            else:
+                idx = pd.MultiIndex.from_tuples([(factor.lstrip('f_'),
+                                                  fdict[factor])],
+                                                names=['factor', 'factor_level'])
+                dfs.append(pd.DataFrame({'trt_{}'.format(t):0
+                                         for t in self.treatments}, index=idx))
+        
+        return pd.concat(dfs).fillna(0).astype(int).reset_index()
+    
+    def get_urns(self, participant):
+        """Returns list of urns constructed from assignment history"""
+        
+        fdict = {col:getattr(participant, col)
+                 for col in participant.__table__.columns.keys()
+                 if col.startswith('f_')}
+        urns = self._get_assignments(fdict)
+        
+        # TODO Modify calculation to accommodate vector-valued w, alpha and beta
+        trt_cols = ['trt_' + t for t in self.treatments]
+        for col in trt_cols:
+            urns['balls_' + col] = (self.w +
+                                    (self.alpha * urns[col]) +
+                                    (self.beta * (urns[trt_cols].sum(axis=1) -
+                                                  urns[col])))
+        
+        ball_cols = ['balls_' + c for c in trt_cols]
+        urns['total_balls'] = urns[ball_cols].sum(axis=1)
+        return urns
+    
     def export_history(self, file):
         """Exports patient assignment history table as a csv file"""
         db.get_participants(self.participant, self.session).to_csv(file, index=False)
@@ -182,30 +185,32 @@ class Study:
         rng = Generator(bg)
         
         urns = self.get_urns(participant)
-        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
+        ball_cols = ['balls_trt_' + trt for trt in self.treatments]
         if self.D == 'range':
-            urns = urns.assign(d=(urns[lst_balls_col].max(axis=1) -
-                                  urns[lst_balls_col].min(axis=1))
+            urns = urns.assign(d=(urns[ball_cols].max(axis=1) -
+                                  urns[ball_cols].min(axis=1))
                                  .div(urns['total_balls']))
-        else:
-            urns = urns.assign(d=(urns[lst_balls_col].var(axis=1))
-                                 .div(urns['total_balls']))
+        elif self.D == 'variance':
+            urns = urns.assign(d=(urns[ball_cols].div(urns['total_balls'],
+                                                      axis=0).var(axis=1)))
         
-        # Select urn with most imbalance
-        # Get urns with maximum imbalance and sort them by factor columns
-        candidate_urns = urns.loc[urns['d']==urns['d'].max()
-                                 ].sort_values(by=['factor'],
-                                               ascending=True).reset_index(drop=True)
-        selected_urn = candidate_urns.iloc[[rng.choice(candidate_urns.index.tolist(),
-                                                       1, replace=True)[0]]]
-        trt = rng.choice(lst_balls_col, 1,
-                         replace=True,
-                         p = selected_urn[lst_balls_col].div(selected_urn['total_balls'].values,
-                                                             axis=0).values.flatten().tolist()
-                        )[0]
-        trt = trt.replace('balls_trt_', '')
-        participant.trt = trt
+        # Select urn with greatest imbalance
+        # Start by getting urns with maximum imbalance and sorting them by
+        # factor columns
+        candidate_urns = urns.loc[urns['d']==urns['d'].max()].\
+                              sort_values(by=['factor'], ascending=True).\
+                              reset_index(drop=True)
+        selected_urn = candidate_urns.iloc[rng.choice(candidate_urns.index.\
+                                                      tolist(), 1).tolist()]
+        
+        trt = rng.choice(ball_cols, 1,
+                         p = selected_urn[ball_cols].\
+                             div(selected_urn['total_balls'].values, axis=0).\
+                             values.flatten().tolist())[0]
+        participant.trt = trt.lstrip('balls_trt_')
+        
         participant.datetime = datetime.now(timezone.utc)
         participant.bg_state = bg.state
         db.add_participant(participant, self.session)
+        
         return participant
