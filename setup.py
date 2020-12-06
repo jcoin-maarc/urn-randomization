@@ -26,5 +26,9 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    package_data={'urand': ['config_default.yaml']}
+    package_data={'urand': ['config_default.yaml']},
+    entry_points='''
+        [console_scripts]
+        urn=urand.cli:cli
+    ''',
 )
