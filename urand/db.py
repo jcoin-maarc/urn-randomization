@@ -12,7 +12,8 @@ import json
 import re
 import pandas as pd
 
-clean = lambda s: re.sub('\W|^(?=\d)','_', s)
+clean = lambda s: re.sub(r'\W|^(?=\d)', '_', s)
+
 
 def config_table(engine, metadata, study_name):
     """Define table holding study configuration"""
@@ -24,6 +25,7 @@ def config_table(engine, metadata, study_name):
               Column('value', String))
     
     return table_name
+
 
 def participant_table(engine, metadata, study_name):
     """Define table holding history of treatment assignments"""
@@ -53,6 +55,7 @@ def participant_table(engine, metadata, study_name):
     
     return table_name
 
+
 def populate_config(study_name, config_tbl, session):
     """Populate or verify config table
     
@@ -69,7 +72,7 @@ def populate_config(study_name, config_tbl, session):
         
         # TODO Allow w, alpha and beta to be sequence of integers
         w = (study_config['w'].get(int) if 'w' in study_config
-                 else config['w'].get(int))
+             else config['w'].get(int))
         alpha = (study_config['alpha'].get(int) if 'alpha' in study_config
                  else config['alpha'].get(int))
         beta = (study_config['beta'].get(int) if 'beta' in study_config
@@ -108,6 +111,7 @@ def populate_config(study_name, config_tbl, session):
         
         session.commit()
 
+
 def get_tables(study_name, memory=False):
     """Return study tables, initializing if necessary"""
     
@@ -140,16 +144,19 @@ def get_tables(study_name, memory=False):
     
     return (config_tbl, participant_tbl, session)
 
+
 def get_param(config_tbl, session, param):
     """Retrieve value of parameter from configuration table"""
     
     return session.query(config_tbl).filter_by(param=param).first().value
 
+
 def get_last_state(participant_tbl, session):
     """Get state of RNG following last assignment"""
     
     return session.query(participant_tbl.bg_state).\
-                   order_by(participant_tbl.datetime.desc()).first()
+        order_by(participant_tbl.datetime.desc()).first()
+
 
 def get_participants(participant_tbl, session, **factor_levels):
     """Get existing participants, optionally filtered by factor levels"""
@@ -160,6 +167,7 @@ def get_participants(participant_tbl, session, **factor_levels):
     df = pd.read_sql(query.statement, session.bind)
     return df
 
+
 def add_participant(participant, session):
     """Add new participant to participants table"""
     
@@ -168,6 +176,7 @@ def add_participant(participant, session):
         session.commit()
     except IntegrityError as e:
         print(e)
+
 
 def add_participants(participant_tbl, plist, session):
     """Add list of participants stored as dictionaries to participants table"""

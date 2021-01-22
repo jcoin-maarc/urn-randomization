@@ -10,6 +10,7 @@ import ast
 import pandas as pd
 import sys
 
+
 class Study:
     """Study for which treatments are to be assigned"""
     
@@ -46,7 +47,7 @@ class Study:
     def generate_dummy_participants(self, n_participants, seed):
         """Adds dummy participants to study database for using in development mode"""
         rng = Generator(PCG64(seed))
-        lst_factorlevels = [self.factors[factor] for factor in sorted(self.factors.keys())] #+ [self.treatments]
+        lst_factorlevels = [self.factors[factor] for factor in sorted(self.factors.keys())]
         lst_factor_combos = list(set(product(*lst_factorlevels)))
         lstdct_participants = [dict([(factor, tpl_participant[factor_index])
                                      for factor_index, factor in enumerate(lst_factor)] +
@@ -55,13 +56,14 @@ class Study:
                                      # ('seed', pickle.dumps(np.random.RandomState()))
                                      ]
                                     ) for lst_factor, tpl_participant in
-                                            product([['f_' + factor
-                                                      for factor in sorted(self.factors.keys())] +
-                                                     ['id']],
-                                                     [tpl + (idx,) for idx, tpl in
-                                                      enumerate([lst_factor_combos[i] for i in
-                                                                 rng.choice(len(lst_factor_combos), n_participants,
-                                                                            replace=True)])])]
+                               product([['f_' + factor
+                                         for factor in sorted(self.factors.keys())] +
+                                        ['id']],
+                                       [tpl + (idx,) for idx, tpl in
+                                        enumerate([lst_factor_combos[i] for i in
+                                                   rng.choice(len(lst_factor_combos),
+                                                              n_participants,
+                                                              replace=True)])])]
         self.upload_new_participants(pdf=pd.DataFrame(lstdct_participants))
         return
 
@@ -71,7 +73,7 @@ class Study:
         for attr in attrs:
             print('{}: {}'.format(attr, getattr(self, attr)))
 
-    def _get_assignments(self, lsttpl_factors):
+    def _get_assignments(self, fdict):
         """Assignments for those matching each factor, in urn format"""
 
         # Start with empty data frame with all treatment columns in order
@@ -79,38 +81,29 @@ class Study:
         dfs = [pd.DataFrame(columns=['trt_' + t for t in self.treatments],
                             index=idx)]
 
-        lst_factor_names = [tpl[0] for tpl in lsttpl_factors]
-        df = db.get_participants(self.participant, self.session,
-                                 **(dict(lsttpl_factors) if (
-                                             len(set(lst_factor_names)) == len(lst_factor_names)) else dict()))
-        for tpl_factor in lsttpl_factors:
-            subset = df.loc[df[tpl_factor[0]] == tpl_factor[1], [tpl_factor[0], 'trt']]
-            if not subset.empty:
-                subset.rename(columns={tpl_factor[0]:'factor_level'}, inplace=True)
-                subset['factor'] = tpl_factor[0].lstrip('f_')
-                subset['trt'] = 'trt_' + subset.trt
-                dfs.append(subset.value_counts(['factor','factor_level','trt']).\
-                                  to_frame().unstack(level=-1, fill_value=0).\
-                                  droplevel(level=0, axis=1))
-            else:
-                idx = pd.MultiIndex.from_tuples([(tpl_factor[0].lstrip('f_'),
-                                                  tpl_factor[1])],
-                                                names=['factor', 'factor_level'])
-                dfs.append(pd.DataFrame({'trt_{}'.format(t):0
-                                         for t in self.treatments}, index=idx))
+        df = db.get_participants(self.participant, self.session, **fdict)
+        for factor in self.factors.keys():
+            for factor_level in ([fdict['f_' + factor]] if bool(fdict) else self.factors[factor]):
+                subset = df.loc[df['f_' + factor] == factor_level,
+                                ['f_' + factor, 'trt']]
+                if not subset.empty:
+                    subset.rename(columns={'f_' + factor: 'factor_level'}, inplace=True)
+                    subset['factor'] = factor
+                    subset['trt'] = 'trt_' + subset.trt
+                    dfs.append(subset.value_counts(['factor', 'factor_level', 'trt']).\
+                               to_frame().unstack(level=-1, fill_value=0).\
+                               droplevel(level=0, axis=1))
+                else:
+                    idx = pd.MultiIndex.from_tuples([(factor,
+                                                      factor_level)],
+                                                    names=['factor', 'factor_level'])
+                    dfs.append(pd.DataFrame({'trt_{}'.format(t): 0
+                                             for t in self.treatments}, index=idx))
 
         return pd.concat(dfs).fillna(0).astype(int).reset_index()
 
-    def get_urns(self, participant=None):
-        """Returns list of urns constructed from assignment history"""
-
-        tpllst_factors = [item for sublist in [
-            [(factor_name, factor_level) for factor_name, factor_level in product([factor], self.factors[factor])] for
-            factor in self.factors.keys()] for item in sublist] if participant is None else [
-            (col, getattr(participant, col))
-            for col in participant.__table__.columns.keys()
-            if col.startswith('f_')]
-        urns = self._get_assignments(tpllst_factors)
+    def compute_no_balls(self, urns):
+        """Add no_balls columns"""
 
         # TODO Modify calculation to accommodate vector-valued w, alpha and beta
         trt_cols = ['trt_' + t for t in self.treatments]
@@ -124,12 +117,24 @@ class Study:
         urns['total_balls'] = urns[ball_cols].sum(axis=1)
         return urns
 
+    def get_urns(self, participant):
+        """Returns list of urns associsated with the participant,
+        constructed from their assignment history"""
+
+        fdict = {col: getattr(participant, col)
+                 for col in participant.__table__.columns.keys()
+                 if col.startswith('f_')}
+        urns = self._get_assignments(fdict)
+        urns = self.compute_no_balls(urns)
+        return urns
 
     def get_study_urns(self):
         """Get all possible urns related to study
             Build list of urns from assignment history.
         """
-        pdf_urns = self.get_urns()
+        pdf_urns = self._get_assignments({})
+
+        pdf_urns = self.compute_no_balls(pdf_urns)
         lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
         if self.D == 'range':
             pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].max(axis=1) - pdf_urns[lst_balls_col].min(axis=1))
@@ -146,7 +151,7 @@ class Study:
         """Load existing history from study that has already started recruiting"""
         assert ('file' in dct_existing_history) | (
                     'pdf' in dct_existing_history), 'Neither filename nor dataframe with assignment ' \
-                                                'info provided as input'
+                                                    'info provided as input'
         pdf_asgmt = dct_existing_history['pdf'] if ('pdf' in dct_existing_history) else pd.read_csv(
             dct_existing_history['file'],
             dtype=object,
@@ -155,7 +160,7 @@ class Study:
                                            sorted(['id', 'user', 'trt', 'datetime'] +
                                                   ['f_' + factor for factor in self.factors]))]), \
             "Input file does not match study schema"
-        pdf_asgmt = pdf_asgmt.assign(datetime = pd.to_datetime(pdf_asgmt['datetime'],
+        pdf_asgmt = pdf_asgmt.assign(datetime=pd.to_datetime(pdf_asgmt['datetime'],
                                                                utc=True))
         if 'bg_state' in pdf_asgmt.columns:
             pdf_asgmt = pdf_asgmt.assign(bg_state=pdf_asgmt['bg_state'].apply(ast.literal_eval))
@@ -168,11 +173,11 @@ class Study:
             db.add_participants(self.participant, [dct_participant], self.session, )
         return
 
-    ## TODO: get study status - multiple studies, npatients, print urn assignments
+    # TODO: get study status - multiple studies, npatients, print urn assignments
     def upload_new_participants(self, **dct_participants):
 
-        assert ('file' in dct_participants) | ('pdf' in dct_participants), 'Neither filename nor dataframe eith patient ' \
-                                                                           'info provided as input'
+        assert ('file' in dct_participants) | ('pdf' in dct_participants), \
+            'Neither filename nor dataframe eith patient info provided as input'
         pdf_asgmt = dct_participants['pdf'] if ('pdf' in dct_participants) else pd.read_csv(dct_participants['file'],
                                                                                             dtype=object,
                                                                                             encoding='utf8')
@@ -209,7 +214,7 @@ class Study:
         if self.D == 'range':
             urns = urns.assign(d=(urns[ball_cols].max(axis=1) -
                                   urns[ball_cols].min(axis=1))
-                                 .div(urns['total_balls']))
+                               .div(urns['total_balls']))
         elif self.D == 'variance':
             urns = urns.assign(d=(urns[ball_cols].div(urns['total_balls'],
                                                       axis=0).var(axis=1)))
@@ -217,16 +222,16 @@ class Study:
         # Select urn with greatest imbalance
         # Start by getting urns with maximum imbalance and sorting them by
         # factor columns
-        candidate_urns = urns.loc[urns['d']==urns['d'].max()].\
-                              sort_values(by=['factor'], ascending=True).\
-                              reset_index(drop=True)
+        candidate_urns = urns.loc[urns['d'] == urns['d'].max()].\
+            sort_values(by=['factor'], ascending=True).\
+            reset_index(drop=True)
         selected_urn = candidate_urns.iloc[rng.choice(candidate_urns.index.\
                                                       tolist(), 1).tolist()]
         
         trt = rng.choice(ball_cols, 1,
-                         p = selected_urn[ball_cols].\
-                             div(selected_urn['total_balls'].values, axis=0).\
-                             values.flatten().tolist())[0]
+                         p=selected_urn[ball_cols].\
+                         div(selected_urn['total_balls'].values, axis=0).\
+                         values.flatten().tolist())[0]
         participant.trt = trt.lstrip('balls_trt_')
         
         participant.datetime = datetime.now(timezone.utc)
