@@ -6,5 +6,6 @@ urn_randomization.egg-info
 /build
 /dist
 **/*.db
-/data/simulations
+tests/data/simulations
 urn-randomization.db
+
