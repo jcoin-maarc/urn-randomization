@@ -8,10 +8,10 @@ from datatables import ColumnDT, DataTables
 from flask_bootstrap import Bootstrap
 
 import pandas as pd
-import flask_ui.forms as urand_forms
-import flask_ui.plots as plot_utils
+import urand_gui.forms as urand_forms
+import urand_gui.plots as plot_utils
 
-from flask_ui import study, app, Study, config
+from urand_gui import study, app, Study, config
 
 
 # app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lumen'  # uncomment this line to test bootswatch theme

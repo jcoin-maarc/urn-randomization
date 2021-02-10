@@ -8,7 +8,7 @@ from flask_wtf import Form
 from urand import db
 from collections import OrderedDict
 
-from flask_ui import study, ModelForm
+from urand_gui import study, ModelForm
 
 
 class FrmRandomizeParticipant(ModelForm):

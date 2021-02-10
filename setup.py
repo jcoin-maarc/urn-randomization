@@ -20,6 +20,11 @@ setuptools.setup(
         'Flask',
         'pandas',
         'numpy',
+        'wtforms_alchemy',
+        'flask_wtf',
+        'sqlalchemy-datatables ',
+        'bootstrap-flask',
+
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
