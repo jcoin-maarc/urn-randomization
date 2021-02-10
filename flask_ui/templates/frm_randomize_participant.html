@@ -6,13 +6,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             {{ render_breadcrumb_item('list_participants', 'Participants') }}
-            {{ render_breadcrumb_item('add_participant', 'Add') }}
+            {{ render_breadcrumb_item('randomize_participant', 'Randomize') }}
 
         </ol>
     </nav>
 
     <h2>Randomize a new participant</h2>
-    <form method="post" action="{{ url_for('frm_add_participant') }}">
+    <form method="post" action="{{ url_for('randomize_participant') }}">
         {{ participant_form.csrf_token }}
         {{ render_form(participant_form, button_map={'submit': 'primary', 'cancel': 'secondary'}) }}
     </form>

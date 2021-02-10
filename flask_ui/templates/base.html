@@ -6,7 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Urn Randomization</title>
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../static/favicon_io/site.webmanifest">
     {{ bootstrap.load_css() }}
     <style>
         pre {
@@ -29,8 +32,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                {{ render_nav_item('add_participant', 'Add Participant', use_li=True) }}
                 {{ render_nav_item('list_participants', 'Participants', use_li=True) }}
+                {{ render_nav_item('randomize_participant', 'Randomize Participant', use_li=True) }}
             </ul>
         </div>
     </nav>

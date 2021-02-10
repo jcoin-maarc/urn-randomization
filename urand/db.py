@@ -37,7 +37,8 @@ def participant_table(engine, metadata, study_name):
         trts = config[study_name]['treatments'].get()
         factors = config[study_name]['factors'].get()
     except NotFoundError:
-        print('Treatments or factors not found in configuration file')
+        print('Treatments or factors not found in configuration file for study {0}'.format(study_name))
+        print(config)
         raise
 
     cols = [Column('id', String, primary_key=True)]
@@ -46,7 +47,7 @@ def participant_table(engine, metadata, study_name):
                            Enum(*[str(i) for i in factors[factor]],
                                 validate_strings=True),
                            nullable=False,
-                           info={'label': str(factor).capitalize()}))
+                           info={'label': str(factor).replace("_", " ").title()}))
     cols.extend([Column('trt', Enum(*[str(t) for t in trts]), nullable=False,
                         info={'label': 'Treatment'}),
                  Column('datetime', DateTime, nullable=False, info={'label': 'Date Assigned'}),
@@ -97,7 +98,7 @@ def populate_config(study_name, config_tbl, session):
             for factor in factors:
                 factors[factor] = [str(f) for f in factors[factor]]
         except NotFoundError:
-            print('Treatments or factors not found in configuration file')
+            print('Treatments or factors not found in configuration file for study {0}'.format(study_name))
             raise
 
         session.add_all([

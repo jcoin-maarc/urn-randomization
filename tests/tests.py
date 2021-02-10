@@ -3,8 +3,8 @@ import os
 import pandas as pd
 
 
-def test_upload_with_seed():
-	study = Study('Test Study', memory=True)
+def test_upload_with_seed(study_name):
+	study = Study(study_name, memory=True)
 	df_file = pd.read_csv(os.path.join('data', 'test_asgmts_with_seed.csv'))
 	study.upload_existing_history(file=os.path.join('data', 'test_asgmts_with_seed.csv'))
 	df_participants = db.get_participants(study.participant, study.session)
@@ -12,8 +12,8 @@ def test_upload_with_seed():
 	return True
 
 
-def test_upload_without_seed():
-	study = Study('Test Study', memory=True)
+def test_upload_without_seed(study_name):
+	study = Study(study_name, memory=True)
 	df_file = pd.read_csv(os.path.join('data', 'test_asgmts_without_seed.csv'))
 	study.upload_existing_history(file=os.path.join('data', 'test_asgmts_without_seed.csv'))
 	df_participants = db.get_participants(study.participant, study.session)
@@ -22,5 +22,11 @@ def test_upload_without_seed():
 
 
 if __name__ == '__main__':
-	test_upload_without_seed()
-	test_upload_with_seed()
+	study = Study('CHS JCOIN', memory=False)
+	study.generate_dummy_participants(750, 100)
+	study.export_history(os.path.join('data', 'test_asgmts_with_seed.csv'))
+	df = pd.read_csv(os.path.join('data', 'test_asgmts_with_seed.csv'), dtype=object)
+	del df['bg_state']
+	df.to_csv(os.path.join('data', 'test_asgmts_without_seed.csv'), index=False)
+	test_upload_without_seed('CHS JCOIN')
+	test_upload_with_seed('CHS JCOIN')

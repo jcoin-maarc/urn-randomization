@@ -143,9 +143,13 @@ class Study:
             pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].var(axis=1)).div(pdf_urns['total_balls']))
         return pdf_urns
 
-    def export_history(self, file):
+    def export_history(self, file=None):
         """Exports patient assignment history table as a csv file"""
-        db.get_participants(self.participant, self.session).to_csv(file, index=False)
+        pdf = db.get_participants(self.participant, self.session)
+        if file is not None:
+            pdf.to_csv(file, index=False)
+        else:
+            return pdf
 
     def upload_existing_history(self, **dct_existing_history):
         """Load existing history from study that has already started recruiting"""
@@ -192,6 +196,21 @@ class Study:
             dct_participant['datetime'] = datetime.now(timezone.utc)
             self.randomize(self.participant(**dct_participant))
         return
+
+    def get_participant(self, id):
+        df_participant = db.get_participants(self.participant, self.session,
+                                             **{'id': id})
+        return df_participant
+
+    def get_config(self):
+        study_config = db.config[self.study_name].get()
+        study_config['w'] = self.w
+        study_config['alpha'] = self.alpha
+        study_config['beta'] = self.beta
+        study_config['D'] = self.D
+        study_config['urn_selection'] = self.urn_selection
+        study_config['starting_seed'] = self.starting_seed
+        return study_config
 
     def randomize(self, participant):
         """Randomize new participant

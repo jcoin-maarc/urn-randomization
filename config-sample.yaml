@@ -2,14 +2,14 @@
 # To use, rename to config.yaml and edit as necessary
 
 # A short string identifying the study
-"Example Study":
-    
+"CHS JCOIN":
+
     # Default values
     # db: sqlite:///urn-randomization.db
     # w: 0
     # alpha: 0
     # beta: 1
-    # starting_seed: 
+    # starting_seed:
     # Possible values include range or variance
     # D: range
     # Method 1 sets p=1 for urn with largest value of D, with random selection in
@@ -18,13 +18,34 @@
 
     starting_seed: 100
     treatments:
-        - 1
-        - 2
-    
+        - MART
+        - RMC-Q
+        - RMC-A
+
     factors:
-        institute:
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        pretreatment:
-            ["no prior treatment", "prior radiotherapy", "prior chemotherapy"]
+        local_site:
+            ["11-Cook County – Chicago", "30-Dupage County", "40-Grundy County", "50-Mclean County", "60-Tazewell County", "70-Will County"]
+        electronic_monitoring:
+            ["Yes", "Other"]
+        days_in_jail:
+            ["Low (0-12)", "Moderate (13-90)", "High (91+)"]
+        young_adult:
+            ["Yes (18-25)", "Other (26 or older)"]
+        hispanic_descent:
+            ["Yes", "Other"]
+        african_american:
+            ["Yes (including mixed)", "No"]
         sex:
-            [male, female]
+            ["Male", "Female"]
+        prior_opioid_overdose:
+            ["Yes", "No"]
+        prior_substance_use_treatment:
+            ["Any MOUD treatment", "Any other SUD treatment", "Other"]
+        crime_violence_screener_count:
+            ["Low", "Moderate (1-2)",  "High (3-5)"]
+        days_of_substance_use:
+            ["Low (0-12)", "Moderate (13-44)", "High"]
+        probation_parole_community_supervision:
+            ["Yes (1+ days", "Other"]
+        substance_screener_symptoms:
+            ["Low", "Moderate (1-2)", "High (3-5)"]
