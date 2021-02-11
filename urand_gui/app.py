@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import redirect, url_for, render_template, request,  jsonify, render_template, request
+from flask import redirect, url_for, render_template, request,  jsonify, render_template, request, Response
 from flask_wtf import CSRFProtect
 
 
@@ -12,8 +12,6 @@ import urand_gui.forms as urand_forms
 import urand_gui.plots as plot_utils
 
 from urand_gui import study, Study, config, app
-
-
 
 # app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lumen'  # uncomment this line to test bootswatch theme
 
@@ -36,6 +34,8 @@ def index():
 
 @app.route('/randomize_participant', methods=['GET', 'POST'])
 def randomize_participant():
+    """This function renders Randomize Participant form with which the end user can randomize new participants
+    """
     form = urand_forms.FrmRandomizeParticipant()
     if form.validate_on_submit():
         participant = study.participant()
@@ -50,89 +50,353 @@ def randomize_participant():
 
 @app.route('/api/participants', methods=['GET'])
 def get_participants():
-    if ('api_key' not in request.args):
-        return jsonify({'status': 403,
-                        'message': "Please pass your API key with your request."})
-    if ('study' not in request.args):
-        return jsonify({'status': 400,
-                        'message': "Please pass a study name with your request."})
+    """Return list of participants with their factor levels and treatment assignments.
 
-    if request.args.get('study') not in config:
-        return jsonify({'status': 404,
-                        'message': "Requested study does not exist."})
-    study = Study(request.args.get('study'))
-    df_participants = study.export_history()
-    response = {'status': 200,
-                'results': df_participants.to_dict(orient='record')
-                }
-    return jsonify(response)
+        **Example request**:
+
+        .. sourcecode:: http
+
+          GET /api/participants HTTP/1.1
+          Host: https://rcg.bsd.uchicago.edu/urand
+
+        **Example response**:
+
+        .. sourcecode:: http
+
+          HTTP/1.1 200 OK
+          Vary: Accept
+          Content-Type: application/json
+
+          {
+              "message": "Success",
+              "results": [
+                {
+                  "bg_state": {
+                    "bit_generator": "PCG64",
+                    "has_uint32": 1,
+                    "state": {
+                      "inc": 30008503642980956324491363429807189605,
+                      "state": 164404244729103591598495580972637239091
+                    },
+                    "uinteger": 3586218795
+                  },
+                  "datetime": "Wed, 10 Feb 2021 00:01:08 GMT",
+                  "f_african_american": "Yes (including mixed)",
+                  "f_crime_violence_screener_count": "Low",
+                  "f_electronic_monitoring": "Yes",
+                  "f_hispanic_descent": "Other",
+                  "f_incarceration_days": "Moderate (13-90)",
+                  "f_local_site": "40-Grundy County",
+                  "f_prior_opioid_overdose": "Yes",
+                  "f_prior_substance_use_treatment": "Any other SUD treatment",
+                  "f_probation_parole_community_supervision": "Other",
+                  "f_sex": "Male",
+                  "f_substance_screener_symptoms": "High (3-5)",
+                  "f_substance_use_days": "High",
+                  "f_young_adult": "Other (26 or older)",
+                  "id": "0",
+                  "trt": "RMC-Q",
+                  "user": "dummy"
+                },
+                {
+                    "bg_state": {
+                    "bit_generator": "PCG64",
+                    "has_uint32": 0,
+                    "state": {
+                      "inc": 30008503642980956324491363429807189605,
+                      "state": 175296851311552035585228848780835049764
+                    },
+                    "uinteger": 3586218795
+                  },
+                  "datetime": "Wed, 10 Feb 2021 00:01:08 GMT",
+                  "f_african_american": "No",
+                  "f_crime_violence_screener_count": "Moderate (1-2)",
+                  "f_electronic_monitoring": "Yes",
+                  "f_hispanic_descent": "Yes",
+                  "f_incarceration_days": "Low (0-12)",
+                  "f_local_site": "70-Will County",
+                  "f_prior_opioid_overdose": "Yes",
+                  "f_prior_substance_use_treatment": "Any other SUD treatment",
+                  "f_probation_parole_community_supervision": "Other",
+                  "f_sex": "Male",
+                  "f_substance_screener_symptoms": "Moderate (1-2)",
+                  "f_substance_use_days": "Moderate (13-44)",
+                  "f_young_adult": "Yes (18-25)",
+                  "id": "1",
+                  "trt": "MART",
+                  "user": "dummy"
+                }],
+              status: 200
+          }
+
+        :query api_key: API Key
+        :query study: study name
+        :resheader Content-Type: application/json
+        :status 200 OK: participnts found for study
+        :status 400 Bad request: Invalid request
+        :status 401 Unauthorized: Unauthorized access
+        :status 404 Not found: Study not found
+        :returns status: :string: Status code
+        :returns message: :string: Status message/ error info
+        :returns results: :dict: study config parameters
+        """
+    dct_data = {}
+    status = 200
+    if ('api_key' not in request.args):
+        status = 401
+        dct_data['message'] = "Please pass your API key with your request."
+    elif ('study' not in request.args):
+        status = 400
+        dct_data['message'] = "Please pass a study name with your request."
+    elif request.args.get('study') not in config:
+        status = 404
+        dct_data['message'] = "Requested study does not exist."
+    else:
+        study = Study(request.args.get('study'))
+        df_participants = study.export_history()
+        dct_data['message'] = 'Success'
+        dct_data['results'] = df_participants.to_dict(orient='record')
+    dct_data['status'] = status
+    return jsonify(dct_data), status
 
 
 @app.route('/api/randomize', methods=['GET'])
 def api_randomize_participant():
+    """Return study configuration.
+
+                **Example request**:
+
+                .. sourcecode:: http
+
+                  GET /api/config HTTP/1.1
+                  Host: https://rcg.bsd.uchicago.edu/urand
+
+                **Example response**:
+
+                .. sourcecode:: http
+
+                  HTTP/1.1 200 OK
+                  Vary: Accept
+                  Content-Type: application/json
+
+                  {
+                        'message': 'Success',
+                        'results': [{'bg_state': {'bit_generator': 'PCG64',
+                        'has_uint32': 1,
+                        'state': {'inc': 30008503642980956324491363429807189605,
+                         'state': 319048474597050894074079425948099527333},
+                        'uinteger': 1833294560},
+                        'datetime': 'Thu, 11 Feb 2021 04:16:48 GMT',
+                        'f_african_american': 'Yes (including mixed)',
+                        'f_crime_violence_screener_count': 'Low',
+                        'f_electronic_monitoring': 'Yes',
+                        'f_hispanic_descent': 'Yes',
+                        'f_incarceration_days': 'Low (0-12)',
+                        'f_local_site': '11-Cook County – Chicago',
+                        'f_prior_opioid_overdose': 'Yes',
+                        'f_prior_substance_use_treatment': 'Any MOUD treatment',
+                        'f_probation_parole_community_supervision': 'Yes (1+ days)',
+                        'f_sex': 'Male',
+                        'f_substance_screener_symptoms': 'Low',
+                        'f_substance_use_days': 'Low (0-12)',
+                        'f_young_adult': 'Yes (18-25)',
+                        'id': '123434234',
+                        'trt': 'RMC-A',
+                        'user': 'api'}],
+                        'status': 200
+                        }
+
+                :query api_key: API Key
+                :query study: study name
+                :query id: participant id
+                :query factor: Factor value. All study factor levels should be passed
+                :resheader Content-Type: application/json
+                :status 200 OK: participnts found for study
+                :status 400 Bad request: Invalid request
+                :status 401 Unauthorized: Unauthorized access
+                :status 404 Not found: Study not found
+                :returns status: :string: Status code
+                :returns message: :string: Status message/ error info
+                :returns results: :dict: Participant info with treatment assignment
+                """
+    dct_data = {}
+    status = 200
     if ('api_key' not in request.args):
-        return jsonify({'status': 403,
-                        'message': "Please pass your API key with your request."})
-    if ('study' not in request.args):
-        return jsonify({'status': 400,
-                        'message': "Please pass a study name with your request."})
+        status = 401
+        dct_data['message'] = "Please pass your API key with your request."
+    elif ('study' not in request.args):
+        status = 400
+        dct_data['message'] = "Please pass a study name with your request."
 
-    if request.args.get('study') not in config:
-        return jsonify({'status': 404,
-                        'message': "Requested study does not exist."})
-    if 'id' not in request.args:
-        return jsonify({'status': 400,
-                        'message': "Please pass the participant id with your request."})
-    study = Study(request.args.get('study'))
-    lst_factors = list(study.factors.keys())
-
-    for factor in lst_factors:
-        if factor not in request.args:
-            return jsonify({'status': 400,
-                            'message': "Please pass a value for factor {0} with your request.".format(factor)})
-        if request.args.get(factor) not in study.factors[factor]:
-            return jsonify({'status': 400,
-                            'message': "Invalid value supplised for factor {0}. "
-                                       "Allowed values are: [{1}].".format(factor,
-                                                                           ", ".join(study.factors[factor]))
-                            })
-    df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
-                                        ('user', 'api')] +
-                                       [('f_' + factor,
-                                         request.args.get(factor)) for factor in lst_factors]),
-                                  index=[0])
-    study.upload_new_participants(pdf=df_participant)
-    df_participant = study.get_participant(request.args.get('id'))
-    response = {'status': 200,
-                'results': df_participant.to_dict(orient='record')
-                }
-    return jsonify(response)
+    elif request.args.get('study') not in config:
+        status = 404
+        dct_data['message'] = "Requested study does not exist."
+    elif 'id' not in request.args:
+        status = 400
+        dct_data['message'] = "Please pass the participant id with your request."
+    else:
+        study = Study(request.args.get('study'))
+        lst_factors = list(study.factors.keys())
+        for factor in lst_factors:
+            if factor not in request.args:
+                status = 400
+                dct_data['message'] = "Please pass a value for factor {0} with your request.".format(factor)
+                break
+            if request.args.get(factor) not in study.factors[factor]:
+                status = 400
+                dct_data['message'] = "Invalid value supplised for factor {0}. " +\
+                                      "Allowed values are: [{1}].".format(factor,
+                                                                          ", ".join(study.factors[factor]))
+                break
+    if status == 200:
+        df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
+                                            ('user', 'api')] +
+                                           [('f_' + factor,
+                                             request.args.get(factor)) for factor in lst_factors]),
+                                      index=[0])
+        study.upload_new_participants(pdf=df_participant)
+        df_participant = study.get_participant(request.args.get('id'))
+        dct_data['message'] = "Success"
+        dct_data['results'] = df_participant.to_dict(orient='record')
+    dct_data['status'] = status
+    return jsonify(dct_data), status
 
 
 @app.route('/api/config', methods=['GET'])
 def api_get_config():
-    print(config)
-    if ('api_key' not in request.args):
-        return jsonify({'status': 403,
-                        'message': "Please pass your API key with your request."})
-    if ('study' not in request.args):
-        return jsonify({'status': 400,
-                        'message': "Please pass a study name with your request."})
+    """Return study configuration.
 
-    if request.args.get('study') not in config:
-        return jsonify({'status': 404,
-                        'message': "Requested study does not exist."})
-    study = Study(request.args.get('study'))
+            **Example request**:
 
-    response = {'status': 200,
-                'results': study.get_config()
+            .. sourcecode:: http
+
+              GET /api/config HTTP/1.1
+              Host: https://rcg.bsd.uchicago.edu/urand
+
+            **Example response**:
+
+            .. sourcecode:: http
+
+              HTTP/1.1 200 OK
+              Vary: Accept
+              Content-Type: application/json
+
+              {
+                  "message": "Success",
+                  "results": {
+                    "D": "range",
+                    "alpha": 0,
+                    "beta": 1,
+                    "factors": {
+                      "african_american": [
+                        "Yes (including mixed)",
+                        "No"
+                      ],
+                      "crime_violence_screener_count": [
+                        "Low",
+                        "Moderate (1-2)",
+                        "High (3-5)"
+                      ],
+                      "electronic_monitoring": [
+                        "Yes",
+                        "Other"
+                      ],
+                      "hispanic_descent": [
+                        "Yes",
+                        "Other"
+                      ],
+                      "incarceration_days": [
+                        "Low (0-12)",
+                        "Moderate (13-90)",
+                        "High (91+)"
+                      ],
+                      "local_site": [
+                        "11-Cook County \u2013 Chicago",
+                        "30-Dupage County",
+                        "40-Grundy County",
+                        "50-Mclean County",
+                        "60-Tazewell County",
+                        "70-Will County"
+                      ],
+                      "prior_opioid_overdose": [
+                        "Yes",
+                        "No"
+                      ],
+                      "prior_substance_use_treatment": [
+                        "Any MOUD treatment",
+                        "Any other SUD treatment",
+                        "Other"
+                      ],
+                      "probation_parole_community_supervision": [
+                        "Yes (1+ days)",
+                        "Other"
+                      ],
+                      "sex": [
+                        "Male",
+                        "Female"
+                      ],
+                      "substance_screener_symptoms": [
+                        "Low",
+                        "Moderate (1-2)",
+                        "High (3-5)"
+                      ],
+                      "substance_use_days": [
+                        "Low (0-12)",
+                        "Moderate (13-44)",
+                        "High"
+                      ],
+                      "young_adult": [
+                        "Yes (18-25)",
+                        "Other (26 or older)"
+                      ]
+                    },
+                    "starting_seed": 100,
+                    "treatments": [
+                      "MART",
+                      "RMC-Q",
+                      "RMC-A"
+                    ],
+                    "urn_selection": "method1",
+                    "w": 1
+                  },
+                  "status": 200
                 }
-    return jsonify(response)
+
+            :query api_key: API Key
+            :query study: study name
+            :resheader Content-Type: application/json
+            :status 200 OK: participnts found for study
+            :status 400 Bad request: Invalid request
+            :status 401 Unauthorized: Unauthorized access
+            :status 404 Not found: Study not found
+            :returns status: :string: Status code
+            :returns message: :string: Status message/ error info
+            :returns results: :array: List of participants
+            """
+    dct_data = {}
+    status = 200
+    if ('api_key' not in request.args):
+        status = 401
+        dct_data['message'] = "Please pass your API key with your request."
+    elif ('study' not in request.args):
+        status = 400
+        dct_data['message'] = "Please pass a study name with your request."
+
+    elif request.args.get('study') not in config:
+        status = 404
+        dct_data['message'] = "Requested study does not exist."
+    else:
+        study = Study(request.args.get('study'))
+        dct_data['message'] = 'Success'
+        dct_data['results'] = study.get_config()
+
+    dct_data['status'] = status
+    return jsonify(dct_data), status
 
 
 @app.route("/participants", methods=['GET', 'POST'])
 def list_participants():
-    """List users with DataTables <= 1.10.x."""
+    """List randomized participants"""
     script_plt, div_plt, js_resources, css_resources = plot_utils.plt_factor_treatment_assignments(study)
     return render_template("tbl_participant.html", project=study.study_name,
                            div_plt=div_plt,
