@@ -11,7 +11,8 @@ import pandas as pd
 import urand_gui.forms as urand_forms
 import urand_gui.plots as plot_utils
 
-from urand_gui import study, app, Study, config
+from urand_gui import study, Study, config, app
+
 
 
 # app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lumen'  # uncomment this line to test bootswatch theme
@@ -68,7 +69,7 @@ def get_participants():
 
 
 @app.route('/api/randomize', methods=['GET'])
-def get_participants():
+def api_randomize_participant():
     if ('api_key' not in request.args):
         return jsonify({'status': 403,
                         'message': "Please pass your API key with your request."})
@@ -103,13 +104,13 @@ def get_participants():
     study.upload_new_participants(pdf=df_participant)
     df_participant = study.get_participant(request.args.get('id'))
     response = {'status': 200,
-                'results': [df_participant.to_dict(orient='record')]
+                'results': df_participant.to_dict(orient='record')
                 }
     return jsonify(response)
 
 
 @app.route('/api/config', methods=['GET'])
-def get_config():
+def api_get_config():
     print(config)
     if ('api_key' not in request.args):
         return jsonify({'status': 403,
@@ -124,7 +125,7 @@ def get_config():
     study = Study(request.args.get('study'))
 
     response = {'status': 200,
-                'results': [study.get_config()]
+                'results': study.get_config()
                 }
     return jsonify(response)
 
