@@ -2,7 +2,7 @@
 # To use, rename to config.yaml and edit as necessary
 
 # A short string identifying the study
-"CHS JCOIN":
+"JCOIN CHS":
 
     # Default values
     # db: sqlite:///urn-randomization.db

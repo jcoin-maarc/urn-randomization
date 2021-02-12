@@ -17,6 +17,7 @@ class FrmRandomizeParticipant(ModelForm):
 	class Meta:
 		model = study.participant
 		only = [c.name for c in study.participant.__table__.columns if (c.name in ['id', 'user']) or c.name.startswith('f_')]
+		include_primary_keys = True
 
 	def __init__(self, *args, **kwargs):
 		super(FrmRandomizeParticipant, self).__init__(*args, **kwargs)
@@ -24,6 +25,7 @@ class FrmRandomizeParticipant(ModelForm):
 		self._fields = OrderedDict([(field, self._fields[field])
 		                            for field in self._fields if field in study.participant.__table__.columns] +
 		                           [(field, self._fields[field]) for field in ['submit', 'cancel']])
+
 
 
 

@@ -41,7 +41,7 @@ def participant_table(engine, metadata, study_name):
         print(config)
         raise
 
-    cols = [Column('id', String, primary_key=True)]
+    cols = [Column('id', String, primary_key=True, unique=True)]
     for factor in factors:
         cols.append(Column('f_' + str(factor),
                            Enum(*[str(i) for i in factors[factor]],

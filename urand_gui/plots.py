@@ -36,19 +36,19 @@ def plot_styler(p):
 	p.x_range.range_padding = chart_inner_left_padding
 	p.xaxis.axis_label_text_font = chart_font
 	p.xaxis.major_label_text_font = chart_font
-	p.xaxis.axis_label_standoff = default_padding
+	p.xaxis.axis_label_standoff = int(default_padding*0.3)
 	p.xaxis.axis_label_text_font_size = axis_label_size
 	p.xaxis.major_label_text_font_size = axis_ticks_size
 	p.yaxis.axis_label_text_font = chart_font
 	p.yaxis.major_label_text_font = chart_font
 	p.yaxis.axis_label_text_font_size = axis_label_size
 	p.yaxis.major_label_text_font_size = axis_ticks_size
-	p.yaxis.axis_label_standoff = default_padding
+	p.yaxis.axis_label_standoff = int(default_padding*0.3)
 	p.toolbar.logo = None
 	p.toolbar_location = None
 	p.x_range.range_padding = 0.1
 	p.legend.background_fill_alpha = 0.0
-	p.xaxis.major_label_orientation = 1
+	p.xaxis.major_label_orientation = 0.18
 	p.xgrid.grid_line_color = None
 	p.legend.location = "top_right"
 	# p.legend.orientation = "vertical"
@@ -107,7 +107,8 @@ def plt_factor_treatment_assignments(study):
 	                location=(0,30),
 	                title='Treatments')
 	p.add_layout(legend, 'right')
-	p.yaxis.axis_label = '%'
+	p.yaxis.axis_label = 'Percentage'
+	p.xaxis.axis_label = "Factor levels"
 	plot_styler(p)
 
 	callback = CustomJS(args=dict(select=select_factor, src=src, filter=filter,

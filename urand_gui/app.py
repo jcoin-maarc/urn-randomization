@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import redirect, url_for, render_template, request,  jsonify, render_template, request, Response
+from flask import flash, redirect, url_for, render_template, request,  jsonify, render_template, request, Response
 from flask_wtf import CSRFProtect
 
 
@@ -32,6 +32,7 @@ def index():
     return render_template('index.html')
 
 
+# TODO: Fetch username from currentusername
 @app.route('/randomize_participant', methods=['GET', 'POST'])
 def randomize_participant():
     """This function renders Randomize Participant form with which the end user can randomize new participants
@@ -41,9 +42,13 @@ def randomize_participant():
         participant = study.participant()
         form.populate_obj(participant)
         pdf_participants = pd.DataFrame([participant.__dict__], index=[0])
-        pdf_participants = pdf_participants[[col for col in pdf_participants.columns if col in [c.name for c in study.participant.__table__.columns]]]
-        print(pdf_participants)
+        pdf_participants = pdf_participants[[col for col in pdf_participants.columns
+                                             if col in [c.name for c in study.participant.__table__.columns]]]
         study.upload_new_participants(pdf=pdf_participants)
+        pdf_participant = study.get_participant(participant.id)
+        flash("Participant id {0} has been randomized to treatment {1}".format(pdf_participant['id'].values[0],
+                                                                               pdf_participant['trt'].values[0]),
+              category="info")
         return redirect(url_for('list_participants'))
     return render_template('frm_randomize_participant.html', participant_form=form)
 
@@ -249,15 +254,19 @@ def api_randomize_participant():
                                                                           ", ".join(study.factors[factor]))
                 break
     if status == 200:
-        df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
-                                            ('user', 'api')] +
-                                           [('f_' + factor,
-                                             request.args.get(factor)) for factor in lst_factors]),
-                                      index=[0])
-        study.upload_new_participants(pdf=df_participant)
-        df_participant = study.get_participant(request.args.get('id'))
-        dct_data['message'] = "Success"
-        dct_data['results'] = df_participant.to_dict(orient='record')
+        if study.get_participant(request.args.get('id')).shape[0]:
+            status = 400
+            dct_data['message'] = "Participant id {0} is unavailable".format(request.args.get('id'))
+        else:
+            df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
+                                                ('user', 'api')] +
+                                               [('f_' + factor,
+                                                 request.args.get(factor)) for factor in lst_factors]),
+                                          index=[0])
+            study.upload_new_participants(pdf=df_participant)
+            df_participant = study.get_participant(request.args.get('id'))
+            dct_data['message'] = "Success"
+            dct_data['results'] = df_participant.to_dict(orient='record')
     dct_data['status'] = status
     return jsonify(dct_data), status
 
