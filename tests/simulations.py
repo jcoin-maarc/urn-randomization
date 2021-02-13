@@ -103,14 +103,14 @@ def process_isolated_trial(trial_starting_seed, trial_factor_combination_seed,
 
 
 @click.command()
-@click.option('--n_participants', required=True, help='Number of participants')
-@click.option('--n_simulations', required=True, help='Number of simulations')
-@click.option('--study_name', required=True, help='Study name')
-@click.option('--simulation_label', required=True, help='Simulation name')
-@click.option('--factor_combination_seed', default=100, help='Factor sampling seed')
-@click.option('--starting_seed', default=100, help='Starting seed')
-@click.option('--fixed_participants', default=False, help='Starting seed')
-@click.option('--nproc', default=8, help='Number of processes to use')
+@click.option('--n_participants', type=click.INT, required=True, help='Number of participants')
+@click.option('--n_simulations', type=click.INT, required=True, help='Number of simulations')
+@click.option('--study_name', type=click.STRING, required=True, help='Study name')
+@click.option('--simulation_label', type=click.STRING, required=True, help='Simulation name')
+@click.option('--factor_combination_seed', type=click.INT, default=100, help='Factor sampling seed')
+@click.option('--starting_seed', type=click.INT, default=100, help='Starting seed')
+@click.option('--fixed_participants', type=click.BOOL, default=False, help='Starting seed')
+@click.option('--nproc', type=click.INT, default=8, help='Number of processes to use')
 def simulate_assignments_mproc(n_participants: int, n_simulations: int, study_name: str,
                                simulation_label: str, factor_combination_seed: int, starting_seed: int,
                                fixed_participants: bool = False, nproc: int = 4):
