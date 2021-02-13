@@ -1,13 +1,17 @@
-from urand import Study, db
 import os
 import numpy as np
 from numpy.random import Generator, PCG64
 import pandas as pd
 import glob
 import shutil
-import urand
 import ast
 from multiprocessing import Pool
+import click
+import sys
+
+sys.path.append("../")
+from urand import Study, db
+import urand
 
 
 def simulate_assignments(n_participants, n_simulations, factor_combination_seed, starting_seed, simulation_label,
@@ -95,10 +99,21 @@ def process_isolated_trial(trial_starting_seed, trial_factor_combination_seed,
 		                                                                 pdf_urns],
 		                                                                ignore_index=True).reset_index(drop=True)
 	pdf_stats.to_csv(os.path.join(simulation_data_folder, 'trial_stats_{0}.csv'.format(trial_no)), index=False)
+	print("Trial {0} complete".format(trial_no))
 
 
-def simulate_assignments_mproc(n_participants, n_simulations, factor_combination_seed, starting_seed, simulation_label,
-                               study_name='Test Study', fixed_participants=True, nproc=4):
+@click.command()
+@click.option('--n_participants', required=True, help='Number of participants')
+@click.option('--n_simulations', required=True, help='Number of simulations')
+@click.option('--study_name', required=True, help='Study name')
+@click.option('--simulation_label', required=True, help='Simulation name')
+@click.option('--factor_combination_seed', default=100, help='Factor sampling seed')
+@click.option('--starting_seed', default=100, help='Starting seed')
+@click.option('--fixed_participants', default=False, help='Starting seed')
+@click.option('--nproc', default=8, help='Number of processes to use')
+def simulate_assignments_mproc(n_participants: int, n_simulations: int, study_name: str,
+                               simulation_label: str, factor_combination_seed: int, starting_seed: int,
+                               fixed_participants: bool = False, nproc: int = 4):
 	""" Simulates n_simulations assignments, with multiprocessing, each with n_participants participants.
 		Assignment data is exported to simulation_label as csv files.
 		:param n_participants: No. of participants in each trial
@@ -175,7 +190,8 @@ def estimate_study_imbalance(simulation_label, study_name='Test Study'):
 
 
 if __name__ == '__main__':
-	# simulate_assignments(30, 4, 100, 100,
-	#                      1, fixed_participants=True)
-	simulate_assignments_mproc(500, 200, 100, 100, "mproc_1", nproc=8, fixed_participants=False)
-	# estimate_study_imbalance("mproc")
+	simulate_assignments_mproc()
+# 	# simulate_assignments(30, 4, 100, 100,
+# 	#                      1, fixed_participants=True)
+# 	simulate_assignments_mproc(500, 200, 100, 100, "mproc_1", nproc=8, fixed_participants=False)
+# 	# estimate_study_imbalance("mproc")

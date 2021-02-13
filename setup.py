@@ -24,6 +24,7 @@ setuptools.setup(
         'flask_wtf',
         'sqlalchemy-datatables ',
         'bootstrap-flask',
+        'scipy'
 
     ],
     classifiers=[
