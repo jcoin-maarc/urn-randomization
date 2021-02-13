@@ -80,9 +80,9 @@ def populate_config(study_name, config_tbl, session):
                  else config['alpha'].get(int))
         beta = (study_config['beta'].get(int) if 'beta' in study_config
                 else config['beta'].get(int))
-        D = (study_config['D'].as_choice(['range', 'variance'])
+        D = (study_config['D'].as_choice(['range', 'variance', 'chisquare'])
              if 'D' in study_config
-             else config['D'].as_choice(['range', 'variance']))
+             else config['D'].as_choice(['range', 'variance', 'chisquare']))
         urn_selection = (study_config['urn_selection'].as_choice(['method1'])
                          if 'urn_selection' in study_config
                          else config['urn_selection'].as_choice(['method1']))

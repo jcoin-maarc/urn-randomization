@@ -22,7 +22,7 @@ def test_upload_without_seed(study_name):
 
 
 if __name__ == '__main__':
-	study = Study('CHS JCOIN', memory=False)
+	study = Study("CHS JCOIN", memory=False)
 	study.generate_dummy_participants(300, 100)
 	study.export_history(os.path.join('data', 'test_asgmts_with_seed.csv'))
 	df = pd.read_csv(os.path.join('data', 'test_asgmts_with_seed.csv'), dtype=object)

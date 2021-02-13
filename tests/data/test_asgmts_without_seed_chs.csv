@@ -1,0 +1,301 @@
+id,f_local_site,f_electronic_monitoring,f_incarceration_days,f_young_adult,f_hispanic_descent,f_african_american,f_sex,f_prior_opioid_overdose,f_prior_substance_use_treatment,f_crime_violence_screener_count,f_substance_use_days,f_probation_parole_community_supervision,f_substance_screener_symptoms,trt,datetime,user
+0,11-Cook County – Chicago,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,No,Other,Low,Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:28.693862,dummy
+1,40-Grundy County,Other,Moderate (13-90),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Moderate (1-2),High,Yes (1+ days),Low,MART,2021-02-12 03:06:28.752054,dummy
+2,40-Grundy County,Yes,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Any other SUD treatment,Low,Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:28.811084,dummy
+3,60-Tazewell County,Yes,High (91+),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,High (3-5),Low (0-12),Other,Low,RMC-Q,2021-02-12 03:06:28.871553,dummy
+4,70-Will County,Yes,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Other,Low,Low (0-12),Other,Low,RMC-A,2021-02-12 03:06:28.937649,dummy
+5,70-Will County,Yes,Moderate (13-90),Yes (18-25),Other,No,Female,No,Any other SUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:29.006311,dummy
+6,50-Mclean County,Other,High (91+),Other (26 or older),Other,No,Male,Yes,Any MOUD treatment,Moderate (1-2),High,Other,High (3-5),MART,2021-02-12 03:06:29.086510,dummy
+7,70-Will County,Yes,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:29.168455,dummy
+8,50-Mclean County,Yes,High (91+),Yes (18-25),Yes,No,Female,Yes,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:29.243234,dummy
+9,50-Mclean County,Other,High (91+),Yes (18-25),Other,No,Male,No,Any MOUD treatment,High (3-5),Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:29.320310,dummy
+10,70-Will County,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:29.392971,dummy
+11,40-Grundy County,Yes,High (91+),Yes (18-25),Yes,Yes (including mixed),Male,No,Any other SUD treatment,Low,High,Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:29.467848,dummy
+12,70-Will County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Any other SUD treatment,High (3-5),High,Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:29.536287,dummy
+13,50-Mclean County,Other,Moderate (13-90),Other (26 or older),Yes,No,Male,No,Other,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:29.606850,dummy
+14,40-Grundy County,Yes,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Other,High (3-5),Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:29.673211,dummy
+15,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,No,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:29.744321,dummy
+16,50-Mclean County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:29.810165,dummy
+17,70-Will County,Other,High (91+),Yes (18-25),Other,No,Female,Yes,Any MOUD treatment,High (3-5),Low (0-12),Other,Low,RMC-A,2021-02-12 03:06:29.878211,dummy
+18,70-Will County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Other,Low,Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:29.944287,dummy
+19,30-Dupage County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Male,No,Other,High (3-5),Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:30.009869,dummy
+20,11-Cook County – Chicago,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Female,Yes,Other,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:30.077792,dummy
+21,40-Grundy County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:30.148232,dummy
+22,70-Will County,Other,Moderate (13-90),Other (26 or older),Other,No,Female,No,Other,Moderate (1-2),Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:30.220866,dummy
+23,11-Cook County – Chicago,Yes,Low (0-12),Yes (18-25),Yes,No,Male,Yes,Other,Moderate (1-2),Low (0-12),Other,Low,MART,2021-02-12 03:06:30.290125,dummy
+24,60-Tazewell County,Other,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Other,Moderate (1-2),Moderate (13-44),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:30.364154,dummy
+25,50-Mclean County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Any other SUD treatment,High (3-5),Moderate (13-44),Other,Low,MART,2021-02-12 03:06:30.431818,dummy
+26,60-Tazewell County,Other,High (91+),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,Low,Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:30.505165,dummy
+27,11-Cook County – Chicago,Yes,High (91+),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,High (3-5),High,Other,Moderate (1-2),MART,2021-02-12 03:06:30.574140,dummy
+28,50-Mclean County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Moderate (1-2),High,Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:30.644658,dummy
+29,70-Will County,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,High (3-5),Low (0-12),Other,Low,RMC-Q,2021-02-12 03:06:30.710915,dummy
+30,30-Dupage County,Other,Low (0-12),Other (26 or older),Other,No,Female,Yes,Any other SUD treatment,High (3-5),High,Yes (1+ days),Low,MART,2021-02-12 03:06:30.784397,dummy
+31,70-Will County,Other,Low (0-12),Other (26 or older),Other,No,Female,No,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:30.856256,dummy
+32,11-Cook County – Chicago,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Other,High (3-5),High,Other,Low,MART,2021-02-12 03:06:30.924145,dummy
+33,11-Cook County – Chicago,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Any other SUD treatment,Moderate (1-2),High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:30.991670,dummy
+34,70-Will County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Other,Moderate (1-2),Low (0-12),Other,Low,RMC-Q,2021-02-12 03:06:31.058796,dummy
+35,50-Mclean County,Other,High (91+),Yes (18-25),Yes,Yes (including mixed),Female,No,Any other SUD treatment,High (3-5),Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:31.125739,dummy
+36,30-Dupage County,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Female,No,Other,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:31.199404,dummy
+37,70-Will County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:31.268742,dummy
+38,11-Cook County – Chicago,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:31.339682,dummy
+39,60-Tazewell County,Yes,High (91+),Other (26 or older),Yes,No,Male,Yes,Any MOUD treatment,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:31.410779,dummy
+40,70-Will County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,Yes,Other,Low,High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:31.482611,dummy
+41,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:31.550602,dummy
+42,60-Tazewell County,Yes,Moderate (13-90),Yes (18-25),Other,Yes (including mixed),Male,No,Other,Low,Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:31.617470,dummy
+43,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Other,No,Female,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:31.684056,dummy
+44,30-Dupage County,Yes,High (91+),Yes (18-25),Other,No,Male,No,Other,Moderate (1-2),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:31.750826,dummy
+45,11-Cook County – Chicago,Other,High (91+),Yes (18-25),Other,No,Male,Yes,Other,Moderate (1-2),High,Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:31.817121,dummy
+46,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Other,No,Female,No,Other,High (3-5),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:31.888772,dummy
+47,60-Tazewell County,Yes,High (91+),Yes (18-25),Other,Yes (including mixed),Male,No,Any MOUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:31.961229,dummy
+48,70-Will County,Other,Low (0-12),Other (26 or older),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:32.028152,dummy
+49,50-Mclean County,Other,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:32.095534,dummy
+50,40-Grundy County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:32.163887,dummy
+51,70-Will County,Other,High (91+),Yes (18-25),Other,No,Female,No,Any MOUD treatment,High (3-5),Moderate (13-44),Other,Low,MART,2021-02-12 03:06:32.235804,dummy
+52,11-Cook County – Chicago,Yes,Moderate (13-90),Yes (18-25),Yes,No,Male,Yes,Other,High (3-5),High,Other,Moderate (1-2),RMC-A,2021-02-12 03:06:32.305584,dummy
+53,30-Dupage County,Other,High (91+),Yes (18-25),Other,No,Female,No,Any other SUD treatment,Moderate (1-2),High,Other,High (3-5),RMC-Q,2021-02-12 03:06:32.378536,dummy
+54,11-Cook County – Chicago,Yes,High (91+),Other (26 or older),Other,No,Female,Yes,Other,Low,Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:32.447988,dummy
+55,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,No,Male,No,Other,Moderate (1-2),Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:32.520208,dummy
+56,30-Dupage County,Yes,Low (0-12),Other (26 or older),Other,No,Male,No,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:32.588862,dummy
+57,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Other,No,Female,Yes,Other,High (3-5),Low (0-12),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:32.656096,dummy
+58,70-Will County,Other,High (91+),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any MOUD treatment,Low,High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:32.724244,dummy
+59,40-Grundy County,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Male,No,Any MOUD treatment,Low,Low (0-12),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:32.792904,dummy
+60,40-Grundy County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Female,Yes,Other,Low,High,Yes (1+ days),Low,MART,2021-02-12 03:06:32.860339,dummy
+61,70-Will County,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Any other SUD treatment,Moderate (1-2),High,Yes (1+ days),Low,MART,2021-02-12 03:06:32.931190,dummy
+62,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,No,Any MOUD treatment,Low,High,Other,Moderate (1-2),MART,2021-02-12 03:06:32.997647,dummy
+63,70-Will County,Other,Low (0-12),Yes (18-25),Yes,No,Male,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),Low,RMC-A,2021-02-12 03:06:33.064955,dummy
+64,60-Tazewell County,Yes,High (91+),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:33.148310,dummy
+65,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Other,No,Male,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),High (3-5),MART,2021-02-12 03:06:33.225210,dummy
+66,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,Yes,Other,High (3-5),High,Yes (1+ days),Low,RMC-A,2021-02-12 03:06:33.299661,dummy
+67,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Other,No,Female,No,Any other SUD treatment,Low,Low (0-12),Other,High (3-5),RMC-Q,2021-02-12 03:06:33.375442,dummy
+68,60-Tazewell County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,No,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:33.443811,dummy
+69,50-Mclean County,Yes,High (91+),Yes (18-25),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,High (3-5),High,Other,High (3-5),MART,2021-02-12 03:06:33.514826,dummy
+70,30-Dupage County,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Other,Moderate (1-2),High,Other,Moderate (1-2),RMC-A,2021-02-12 03:06:33.582171,dummy
+71,50-Mclean County,Yes,High (91+),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:33.649484,dummy
+72,50-Mclean County,Other,Moderate (13-90),Yes (18-25),Other,No,Female,No,Other,High (3-5),Low (0-12),Other,High (3-5),MART,2021-02-12 03:06:33.716744,dummy
+73,40-Grundy County,Yes,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Female,No,Other,Moderate (1-2),High,Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:33.785048,dummy
+74,30-Dupage County,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Male,No,Other,High (3-5),High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:33.855054,dummy
+75,30-Dupage County,Yes,High (91+),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:33.922781,dummy
+76,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Yes,No,Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:33.994146,dummy
+77,40-Grundy County,Other,Moderate (13-90),Other (26 or older),Yes,No,Male,No,Any MOUD treatment,Low,Low (0-12),Other,Low,MART,2021-02-12 03:06:34.062197,dummy
+78,50-Mclean County,Yes,High (91+),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:34.136307,dummy
+79,50-Mclean County,Yes,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:34.211026,dummy
+80,40-Grundy County,Yes,High (91+),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Low (0-12),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:34.283429,dummy
+81,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:34.358406,dummy
+82,11-Cook County – Chicago,Other,High (91+),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,High,Yes (1+ days),Low,RMC-A,2021-02-12 03:06:34.429884,dummy
+83,11-Cook County – Chicago,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,No,Any MOUD treatment,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:34.503124,dummy
+84,40-Grundy County,Other,High (91+),Yes (18-25),Yes,No,Female,No,Any MOUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:34.572555,dummy
+85,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Other,No,Female,No,Any MOUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:34.639802,dummy
+86,40-Grundy County,Yes,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Other,Moderate (1-2),Low (0-12),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:34.705219,dummy
+87,70-Will County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Any other SUD treatment,Low,Low (0-12),Other,High (3-5),RMC-Q,2021-02-12 03:06:34.778791,dummy
+88,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Yes,No,Male,No,Other,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:34.847723,dummy
+89,40-Grundy County,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,No,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:34.915201,dummy
+90,60-Tazewell County,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Female,No,Any MOUD treatment,High (3-5),High,Other,Low,RMC-A,2021-02-12 03:06:34.982952,dummy
+91,70-Will County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Any MOUD treatment,Moderate (1-2),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:35.052971,dummy
+92,70-Will County,Other,Low (0-12),Other (26 or older),Other,No,Male,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:35.120352,dummy
+93,70-Will County,Yes,Moderate (13-90),Other (26 or older),Other,No,Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:35.187941,dummy
+94,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,No,Other,High (3-5),Low (0-12),Other,Low,MART,2021-02-12 03:06:35.259849,dummy
+95,11-Cook County – Chicago,Yes,High (91+),Yes (18-25),Yes,No,Female,Yes,Other,Low,Low (0-12),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:35.332265,dummy
+96,40-Grundy County,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),Low,MART,2021-02-12 03:06:35.401880,dummy
+97,40-Grundy County,Other,High (91+),Yes (18-25),Yes,No,Male,No,Any MOUD treatment,Moderate (1-2),High,Yes (1+ days),Low,MART,2021-02-12 03:06:35.479722,dummy
+98,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Other,High (3-5),High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:35.548963,dummy
+99,70-Will County,Other,High (91+),Yes (18-25),Yes,No,Female,No,Other,Moderate (1-2),Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:35.619046,dummy
+100,60-Tazewell County,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:35.686299,dummy
+101,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,No,Any MOUD treatment,High (3-5),High,Other,Moderate (1-2),MART,2021-02-12 03:06:35.756197,dummy
+102,30-Dupage County,Other,High (91+),Other (26 or older),Yes,No,Female,No,Other,High (3-5),Low (0-12),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:35.823502,dummy
+103,50-Mclean County,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:35.892450,dummy
+104,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Any MOUD treatment,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:35.960504,dummy
+105,40-Grundy County,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Female,No,Other,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:36.026661,dummy
+106,30-Dupage County,Other,Low (0-12),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Low,Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:36.096317,dummy
+107,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,Low,RMC-A,2021-02-12 03:06:36.161827,dummy
+108,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:36.236285,dummy
+109,11-Cook County – Chicago,Yes,High (91+),Yes (18-25),Other,No,Male,No,Other,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:36.314289,dummy
+110,50-Mclean County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Female,No,Any other SUD treatment,Moderate (1-2),High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:36.404875,dummy
+111,50-Mclean County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:36.493245,dummy
+112,40-Grundy County,Other,High (91+),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:36.572164,dummy
+113,40-Grundy County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,No,Any other SUD treatment,Low,High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:36.656938,dummy
+114,40-Grundy County,Other,Low (0-12),Other (26 or older),Other,No,Female,No,Any MOUD treatment,Low,Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:36.732532,dummy
+115,30-Dupage County,Yes,High (91+),Other (26 or older),Yes,No,Male,Yes,Other,Moderate (1-2),High,Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:36.801123,dummy
+116,70-Will County,Yes,Moderate (13-90),Yes (18-25),Other,No,Female,Yes,Any other SUD treatment,Low,High,Other,Low,RMC-Q,2021-02-12 03:06:36.867776,dummy
+117,40-Grundy County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,No,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:36.935942,dummy
+118,40-Grundy County,Yes,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Any other SUD treatment,Low,Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:37.016283,dummy
+119,60-Tazewell County,Other,Low (0-12),Other (26 or older),Other,No,Female,Yes,Any MOUD treatment,Moderate (1-2),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:37.091818,dummy
+120,30-Dupage County,Yes,High (91+),Yes (18-25),Yes,No,Female,No,Any other SUD treatment,Low,Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:37.165395,dummy
+121,60-Tazewell County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Other,Low,Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:37.238956,dummy
+122,50-Mclean County,Yes,High (91+),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,Moderate (1-2),High,Other,High (3-5),MART,2021-02-12 03:06:37.318101,dummy
+123,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:37.399325,dummy
+124,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:37.489730,dummy
+125,70-Will County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,No,Other,Low,Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:37.559607,dummy
+126,11-Cook County – Chicago,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:37.627599,dummy
+127,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,No,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:37.697803,dummy
+128,50-Mclean County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Male,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:37.781756,dummy
+129,50-Mclean County,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,No,Any other SUD treatment,Low,High,Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:37.876009,dummy
+130,30-Dupage County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,No,Other,Moderate (1-2),Low (0-12),Other,Low,RMC-A,2021-02-12 03:06:37.944894,dummy
+131,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:38.012884,dummy
+132,60-Tazewell County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Any other SUD treatment,Low,Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:38.077542,dummy
+133,30-Dupage County,Yes,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:38.145535,dummy
+134,40-Grundy County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Other,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:38.228308,dummy
+135,60-Tazewell County,Other,Low (0-12),Yes (18-25),Yes,No,Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:38.312200,dummy
+136,30-Dupage County,Yes,High (91+),Yes (18-25),Other,Yes (including mixed),Female,No,Any MOUD treatment,High (3-5),High,Other,Low,MART,2021-02-12 03:06:38.401696,dummy
+137,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,No,Any MOUD treatment,Low,High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:38.477272,dummy
+138,60-Tazewell County,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,No,Any MOUD treatment,Low,High,Other,Low,MART,2021-02-12 03:06:38.548059,dummy
+139,30-Dupage County,Other,High (91+),Yes (18-25),Yes,No,Female,No,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:38.616391,dummy
+140,60-Tazewell County,Other,High (91+),Other (26 or older),Other,No,Female,Yes,Other,High (3-5),Low (0-12),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:38.684792,dummy
+141,60-Tazewell County,Other,High (91+),Other (26 or older),Yes,Yes (including mixed),Male,No,Any other SUD treatment,High (3-5),Low (0-12),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:38.751964,dummy
+142,30-Dupage County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Any MOUD treatment,High (3-5),Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:38.849873,dummy
+143,40-Grundy County,Yes,High (91+),Yes (18-25),Yes,No,Female,No,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:38.929031,dummy
+144,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,No,Other,High (3-5),Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:39.003144,dummy
+145,60-Tazewell County,Other,High (91+),Yes (18-25),Yes,No,Male,No,Other,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:39.073245,dummy
+146,50-Mclean County,Other,Low (0-12),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,High,Other,High (3-5),RMC-Q,2021-02-12 03:06:39.145879,dummy
+147,11-Cook County – Chicago,Other,High (91+),Other (26 or older),Other,No,Female,Yes,Any other SUD treatment,Low,High,Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:39.224223,dummy
+148,40-Grundy County,Other,Moderate (13-90),Other (26 or older),Yes,No,Female,Yes,Any MOUD treatment,High (3-5),High,Other,Low,RMC-A,2021-02-12 03:06:39.312547,dummy
+149,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,High,Other,High (3-5),RMC-Q,2021-02-12 03:06:39.392859,dummy
+150,70-Will County,Yes,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:39.485958,dummy
+151,40-Grundy County,Other,High (91+),Other (26 or older),Other,No,Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:39.577724,dummy
+152,11-Cook County – Chicago,Yes,Moderate (13-90),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Low,Low (0-12),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:39.650619,dummy
+153,60-Tazewell County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,Yes,Other,Moderate (1-2),High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:39.724372,dummy
+154,11-Cook County – Chicago,Yes,Moderate (13-90),Other (26 or older),Yes,No,Male,Yes,Other,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:39.801474,dummy
+155,11-Cook County – Chicago,Yes,High (91+),Yes (18-25),Other,No,Male,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-Q,2021-02-12 03:06:39.878501,dummy
+156,60-Tazewell County,Other,High (91+),Yes (18-25),Other,No,Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:39.951041,dummy
+157,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Yes,No,Female,Yes,Other,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:40.046248,dummy
+158,40-Grundy County,Yes,High (91+),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any MOUD treatment,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:40.129488,dummy
+159,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,High (3-5),High,Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:40.200557,dummy
+160,11-Cook County – Chicago,Yes,High (91+),Other (26 or older),Other,No,Female,No,Other,Moderate (1-2),Low (0-12),Other,High (3-5),MART,2021-02-12 03:06:40.298907,dummy
+161,70-Will County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any MOUD treatment,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:40.386415,dummy
+162,11-Cook County – Chicago,Yes,High (91+),Other (26 or older),Yes,No,Female,No,Other,Low,Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:40.458880,dummy
+163,40-Grundy County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Male,Yes,Any MOUD treatment,Low,High,Other,High (3-5),RMC-A,2021-02-12 03:06:40.533871,dummy
+164,50-Mclean County,Yes,High (91+),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:40.607442,dummy
+165,70-Will County,Other,Low (0-12),Other (26 or older),Other,No,Female,Yes,Any other SUD treatment,Low,Low (0-12),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:40.677004,dummy
+166,11-Cook County – Chicago,Yes,High (91+),Other (26 or older),Other,No,Male,No,Any other SUD treatment,Low,High,Other,Low,MART,2021-02-12 03:06:40.746259,dummy
+167,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,High (3-5),High,Other,High (3-5),MART,2021-02-12 03:06:40.821517,dummy
+168,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Other,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:40.893448,dummy
+169,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Other,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:40.968048,dummy
+170,11-Cook County – Chicago,Other,High (91+),Yes (18-25),Other,No,Male,Yes,Other,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:41.040584,dummy
+171,11-Cook County – Chicago,Yes,High (91+),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Other,Low,Low (0-12),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:41.112551,dummy
+172,40-Grundy County,Yes,High (91+),Yes (18-25),Other,No,Female,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:41.181861,dummy
+173,60-Tazewell County,Other,High (91+),Yes (18-25),Other,No,Female,No,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:41.259440,dummy
+174,30-Dupage County,Other,High (91+),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:41.341417,dummy
+175,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any other SUD treatment,High (3-5),Low (0-12),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:41.424745,dummy
+176,50-Mclean County,Other,High (91+),Other (26 or older),Other,No,Female,Yes,Other,Low,Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:41.501820,dummy
+177,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Male,No,Any other SUD treatment,Low,High,Other,Low,RMC-Q,2021-02-12 03:06:41.574505,dummy
+178,50-Mclean County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:41.646796,dummy
+179,30-Dupage County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,No,Any other SUD treatment,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:41.715694,dummy
+180,60-Tazewell County,Other,High (91+),Other (26 or older),Other,No,Female,No,Other,High (3-5),High,Other,High (3-5),MART,2021-02-12 03:06:41.786211,dummy
+181,50-Mclean County,Other,Low (0-12),Yes (18-25),Yes,No,Female,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:41.863027,dummy
+182,50-Mclean County,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Male,No,Other,Moderate (1-2),Low (0-12),Other,High (3-5),RMC-Q,2021-02-12 03:06:41.934568,dummy
+183,70-Will County,Other,Low (0-12),Yes (18-25),Other,No,Male,Yes,Other,High (3-5),Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:42.006899,dummy
+184,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:42.078393,dummy
+185,70-Will County,Other,Moderate (13-90),Yes (18-25),Yes,No,Male,No,Any other SUD treatment,High (3-5),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:42.152694,dummy
+186,70-Will County,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Female,No,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:42.226003,dummy
+187,50-Mclean County,Yes,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,High (3-5),High,Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:42.297024,dummy
+188,11-Cook County – Chicago,Yes,Low (0-12),Yes (18-25),Other,No,Female,No,Any other SUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:42.379508,dummy
+189,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Other,No,Male,No,Any other SUD treatment,Low,Low (0-12),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:42.452323,dummy
+190,11-Cook County – Chicago,Other,High (91+),Other (26 or older),Yes,No,Male,Yes,Other,High (3-5),Low (0-12),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:42.531707,dummy
+191,70-Will County,Other,Low (0-12),Other (26 or older),Yes,No,Female,Yes,Other,Low,Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:42.603307,dummy
+192,11-Cook County – Chicago,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,No,Other,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:42.673205,dummy
+193,70-Will County,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any other SUD treatment,Low,High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:42.747833,dummy
+194,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),High,Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:42.822042,dummy
+195,40-Grundy County,Yes,Low (0-12),Other (26 or older),Other,No,Male,No,Any MOUD treatment,High (3-5),Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:42.893257,dummy
+196,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Yes,No,Female,No,Other,High (3-5),Low (0-12),Other,Low,RMC-Q,2021-02-12 03:06:42.959330,dummy
+197,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Female,No,Other,Low,High,Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:43.032749,dummy
+198,50-Mclean County,Other,High (91+),Yes (18-25),Other,No,Male,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:43.109245,dummy
+199,11-Cook County – Chicago,Other,High (91+),Yes (18-25),Yes,No,Male,No,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:43.182142,dummy
+200,50-Mclean County,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,No,Other,Low,High,Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:43.258800,dummy
+201,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Other,High (3-5),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:43.345303,dummy
+202,60-Tazewell County,Other,Low (0-12),Yes (18-25),Other,No,Male,No,Other,High (3-5),Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:43.416325,dummy
+203,30-Dupage County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Male,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:43.488231,dummy
+204,70-Will County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any other SUD treatment,Low,Low (0-12),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:43.559782,dummy
+205,11-Cook County – Chicago,Other,High (91+),Yes (18-25),Yes,Yes (including mixed),Male,No,Any MOUD treatment,Moderate (1-2),High,Other,Low,MART,2021-02-12 03:06:43.627277,dummy
+206,50-Mclean County,Other,High (91+),Other (26 or older),Other,No,Male,Yes,Other,Low,Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:43.695281,dummy
+207,50-Mclean County,Other,High (91+),Yes (18-25),Yes,Yes (including mixed),Female,No,Other,Moderate (1-2),Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:43.765454,dummy
+208,30-Dupage County,Yes,High (91+),Yes (18-25),Yes,No,Male,Yes,Other,Moderate (1-2),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:43.838356,dummy
+209,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:43.907063,dummy
+210,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Yes,No,Male,Yes,Other,High (3-5),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:43.986571,dummy
+211,50-Mclean County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,No,Any other SUD treatment,Low,Low (0-12),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:44.060030,dummy
+212,50-Mclean County,Yes,Low (0-12),Yes (18-25),Yes,No,Male,No,Other,Moderate (1-2),Moderate (13-44),Other,Low,MART,2021-02-12 03:06:44.139190,dummy
+213,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,No,Any other SUD treatment,High (3-5),High,Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:44.212565,dummy
+214,70-Will County,Other,Low (0-12),Other (26 or older),Other,No,Female,No,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:44.295642,dummy
+215,70-Will County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:44.382595,dummy
+216,60-Tazewell County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Male,Yes,Other,Moderate (1-2),High,Other,Low,RMC-Q,2021-02-12 03:06:44.450436,dummy
+217,70-Will County,Yes,High (91+),Yes (18-25),Other,No,Male,No,Other,High (3-5),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:44.526529,dummy
+218,40-Grundy County,Yes,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Male,No,Any MOUD treatment,High (3-5),Low (0-12),Yes (1+ days),Low,MART,2021-02-12 03:06:44.601021,dummy
+219,60-Tazewell County,Other,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Other,High (3-5),Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:44.671032,dummy
+220,40-Grundy County,Other,Moderate (13-90),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any MOUD treatment,Low,High,Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:44.740666,dummy
+221,50-Mclean County,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Low,High,Other,High (3-5),RMC-A,2021-02-12 03:06:44.809221,dummy
+222,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:44.879990,dummy
+223,70-Will County,Other,Low (0-12),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:44.954201,dummy
+224,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Male,No,Other,High (3-5),Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:45.026491,dummy
+225,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Other,Yes (including mixed),Female,No,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:45.096840,dummy
+226,30-Dupage County,Other,Low (0-12),Yes (18-25),Yes,No,Female,No,Other,Low,High,Other,Low,MART,2021-02-12 03:06:45.167131,dummy
+227,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,Yes (including mixed),Female,No,Other,Low,Low (0-12),Other,High (3-5),MART,2021-02-12 03:06:45.245426,dummy
+228,70-Will County,Yes,High (91+),Other (26 or older),Other,No,Female,No,Other,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:45.324852,dummy
+229,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Other,Moderate (1-2),High,Other,Moderate (1-2),MART,2021-02-12 03:06:45.403308,dummy
+230,30-Dupage County,Other,Low (0-12),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,High (3-5),Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:45.473756,dummy
+231,70-Will County,Other,Moderate (13-90),Other (26 or older),Other,No,Female,No,Any MOUD treatment,Low,Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:45.547157,dummy
+232,70-Will County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Female,Yes,Other,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:45.618745,dummy
+233,50-Mclean County,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Moderate (1-2),High,Other,High (3-5),RMC-A,2021-02-12 03:06:45.686797,dummy
+234,40-Grundy County,Yes,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,No,Other,High (3-5),Low (0-12),Other,Low,RMC-A,2021-02-12 03:06:45.753551,dummy
+235,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Other,No,Female,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:45.825404,dummy
+236,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:45.894585,dummy
+237,11-Cook County – Chicago,Other,Moderate (13-90),Other (26 or older),Yes,No,Male,Yes,Other,High (3-5),Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:45.969560,dummy
+238,50-Mclean County,Other,Moderate (13-90),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,Low,Low (0-12),Other,High (3-5),RMC-Q,2021-02-12 03:06:46.041862,dummy
+239,50-Mclean County,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,No,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:46.110512,dummy
+240,11-Cook County – Chicago,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,Yes,Any MOUD treatment,Moderate (1-2),High,Yes (1+ days),High (3-5),MART,2021-02-12 03:06:46.181868,dummy
+241,40-Grundy County,Other,Low (0-12),Yes (18-25),Other,No,Female,No,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:46.259438,dummy
+242,11-Cook County – Chicago,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:46.348958,dummy
+243,70-Will County,Other,Low (0-12),Yes (18-25),Yes,No,Female,No,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:46.418238,dummy
+244,30-Dupage County,Yes,Moderate (13-90),Yes (18-25),Other,No,Female,No,Other,High (3-5),High,Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:46.488561,dummy
+245,50-Mclean County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),High,Other,High (3-5),MART,2021-02-12 03:06:46.559295,dummy
+246,70-Will County,Yes,Moderate (13-90),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:46.627278,dummy
+247,30-Dupage County,Other,Moderate (13-90),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,High (3-5),Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:46.696886,dummy
+248,50-Mclean County,Yes,Low (0-12),Other (26 or older),Other,No,Female,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:46.777125,dummy
+249,40-Grundy County,Yes,Low (0-12),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,High,Yes (1+ days),High (3-5),MART,2021-02-12 03:06:46.868299,dummy
+250,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,No,Other,Moderate (1-2),Low (0-12),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:46.947274,dummy
+251,70-Will County,Other,Moderate (13-90),Other (26 or older),Other,No,Female,Yes,Any MOUD treatment,Moderate (1-2),High,Yes (1+ days),High (3-5),RMC-Q,2021-02-12 03:06:47.039671,dummy
+252,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Yes (1+ days),Low,MART,2021-02-12 03:06:47.119076,dummy
+253,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,High,Other,Low,RMC-A,2021-02-12 03:06:47.193557,dummy
+254,70-Will County,Yes,High (91+),Yes (18-25),Yes,No,Female,No,Any other SUD treatment,High (3-5),High,Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:47.272618,dummy
+255,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Other,Moderate (1-2),Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:47.352961,dummy
+256,30-Dupage County,Yes,High (91+),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:47.429063,dummy
+257,11-Cook County – Chicago,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Low,High,Yes (1+ days),Moderate (1-2),RMC-Q,2021-02-12 03:06:47.506330,dummy
+258,30-Dupage County,Yes,Moderate (13-90),Yes (18-25),Yes,No,Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:47.577319,dummy
+259,30-Dupage County,Other,Low (0-12),Yes (18-25),Other,No,Male,Yes,Any MOUD treatment,High (3-5),Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:47.647255,dummy
+260,60-Tazewell County,Yes,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Other,Low,Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:47.715173,dummy
+261,60-Tazewell County,Other,Low (0-12),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,High (3-5),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:47.786392,dummy
+262,70-Will County,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Male,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-A,2021-02-12 03:06:47.861062,dummy
+263,11-Cook County – Chicago,Yes,High (91+),Other (26 or older),Other,Yes (including mixed),Male,No,Other,Low,Moderate (13-44),Other,High (3-5),RMC-Q,2021-02-12 03:06:47.935255,dummy
+264,30-Dupage County,Other,High (91+),Other (26 or older),Other,No,Female,Yes,Any other SUD treatment,Moderate (1-2),Low (0-12),Other,Low,RMC-Q,2021-02-12 03:06:48.005527,dummy
+265,70-Will County,Yes,High (91+),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,High (3-5),High,Yes (1+ days),Low,MART,2021-02-12 03:06:48.073028,dummy
+266,60-Tazewell County,Other,High (91+),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,High (3-5),Low (0-12),Other,High (3-5),RMC-A,2021-02-12 03:06:48.145469,dummy
+267,60-Tazewell County,Other,Low (0-12),Other (26 or older),Yes,No,Male,No,Any other SUD treatment,High (3-5),Low (0-12),Other,Moderate (1-2),RMC-A,2021-02-12 03:06:48.221981,dummy
+268,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Yes,No,Male,No,Any other SUD treatment,High (3-5),Moderate (13-44),Other,High (3-5),MART,2021-02-12 03:06:48.302658,dummy
+269,50-Mclean County,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,Yes,Other,Low,Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:48.387200,dummy
+270,30-Dupage County,Yes,Moderate (13-90),Other (26 or older),Other,No,Male,No,Other,Low,Moderate (13-44),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:48.458202,dummy
+271,40-Grundy County,Yes,High (91+),Yes (18-25),Yes,No,Male,No,Any MOUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:48.543758,dummy
+272,60-Tazewell County,Other,Low (0-12),Yes (18-25),Other,No,Male,No,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:48.626657,dummy
+273,70-Will County,Other,Moderate (13-90),Yes (18-25),Other,No,Male,Yes,Any MOUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,MART,2021-02-12 03:06:48.699609,dummy
+274,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Female,Yes,Other,Moderate (1-2),Low (0-12),Other,Moderate (1-2),MART,2021-02-12 03:06:48.769441,dummy
+275,70-Will County,Other,Moderate (13-90),Other (26 or older),Yes,No,Female,Yes,Other,High (3-5),Moderate (13-44),Other,Low,MART,2021-02-12 03:06:48.859722,dummy
+276,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Other,No,Female,No,Other,High (3-5),Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:48.933580,dummy
+277,70-Will County,Other,Moderate (13-90),Other (26 or older),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:49.014200,dummy
+278,11-Cook County – Chicago,Other,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,High,Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:49.094298,dummy
+279,40-Grundy County,Other,High (91+),Yes (18-25),Yes,No,Female,Yes,Other,Low,High,Other,High (3-5),RMC-A,2021-02-12 03:06:49.165576,dummy
+280,60-Tazewell County,Other,Moderate (13-90),Other (26 or older),Other,No,Female,No,Other,Moderate (1-2),Moderate (13-44),Other,High (3-5),RMC-A,2021-02-12 03:06:49.239896,dummy
+281,70-Will County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Female,No,Other,High (3-5),Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:49.315088,dummy
+282,30-Dupage County,Other,High (91+),Yes (18-25),Other,No,Male,Yes,Other,Moderate (1-2),High,Other,Low,RMC-A,2021-02-12 03:06:49.399355,dummy
+283,11-Cook County – Chicago,Yes,Low (0-12),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),Low,RMC-A,2021-02-12 03:06:49.471811,dummy
+284,70-Will County,Other,High (91+),Other (26 or older),Yes,Yes (including mixed),Female,Yes,Any MOUD treatment,High (3-5),High,Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:49.547863,dummy
+285,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Other,No,Female,No,Any other SUD treatment,Moderate (1-2),Low (0-12),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:49.644758,dummy
+286,60-Tazewell County,Other,Low (0-12),Other (26 or older),Other,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:49.724523,dummy
+287,11-Cook County – Chicago,Other,Moderate (13-90),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Low,Low (0-12),Yes (1+ days),Moderate (1-2),MART,2021-02-12 03:06:49.799122,dummy
+288,60-Tazewell County,Yes,Low (0-12),Other (26 or older),Yes,No,Male,No,Any MOUD treatment,High (3-5),High,Yes (1+ days),Low,MART,2021-02-12 03:06:49.886287,dummy
+289,70-Will County,Yes,Low (0-12),Yes (18-25),Other,No,Female,Yes,Any other SUD treatment,Low,High,Other,Low,MART,2021-02-12 03:06:49.958079,dummy
+290,70-Will County,Other,High (91+),Yes (18-25),Yes,Yes (including mixed),Male,Yes,Any MOUD treatment,Low,Low (0-12),Other,Moderate (1-2),RMC-Q,2021-02-12 03:06:50.028761,dummy
+291,30-Dupage County,Other,Moderate (13-90),Yes (18-25),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),MART,2021-02-12 03:06:50.097649,dummy
+292,70-Will County,Other,Low (0-12),Yes (18-25),Yes,Yes (including mixed),Male,No,Any MOUD treatment,Moderate (1-2),High,Other,High (3-5),RMC-A,2021-02-12 03:06:50.172083,dummy
+293,50-Mclean County,Yes,Moderate (13-90),Other (26 or older),Other,No,Female,No,Any other SUD treatment,Low,Low (0-12),Yes (1+ days),Low,RMC-Q,2021-02-12 03:06:50.249236,dummy
+294,60-Tazewell County,Yes,High (91+),Other (26 or older),Other,No,Male,Yes,Other,High (3-5),Low (0-12),Other,High (3-5),MART,2021-02-12 03:06:50.325247,dummy
+295,50-Mclean County,Yes,High (91+),Other (26 or older),Yes,No,Female,Yes,Any other SUD treatment,Low,Moderate (13-44),Yes (1+ days),High (3-5),RMC-A,2021-02-12 03:06:50.403871,dummy
+296,70-Will County,Yes,Low (0-12),Yes (18-25),Other,Yes (including mixed),Male,Yes,Other,Low,Low (0-12),Yes (1+ days),Moderate (1-2),RMC-A,2021-02-12 03:06:50.475969,dummy
+297,50-Mclean County,Yes,High (91+),Other (26 or older),Yes,No,Female,Yes,Any MOUD treatment,Low,Moderate (13-44),Other,Moderate (1-2),MART,2021-02-12 03:06:50.551989,dummy
+298,70-Will County,Other,High (91+),Other (26 or older),Other,No,Male,Yes,Any other SUD treatment,Moderate (1-2),Moderate (13-44),Other,Low,RMC-Q,2021-02-12 03:06:50.645821,dummy
+299,70-Will County,Yes,Low (0-12),Yes (18-25),Yes,No,Male,No,Any MOUD treatment,Moderate (1-2),High,Yes (1+ days),Low,MART,2021-02-12 03:06:50.718354,dummy

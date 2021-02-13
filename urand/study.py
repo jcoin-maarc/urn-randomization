@@ -8,6 +8,7 @@ from itertools import product
 from datetime import datetime, timezone
 import ast
 import pandas as pd
+import scipy.stats as stats
 import sys
 
 
@@ -117,6 +118,21 @@ class Study:
         urns['total_balls'] = urns[ball_cols].sum(axis=1)
         return urns
 
+    def compute_d(self, urns):
+        """"Compute D for urns"""
+        ball_cols = ['balls_trt_' + trt for trt in self.treatments]
+        if self.D == 'range':
+            urns = urns.assign(d=(urns[ball_cols].max(axis=1) -
+                                  urns[ball_cols].min(axis=1))
+                               .div(urns['total_balls']))
+        elif self.D == 'variance':
+            urns = urns.assign(d=(urns[ball_cols].div(urns['total_balls'],
+                                                      axis=0).var(axis=1)))
+        else:
+            urns = urns.assign(d=stats.chisquare(urns[ball_cols].div(urns['total_balls'],
+                                                 axis=0), axis=1)[0])
+        return urns
+
     def get_urns(self, participant):
         """Returns list of urns associsated with the participant,
         constructed from their assignment history"""
@@ -126,6 +142,7 @@ class Study:
                  if col.startswith('f_')}
         urns = self._get_assignments(fdict)
         urns = self.compute_no_balls(urns)
+        urns = self.compute_d(urns)
         return urns
 
     def get_study_urns(self):
@@ -133,14 +150,8 @@ class Study:
             Build list of urns from assignment history.
         """
         pdf_urns = self._get_assignments({})
-
         pdf_urns = self.compute_no_balls(pdf_urns)
-        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
-        if self.D == 'range':
-            pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].max(axis=1) - pdf_urns[lst_balls_col].min(axis=1))
-                                       .div(pdf_urns['total_balls']))
-        else:
-            pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].var(axis=1)).div(pdf_urns['total_balls']))
+        pdf_urns = self.compute_d(pdf_urns)
         return pdf_urns
 
     def export_history(self, file=None):
@@ -229,18 +240,11 @@ class Study:
         rng = Generator(bg)
 
         urns = self.get_urns(participant)
-        ball_cols = ['balls_trt_' + trt for trt in self.treatments]
-        if self.D == 'range':
-            urns = urns.assign(d=(urns[ball_cols].max(axis=1) -
-                                  urns[ball_cols].min(axis=1))
-                               .div(urns['total_balls']))
-        elif self.D == 'variance':
-            urns = urns.assign(d=(urns[ball_cols].div(urns['total_balls'],
-                                                      axis=0).var(axis=1)))
 
         # Select urn with greatest imbalance
         # Start by getting urns with maximum imbalance and sorting them by
         # factor columns
+        ball_cols = ['balls_trt_' + trt for trt in self.treatments]
         candidate_urns = urns.loc[urns['d'] == urns['d'].max()].\
             sort_values(by=['factor'], ascending=True).\
             reset_index(drop=True)

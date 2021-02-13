@@ -12,6 +12,7 @@ app.config['BOOTSTRAP_BTN_STYLE'] = 'primary'
 app.config['BOOTSTRAP_BTN_SIZE'] = 'sm'
 
 BaseModelForm = model_form_factory(FlaskForm)
+# study = Study("Example Study")
 study = Study("CHS JCOIN")
 
 
