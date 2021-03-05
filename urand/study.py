@@ -129,8 +129,10 @@ class Study:
             urns = urns.assign(d=(urns[ball_cols].div(urns['total_balls'],
                                                       axis=0).var(axis=1)))
         else:
-            urns = urns.assign(d=stats.chisquare(urns[ball_cols].div(urns['total_balls'],
-                                                 axis=0), axis=1)[0])
+            trt_cols = ['trt_' + t for t in self.treatments]
+            urns = urns.assign(d=stats.chisquare(urns[trt_cols], axis=1)[0])
+            # urns = urns.assign(d=stats.chisquare(urns[ball_cols].div(urns['total_balls'],
+            #                                      axis=0), axis=1)[0])
         return urns
 
     def get_urns(self, participant):
