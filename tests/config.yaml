@@ -125,3 +125,101 @@
             ["Yes (1+ days)", "Other"]
         substance_screener_symptoms:
             ["Low", "Moderate (1-2)", "High (3-5)"]
+            
+# A short string identifying the study
+"CHS JCOIN range":
+
+    # Default values
+    # db: sqlite:///urn-randomization.db
+    # w: 0
+    # alpha: 0
+    # beta: 1
+    # starting_seed:
+    # Possible values include range or variance
+    D: range
+    # Method 1 sets p=1 for urn with largest value of D, with random selection in
+    # case of tied values
+    # urn_selection: method1
+
+    starting_seed: 100
+    treatments:
+        - MART
+        - RMC-Q
+        - RMC-A
+
+    factors:
+        local_site:
+            ["11-Cook County – Chicago", "30-Dupage County", "40-Grundy County", "50-Mclean County", "60-Tazewell County", "70-Will County"]
+        electronic_monitoring:
+            ["Yes", "Other"]
+        incarceration_days:
+            ["Low (0-12)", "Moderate (13-90)", "High (91+)"]
+        young_adult:
+            ["Yes (18-25)", "Other (26 or older)"]
+        hispanic_descent:
+            ["Yes", "Other"]
+        african_american:
+            ["Yes (including mixed)", "No"]
+        sex:
+            ["Male", "Female"]
+        prior_opioid_overdose:
+            ["Yes", "No"]
+        prior_substance_use_treatment:
+            ["Any MOUD treatment", "Any other SUD treatment", "Other"]
+        crime_violence_screener_count:
+            ["Low", "Moderate (1-2)",  "High (3-5)"]
+        substance_use_days:
+            ["Low (0-12)", "Moderate (13-44)", "High"]
+        probation_parole_community_supervision:
+            ["Yes (1+ days)", "Other"]
+        substance_screener_symptoms:
+            ["Low", "Moderate (1-2)", "High (3-5)"]
+            
+# A short string identifying the study
+"CHS JCOIN 2B":
+
+    # Default values
+    # db: sqlite:///urn-randomization.db
+    # w: 0
+    # alpha: 0
+    beta: 2
+    # starting_seed:
+    # Possible values include range or variance
+    # D: range
+    # Method 1 sets p=1 for urn with largest value of D, with random selection in
+    # case of tied values
+    # urn_selection: method1
+
+    starting_seed: 100
+    treatments:
+        - MART
+        - RMC-Q
+        - RMC-A
+
+    factors:
+        local_site:
+            ["11-Cook County – Chicago", "30-Dupage County", "40-Grundy County", "50-Mclean County", "60-Tazewell County", "70-Will County"]
+        electronic_monitoring:
+            ["Yes", "Other"]
+        incarceration_days:
+            ["Low (0-12)", "Moderate (13-90)", "High (91+)"]
+        young_adult:
+            ["Yes (18-25)", "Other (26 or older)"]
+        hispanic_descent:
+            ["Yes", "Other"]
+        african_american:
+            ["Yes (including mixed)", "No"]
+        sex:
+            ["Male", "Female"]
+        prior_opioid_overdose:
+            ["Yes", "No"]
+        prior_substance_use_treatment:
+            ["Any MOUD treatment", "Any other SUD treatment", "Other"]
+        crime_violence_screener_count:
+            ["Low", "Moderate (1-2)",  "High (3-5)"]
+        substance_use_days:
+            ["Low (0-12)", "Moderate (13-44)", "High"]
+        probation_parole_community_supervision:
+            ["Yes (1+ days)", "Other"]
+        substance_screener_symptoms:
+            ["Low", "Moderate (1-2)", "High (3-5)"]

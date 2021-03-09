@@ -1,0 +1,104 @@
+nohup: ignoring input
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/multiprocessing/pool.py", line 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+  File "/mnt/data/schumm-lab/projects/urn-randomization/tests/simulations.py", line 72, in process_isolated_trial
+    study = urand.Study(study_name, memory=True)
+  File "../urand/study.py", line 21, in __init__
+    config, self.participant, self.session = db.get_tables(study_name, memory)
+  File "../urand/db.py", line 134, in get_tables
+    participant_table_name = participant_table(engine, metadata, study_name)
+  File "../urand/db.py", line 37, in participant_table
+    trts = config[study_name]['treatments'].get()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 351, in get
+    return templates.as_template(template).value(self, template)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/templates.py", line 64, in value
+    value, _ = view.first()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 70, in first
+    return util.iter_first(pairs)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/util.py", line 29, in iter_first
+    return next(it)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 493, in resolve
+    for collection, source in self.parent.resolve():
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 493, in resolve
+    for collection, source in self.parent.resolve():
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 697, in resolve
+    self.read()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 692, in read
+    super(LazyConfig, self).read(user, defaults)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 593, in read
+    self._add_user_source()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 572, in _add_user_source
+    filename = self.user_config_path()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 565, in user_config_path
+    return os.path.join(self.config_dir(), CONFIG_FILENAME)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/site-packages/confuse/core.py", line 630, in config_dir
+    os.makedirs(appdir)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/os.py", line 225, in makedirs
+    mkdir(name, mode)
+FileExistsError: [Errno 17] File exists: '/home/mmurugesan/.config/UrnRandomization'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/schumm-lab/projects/urn-randomization/tests/simulations.py", line 183, in <module>
+    pdf_urns['trial_no'] = pdf_trial['trial_no'].values[0]
+  File "/mnt/data/schumm-lab/projects/urn-randomization/tests/simulations.py", line 148, in simulate_assignments_mproc
+    size=n_simulations)
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/multiprocessing/pool.py", line 372, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+  File "/mnt/data/schumm-lab/software/pyvenvs/urn_py39/lib/python3.9/multiprocessing/pool.py", line 771, in get
+    raise self._value
+FileExistsError: [Errno 17] File exists: '/home/mmurugesan/.config/UrnRandomization'
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
+Treatments or factors not found in configuration file for study CHS JCOIN
