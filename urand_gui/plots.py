@@ -61,17 +61,23 @@ def plot_styler(p):
 
 def plt_factor_treatment_assignments(study):
 	factors = list(study.factors.keys())
-	title_select_factor = Paragraph(text='Factor:', align='center')
-	select_factor = Select(title="", value=factors[0], options=factors, align='end')
+	title_select_factor = Paragraph(text='Factor:', sizing_mode='stretch_both', align='end')
+	select_factor = Select(title="", value=factors[0], options=factors, sizing_mode='stretch_both',
+	                       align='start', width_policy='fit')
 
 	pdf_urns = study.get_study_urns()
 	pdf_all = study.export_history()
 	pdf_all = pdf_all.groupby('trt').size().reset_index().rename(columns={0: 'n_participants'})
 	n_participants = pdf_all['n_participants'].sum()
-
-	p_all = figure(x_range=study.treatments, plot_height=400, title="All participants ({0})".format(n_participants),
-	               toolbar_location=None, tools="", )
-	p_all.vbar(x=pdf_all['trt'], top=pdf_all['n_participants'], width=0.9, alpha=0.9)
+	tooltips_all = [("No. participants",
+	                 "@n_participants")]
+	p_all = figure(x_range=study.treatments, plot_height=200, plot_width=300,
+	               title="All participants ({0})".format(n_participants),
+	               toolbar_location=None, tools="", tooltips=tooltips_all, sizing_mode='stretch_both',
+	               height_policy='fit')
+	source_all = ColumnDataSource(data=pdf_all[['trt', 'n_participants']])
+	p_all.add_tools(HoverTool(tooltips=[("No. participants", "@n_participants")]))
+	p_all.vbar(x='trt', top='n_participants', width=0.9, alpha=0.9, source=source_all)
 	p_all.xgrid.grid_line_color = None
 	p_all.y_range.start = 0
 
@@ -85,15 +91,15 @@ def plt_factor_treatment_assignments(study):
 	                                       .sum(axis=1)) for trt in study.treatments]))
 	pdf_factors = pdf_factors.assign(
 		**dict([(trt, pdf_factors['pc_trt_{0}'.format(trt).replace("-", "")]) for trt in study.treatments]))
-	tooltips = [("Trtmt {0}: ".format(trt),
+	tooltips = [("Trtmt {0} ".format(trt),
 	             "@pc_trt_{0}".format(trt.replace("-", ""))) for trt in study.treatments]
 	src = ColumnDataSource(data=pdf_factors)
 	filter = GroupFilter(column_name='factor', group=factors[0])
 	view = CDSView(source=src, filters=[filter])
 
-	p = figure(plot_height=400, title="By factor",
+	p = figure(plot_height=200, plot_width=300, title="By factor",
 	           toolbar_location=None, tools="", tooltips=tooltips,
-	           x_range=FactorRange(), y_range=[0, 110])
+	           x_range=FactorRange(), y_range=[0, 110], sizing_mode='stretch_both', height_policy='fit')
 	p.x_range.factors = study.factors[factors[0]]
 	lst_color = list(itertools.islice(itertools.cycle(bokeh_palette), len(study.treatments)))
 	lst_vbar = p.vbar_stack([trt for trt in study.treatments],
@@ -125,8 +131,7 @@ def plt_factor_treatment_assignments(study):
 	# grab the static resources
 	js_resources = INLINE.render_js()
 	css_resources = INLINE.render_css()
-	script_p, div_p = components(row(column(p_all, sizing_mode='scale_both'),
-	                                 column(row(title_select_factor, select_factor, align='end'),
-	                                        p),
-	                                 sizing_mode='scale_both'))
+	script_p, div_p = components(row(p_all, column(row(title_select_factor, select_factor, align='end'),
+	                                               row(p, sizing_mode='stretch_both', height_policy='fit')),
+	                                 sizing_mode='stretch_both', height_policy='fit'))
 	return script_p, div_p, js_resources, css_resources

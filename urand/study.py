@@ -130,12 +130,12 @@ class Study:
                                                       axis=0).var(axis=1)))
         else:
             trt_cols = ['trt_' + t for t in self.treatments]
-            urns['total_asgmt'] = urns[trt_cols].sum(axis=1)
-            urns = urns.assign(d=urns['total_asgmt'].where(urns['total_asgmt'] == 0,
-                                                           stats.chisquare(urns[trt_cols], axis=1)[0]))
-            del urns['total_asgmt']
-            # urns = urns.assign(d=stats.chisquare(urns[ball_cols].div(urns['total_balls'],
-            #                                      axis=0), axis=1)[0])
+            # urns['total_asgmt'] = urns[trt_cols].sum(axis=1)
+            # urns = urns.assign(d=urns['total_asgmt'].where(urns['total_asgmt'] == 0,
+            #                                                stats.chisquare(urns[trt_cols], axis=1)[0]))
+            # del urns['total_asgmt']
+            urns = urns.assign(d=stats.chisquare(urns[ball_cols].div(urns['total_balls'],
+                                                 axis=0), axis=1)[0])
         return urns
 
     def get_urns(self, participant):

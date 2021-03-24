@@ -20,11 +20,13 @@ setuptools.setup(
         'Flask',
         'pandas',
         'numpy',
+        'bokeh',
         'wtforms_alchemy',
         'flask_wtf',
         'sqlalchemy-datatables ',
-        'bootstrap-flask',
-        'scipy'
+        'flask_bootstrap',
+        'scipy',
+        'datatables'
 
     ],
     classifiers=[

@@ -1,9 +1,12 @@
 """CLI for urn-randomization package"""
 
+import sys
 import click
+from confuse import exceptions as ce
+
 from urand.config import config
 from urand import Study
-from confuse import exceptions as ce
+
 
 @click.group()
 @click.pass_context
@@ -53,3 +56,18 @@ def export(ctx, outfile):
     
     study = Study(ctx.obj['study_name'])
     study.export_history(outfile)
+
+
+@cli.command()
+@click.pass_context
+@click.option('--n_participants', type=int, required=True, prompt='No. of participants', help='Study size')
+@click.option('--seed', type=int, required=True, prompt='Random number generator seed', help='Seed')
+def dummy_study(ctx, n_participants, seed):
+    """Populate a study with dummy data"""
+
+    study = Study(ctx.obj['study_name'], memory=False)
+    study.generate_dummy_participants(n_participants, seed)
+
+
+if __name__ == '__main__':
+    cli(obj={})
