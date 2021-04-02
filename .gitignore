@@ -1,6 +1,6 @@
 .idea
 .DS_Store
-images
+notebooks/images
 .env
 __pycache__/
 .ipynb_checkpoints
@@ -10,4 +10,6 @@ urn_randomization.egg-info
 **/*.db
 tests/data/simulations
 urn-randomization.db
+_build
+pdf
 

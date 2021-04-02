@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Overview &mdash; urn-randomization 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CLI" href="cli.html" />
+    <link rel="prev" title="Urn Randomization" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> urn-randomization
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#randomizing-a-new-participant">Randomizing a new participant</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Access</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">urn-randomization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Randomization schemes in clinical trials strive to keep assignment of patients to treatment groups free of any deliberate
+bias so that basis for causal inference can be established. Minimizing bias and maximizing precision of treatment
+effect estimates are the two principles underpinning the design and execution of these randomization schemes. Urn
+randomization as described by Wei (1978) is a widely used randomization scheme that helps overcome bias related to
+unequal distribution of prognostic factors between groups. In comparison with block randomization schemes, this method is
+less deterministic and is less susceptible to investigator bias due to concealed allotment. It also handles large number
+of factors better than stratified randomization schemes. This scheme can also be used in trials that are already midway
+in their recruitment stage to improve factor balance. While other dynamic randomization schemes such as minimization offer
+more balance, this comes at the cost of being more predictable. Urn randomization schemes also have a tendency to behave
+like simple randomization as the trial size increases, where imbalances that affect power in estimating treatment effects
+are less likely. Urn randomization can thus be used for trials with large number of factors that require subgroup analysis,
+and also to increase precision in interim analyses by ensuring balance.</p>
+</div>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>Authentication to the browser interface is handled via OAuth 2.0 using Google. Users will log in via their Google accounts.
+You will need to provide your Gmail address to the person administering the app so that he or she can register you as an
+authorized user.</p>
+<p>Authentication when using the API is handled via an API key that will be
+provided to you. It is critical that you store and use this key in a secure
+manner.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>When you first login, you will be redirected to <cite>Participants</cite> page which displays information related to factor levels
+of participants already recruited and assigned. This page has bar plots in the top half of the page, visualizing percentages
+of participants assigned to each treatment group and at different factors/ factor levels (<a class="reference internal" href="#fig-assgmt-plot"><span class="std std-numref">Fig. 1</span></a>).</p>
+<div class="figure align-center" id="id1">
+<span id="fig-assgmt-plot"></span><a class="reference internal image-reference" href="_images/assgmt_plot.png"><img alt="_images/assgmt_plot.png" src="_images/assgmt_plot.png" style="width: 947.1px; height: 392.70000000000005px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Treatment assignments plots</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>This page also displays factor information of all participants assigned in a tabular format (<a class="reference internal" href="#fig-assgmt-tbl"><span class="std std-numref">Fig. 2</span></a>)
+in the bottom half of the page. This table has search and sort functionalities and it’s contents can also be downloaded
+as an excel file using the button with <cite>Excel</cite> icon above the table.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-assgmt-tbl"></span><a class="reference internal image-reference" href="_images/assgmt_tbl.png"><img alt="_images/assgmt_tbl.png" src="_images/assgmt_tbl.png" style="width: 940.5px; height: 236.28px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Treatment assignments table</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="randomizing-a-new-participant">
+<h3>Randomizing a new participant<a class="headerlink" href="#randomizing-a-new-participant" title="Permalink to this headline">¶</a></h3>
+<p>To randomize a new participant, click <cite>Randomize Participant</cite> button at the top of the page. This will redirect you to a
+form (<a class="reference internal" href="#fig-randomize-frm"><span class="std std-numref">Fig. 3</span></a>) where you can input factor information related to the new participant along with their ID. Click <cite>Submit</cite> after
+adding all factor details. This will randomize this participant if they do not exist already. Assignment treatment
+information will be displayed in the next page in the form of a flash message.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-randomize-frm"></span><a class="reference internal image-reference" href="_images/randomize_frm.png"><img alt="_images/randomize_frm.png" src="_images/randomize_frm.png" style="width: 384.78000000000003px; height: 495.66px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Randomize new participant</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cli.html" class="btn btn-neutral float-right" title="CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Urn Randomization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Research Computing Group, University of Chicago.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

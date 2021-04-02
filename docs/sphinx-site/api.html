@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>API Access &mdash; urn-randomization 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="CLI" href="cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> urn-randomization
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Access</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">urn-randomization</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Access</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-access">
+<h1>API Access<a class="headerlink" href="#api-access" title="Permalink to this headline">¶</a></h1>
+<p>Urn Randomization app may be accessed via a web-based API, permitting it to be
+integrated into existing platforms. Authentication is handled via a user-specific API
+key provided by the system administrator. It is critical that this key be
+stored and used in a secure manner.</p>
+<p>The API has 3 endpoints, as described below.</p>
+<dl class="http get">
+<dt id="get--study_config">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/study_config</code><a class="headerlink" href="#get--study_config" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="http get">
+<dt id="get--study_config">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/study_config</code><a class="headerlink" href="#get--study_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return study configuration.</p>
+<p><strong>Example request</strong>:</p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/study_config</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://rcg.bsd.uchicago.edu/urand</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Example response</strong>:</p>
+<blockquote>
+<div><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;D&quot;</span><span class="p">:</span> <span class="s2">&quot;range&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&quot;beta&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;factors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;african_american&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes (including mixed)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;No&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;crime_violence_screener_count&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;High (3-5)&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;electronic_monitoring&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Other&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;hispanic_descent&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Other&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;incarceration_days&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Low (0-12)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Moderate (13-90)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;High (91+)&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;local_site&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;11-Cook County – Chicago&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;30-Dupage County&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;40-Grundy County&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;50-Mclean County&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;60-Tazewell County&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;70-Will County&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;prior_opioid_overdose&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;No&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;prior_substance_use_treatment&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Any MOUD treatment&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Any other SUD treatment&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Other&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;probation_parole_community_supervision&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes (1+ days)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Other&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;sex&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Female&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;substance_screener_symptoms&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;High (3-5)&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;substance_use_days&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Low (0-12)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Moderate (13-44)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;High&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;young_adult&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;Yes (18-25)&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Other (26 or older)&quot;</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;starting_seed&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nt">&quot;treatments&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;MART&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RMC-Q&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RMC-A&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;urn_selection&quot;</span><span class="p">:</span> <span class="s2">&quot;method1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;w&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – API Key</p></li>
+<li><p><strong>study</strong> – study name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – participnts found for study</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Invalid request</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Unauthorized access</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> – Study not found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>(status Status code, message Status message/ error info, results Study configuration)</p>
+</dd>
+<dt class="field-odd">Rtype</dt>
+<dd class="field-odd"><p>(str, str, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="http get">
+<dt id="get--study_participants">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/study_participants</code><a class="headerlink" href="#get--study_participants" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="http get">
+<dt id="get--study_participants">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/study_participants</code><a class="headerlink" href="#get--study_participants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of study participants with their factor levels and treatment assignments</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/study_participants</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://rcg.bsd.uchicago.edu/urand</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;Success&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;results&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;bg_state&quot;</span><span class="p">:{</span>
+                <span class="nt">&quot;bit_generator&quot;</span><span class="p">:</span><span class="s2">&quot;PCG64&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;has_uint32&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="nt">&quot;state&quot;</span><span class="p">:{</span>
+                    <span class="nt">&quot;inc&quot;</span><span class="p">:</span><span class="mi">30008503642980956324491363429807189605</span><span class="p">,</span>
+                    <span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="mi">164404244729103591598495580972637239091</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;uinteger&quot;</span><span class="p">:</span><span class="mi">3586218795</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;datetime&quot;</span><span class="p">:</span><span class="s2">&quot;Wed, 10 Feb 2021 00:01:08 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_african_american&quot;</span><span class="p">:</span><span class="s2">&quot;Yes (including mixed)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_crime_violence_screener_count&quot;</span><span class="p">:</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_electronic_monitoring&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_hispanic_descent&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_incarceration_days&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (13-90)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_local_site&quot;</span><span class="p">:</span><span class="s2">&quot;40-Grundy County&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_prior_opioid_overdose&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_prior_substance_use_treatment&quot;</span><span class="p">:</span><span class="s2">&quot;Any other SUD treatment&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_probation_parole_community_supervision&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_sex&quot;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_substance_screener_symptoms&quot;</span><span class="p">:</span><span class="s2">&quot;High (3-5)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_substance_use_days&quot;</span><span class="p">:</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_young_adult&quot;</span><span class="p">:</span><span class="s2">&quot;Other (26 or older)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;trt&quot;</span><span class="p">:</span><span class="s2">&quot;RMC-Q&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;dummy&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;bg_state&quot;</span><span class="p">:{</span>
+                <span class="nt">&quot;bit_generator&quot;</span><span class="p">:</span><span class="s2">&quot;PCG64&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;has_uint32&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="nt">&quot;state&quot;</span><span class="p">:{</span>
+                    <span class="nt">&quot;inc&quot;</span><span class="p">:</span><span class="mi">30008503642980956324491363429807189605</span><span class="p">,</span>
+                    <span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="mi">175296851311552035585228848780835049764</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;uinteger&quot;</span><span class="p">:</span><span class="mi">3586218795</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;datetime&quot;</span><span class="p">:</span><span class="s2">&quot;Wed, 10 Feb 2021 00:01:08 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_african_american&quot;</span><span class="p">:</span><span class="s2">&quot;No&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_crime_violence_screener_count&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_electronic_monitoring&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_hispanic_descent&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_incarceration_days&quot;</span><span class="p">:</span><span class="s2">&quot;Low (0-12)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_local_site&quot;</span><span class="p">:</span><span class="s2">&quot;70-Will County&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_prior_opioid_overdose&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_prior_substance_use_treatment&quot;</span><span class="p">:</span><span class="s2">&quot;Any other SUD treatment&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_probation_parole_community_supervision&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_sex&quot;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_substance_screener_symptoms&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_substance_use_days&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (13-44)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;f_young_adult&quot;</span><span class="p">:</span><span class="s2">&quot;Yes (18-25)&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;trt&quot;</span><span class="p">:</span><span class="s2">&quot;MART&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;dummy&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – API Key</p></li>
+<li><p><strong>study</strong> – study name</p></li>
+<li><p><strong>id</strong> – participant id</p></li>
+<li><p><strong>factor</strong> – Factor value. All study factor levels should be passed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – participnts found for study</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Invalid request</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Unauthorized access</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> – Study not found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>(status Status code, message Status message/ error info, List of participants)</p>
+</dd>
+<dt class="field-odd">Rtype</dt>
+<dd class="field-odd"><p>(str, str, list)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="http post">
+<dt id="post--study_participants">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/study_participants</code><a class="headerlink" href="#post--study_participants" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="http post">
+<dt id="post--study_participants">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/study_participants</code><a class="headerlink" href="#post--study_participants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Randomize a new participant</p>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/study_participants</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://rcg.bsd.uchicago.edu/urand</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+   <span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;Success&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;results&quot;</span><span class="p">:[</span>
+      <span class="p">{</span>
+         <span class="nt">&quot;bg_state&quot;</span><span class="p">:{</span>
+            <span class="nt">&quot;bit_generator&quot;</span><span class="p">:</span><span class="s2">&quot;PCG64&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;has_uint32&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;state&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;inc&quot;</span><span class="p">:</span><span class="mi">30008503642980956324491363429807189605</span><span class="p">,</span>
+               <span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="mi">164404244729103591598495580972637239091</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;uinteger&quot;</span><span class="p">:</span><span class="mi">3586218795</span>
+         <span class="p">},</span>
+         <span class="nt">&quot;datetime&quot;</span><span class="p">:</span><span class="s2">&quot;Wed, 10 Feb 2021 00:01:08 GMT&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_african_american&quot;</span><span class="p">:</span><span class="s2">&quot;Yes (including mixed)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_crime_violence_screener_count&quot;</span><span class="p">:</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_electronic_monitoring&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_hispanic_descent&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_incarceration_days&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (13-90)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_local_site&quot;</span><span class="p">:</span><span class="s2">&quot;40-Grundy County&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_prior_opioid_overdose&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_prior_substance_use_treatment&quot;</span><span class="p">:</span><span class="s2">&quot;Any other SUD treatment&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_probation_parole_community_supervision&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_sex&quot;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_substance_screener_symptoms&quot;</span><span class="p">:</span><span class="s2">&quot;High (3-5)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_substance_use_days&quot;</span><span class="p">:</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_young_adult&quot;</span><span class="p">:</span><span class="s2">&quot;Other (26 or older)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;trt&quot;</span><span class="p">:</span><span class="s2">&quot;RMC-Q&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;dummy&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="nt">&quot;bg_state&quot;</span><span class="p">:{</span>
+            <span class="nt">&quot;bit_generator&quot;</span><span class="p">:</span><span class="s2">&quot;PCG64&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;has_uint32&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;state&quot;</span><span class="p">:{</span>
+               <span class="nt">&quot;inc&quot;</span><span class="p">:</span><span class="mi">30008503642980956324491363429807189605</span><span class="p">,</span>
+               <span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="mi">175296851311552035585228848780835049764</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;uinteger&quot;</span><span class="p">:</span><span class="mi">3586218795</span>
+         <span class="p">},</span>
+         <span class="nt">&quot;datetime&quot;</span><span class="p">:</span><span class="s2">&quot;Wed, 10 Feb 2021 00:01:08 GMT&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_african_american&quot;</span><span class="p">:</span><span class="s2">&quot;No&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_crime_violence_screener_count&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_electronic_monitoring&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_hispanic_descent&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_incarceration_days&quot;</span><span class="p">:</span><span class="s2">&quot;Low (0-12)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_local_site&quot;</span><span class="p">:</span><span class="s2">&quot;70-Will County&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_prior_opioid_overdose&quot;</span><span class="p">:</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_prior_substance_use_treatment&quot;</span><span class="p">:</span><span class="s2">&quot;Any other SUD treatment&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_probation_parole_community_supervision&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_sex&quot;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_substance_screener_symptoms&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (1-2)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_substance_use_days&quot;</span><span class="p">:</span><span class="s2">&quot;Moderate (13-44)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;f_young_adult&quot;</span><span class="p">:</span><span class="s2">&quot;Yes (18-25)&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;trt&quot;</span><span class="p">:</span><span class="s2">&quot;MART&quot;</span><span class="p">,</span>
+         <span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;dummy&quot;</span>
+      <span class="p">}</span>
+   <span class="p">],</span>
+   <span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – API Key</p></li>
+<li><p><strong>study</strong> – study name</p></li>
+<li><p><strong>id</strong> – participant id</p></li>
+<li><p><strong>factor</strong> – Factor value. All study factor levels should be passed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – participnts found for study</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Invalid request</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Unauthorized access</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> – Study not found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>(status Status code, message Status message/ error info, results Participant info)</p>
+</dd>
+<dt class="field-odd">Rtype</dt>
+<dd class="field-odd"><p>(str, str, dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cli.html" class="btn btn-neutral float-left" title="CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Research Computing Group, University of Chicago.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

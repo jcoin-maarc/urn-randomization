@@ -24,11 +24,13 @@ def cli(ctx, study_name):
     ctx.obj['study_name'] = study_name
     ctx.obj['factors'] = factors
 
+
 def get_factor_val(levels, prompt):
     while True:
         val = str(input(prompt))
         if val in levels:
             return val
+
 
 # TODO Allow factor levels to be specified as options
 @cli.command()
@@ -48,12 +50,12 @@ def randomize(ctx, id, user):
     trt = study.randomize(participant).trt
     print('\nTreatment assigned: {}'.format(trt))
 
+
 @cli.command()
 @click.pass_context
 @click.argument('outfile', type=click.Path(exists=False))
 def export(ctx, outfile):
     """Export study history to OUTFILE"""
-    
     study = Study(ctx.obj['study_name'])
     study.export_history(outfile)
 
@@ -64,7 +66,6 @@ def export(ctx, outfile):
 @click.option('--seed', type=int, required=True, prompt='Random number generator seed', help='Seed')
 def dummy_study(ctx, n_participants, seed):
     """Populate a study with dummy data"""
-
     study = Study(ctx.obj['study_name'], memory=False)
     study.generate_dummy_participants(n_participants, seed)
 
