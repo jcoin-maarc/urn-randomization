@@ -1,8 +1,11 @@
+import os
+
 from wtforms_alchemy import model_form_factory
 from flask_wtf import FlaskForm
 from flask import Flask
 from urand.config import config
 from urand.study import Study
+
 
 app = Flask(__name__)
 app.secret_key = 'dev'

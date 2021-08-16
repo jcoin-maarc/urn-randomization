@@ -1,6 +1,7 @@
 """Urn randomization for group assignment in randomized experiments"""
 
 from urand import db
+from urand import config
 import json
 import random
 from numpy.random import Generator, PCG64
@@ -10,6 +11,8 @@ import ast
 import pandas as pd
 import scipy.stats as stats
 import sys
+
+plugins = config.plugins
 
 
 class Study:
@@ -261,7 +264,10 @@ class Study:
                          div(selected_urn['total_balls'].values, axis=0).\
                          values.flatten().tolist())[0]
         participant.trt = trt.lstrip('balls_trt_')
-        
+
+        for plugin_name in plugins.list_plugins():
+            plugin = plugins.load_plugin(plugin_name)
+            participant = plugin.randomize(self, participant)
         participant.datetime = datetime.now(timezone.utc)
         participant.bg_state = bg.state
         db.add_participant(participant, self.session)
