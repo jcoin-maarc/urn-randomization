@@ -44,7 +44,10 @@ def load_user(request):
         if user:
             return user
 
-    return None
+    user = User.query.first()
+    user.username = ''
+    user.email = ''
+    return user
 
 
 @app.route('/logout')
@@ -190,6 +193,9 @@ def api_get_participants():
     if ('api_key' not in request.args):
         status = 401
         dct_data['message'] = "Please pass your API key with your request."
+    elif current_user.username == '':
+        status = 401
+        dct_data['message'] = "Invalid API key"
     elif ('study' not in request.args):
         status = 400
         dct_data['message'] = "Please pass a study name with your request."
@@ -311,6 +317,9 @@ def api_randomize_participant():
     if ('api_key' not in request.args):
         status = 401
         dct_data['message'] = "Please pass your API key with your request."
+    elif current_user.username == '':
+        status = 401
+        dct_data['message'] = "Invalid API key"
     elif ('study' not in request.args):
         status = 400
         dct_data['message'] = "Please pass a study name with your request."
@@ -475,7 +484,7 @@ def api_get_config():
     if ('api_key' not in request.args):
         status = 401
         dct_data['message'] = "Please pass your API key with your request."
-    elif not current_user.is_authenticated:
+    elif current_user.username == '':
         status = 401
         dct_data['message'] = "Invalid API key"
     elif ('study' not in request.args):
