@@ -8,5 +8,4 @@ class Config(object):
     BOOTSTRAP_BTN_STYLE = 'primary'
     BOOTSTRAP_BTN_SIZE = 'sm'
     SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or 'dev'
-    PARTICIPANT_INFO_KEY = base64.urlsafe_b64encode(os.urandom(32))
 

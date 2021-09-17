@@ -4,7 +4,6 @@ from wtforms_alchemy import model_form_factory
 from flask_wtf import FlaskForm
 from flask import Flask, request, redirect, jsonify, url_for
 from flask_bootstrap import Bootstrap
-from cryptography.fernet import Fernet
 from urand.config import config as urand_config
 from urand.study import Study
 from .config import Config as FlaskConfig
@@ -23,7 +22,6 @@ app.cli.add_command(list_users)
 app.cli.add_command(delete_user)
 app.config['SQLALCHEMY_DATABASE_URI'] = urand_config['db'].get()
 db.init_app(app)
-db.create_all(app=app)
 login_manager.init_app(app)
 bootstrap = Bootstrap(app)
 
@@ -53,7 +51,6 @@ def unauthorized():
 
 BaseModelForm = model_form_factory(FlaskForm)
 # study = Study("Example Study")
-
 
 
 class ModelForm(BaseModelForm):

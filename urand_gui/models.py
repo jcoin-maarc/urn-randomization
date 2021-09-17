@@ -4,12 +4,8 @@ from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from sqlalchemy.sql import func
 from sqlalchemy.ext.hybrid import hybrid_method
 from .config import Config
-from cryptography.fernet import Fernet
 
 db = SQLAlchemy()
-config = Config()
-fernet = Fernet(config.PARTICIPANT_INFO_KEY)
-
 
 user_to_study = db.Table('user_to_study',
                          db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
