@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import flash, redirect, url_for, render_template, request,  jsonify, render_template, request, Response
 from flask_wtf import CSRFProtect
+from flask_login import login_required, logout_user, current_user
 
 
 from datatables import ColumnDT, DataTables
@@ -10,12 +11,13 @@ from flask_bootstrap import Bootstrap
 import pandas as pd
 import urand_gui.forms as urand_forms
 import urand_gui.plots as plot_utils
+from urand_gui.models import User
 
-from urand_gui import study, Study, config, app
+from urand_gui import study, Study, config, app, login_manager
 
 # app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lumen'  # uncomment this line to test bootswatch theme
 
-bootstrap = Bootstrap(app)
+#bootstrap_app = Bootstrap(app)
 csrf = CSRFProtect(app)
 
 lst_col_to_defer = ['bg_state']
@@ -32,12 +34,44 @@ def index():
     return render_template('index.html')
 
 
+@login_manager.request_loader
+def load_user(request):
+    """Attempt to authenticate user using API key"""
+
+    api_key = request.form.get('api_key')
+    if api_key:
+        user = User.query.filter_by(api_key=api_key).first()
+        if user:
+            return user
+
+    return None
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have logged out')
+    return redirect(url_for('index'))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    """Respond to unauthorized requests"""
+
+    if request.form.get('api_key'):
+        return jsonify({"message": "Unauthorized request"}), 401
+
+    return redirect(url_for('index'))
+
+
 # TODO: Fetch username from currentusername
 @app.route('/randomize_participant', methods=['GET', 'POST'])
+@login_required
 def randomize_participant():
     """This function renders Randomize Participant form with which the end user can randomize new participants
     """
-    form = urand_forms.FrmRandomizeParticipant()
+    form = urand_forms.FrmRandomizeParticipant(user=current_user.username)
     if form.validate_on_submit():
         participant = study.participant()
         form.populate_obj(participant)
@@ -54,6 +88,7 @@ def randomize_participant():
 
 
 @app.route('/study_participants', methods=['GET'])
+@login_required
 def api_get_participants():
     """
     .. http:get:: /study_participants
@@ -173,6 +208,7 @@ def api_get_participants():
 
 @csrf.exempt
 @app.route('/study_participants', methods=['POST'])
+@login_required
 def api_randomize_participant():
     """
     .. http:post:: /study_participants
@@ -320,6 +356,7 @@ def api_randomize_participant():
 
 
 @app.route('/study_config', methods=['GET'])
+@login_required
 def api_get_config():
     """
     .. http:get:: /study_config
@@ -454,6 +491,7 @@ def api_get_config():
 
 
 @app.route("/participants", methods=['GET', 'POST'])
+@login_required
 def list_participants():
     """List randomized participants"""
     script_plt, div_plt, js_resources, css_resources = plot_utils.plt_factor_treatment_assignments(study)
@@ -467,6 +505,7 @@ def list_participants():
 
 
 @app.route("/dtbl_participants")
+@login_required
 def dtbl_participants():
     """Return server side data."""
     # defining columns
