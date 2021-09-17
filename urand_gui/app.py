@@ -13,7 +13,7 @@ import urand_gui.forms as urand_forms
 import urand_gui.plots as plot_utils
 from urand_gui.models import User
 
-from urand_gui import study, Study, config, app, login_manager
+from urand_gui import study, Study, app, login_manager, urand_config as config
 
 # app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'lumen'  # uncomment this line to test bootswatch theme
 
@@ -38,7 +38,7 @@ def index():
 def load_user(request):
     """Attempt to authenticate user using API key"""
 
-    api_key = request.form.get('api_key')
+    api_key = request.args.get('api_key')
     if api_key:
         user = User.query.filter_by(api_key=api_key).first()
         if user:
@@ -201,14 +201,15 @@ def api_get_participants():
         study = Study(request.args.get('study'))
         df_participants = study.export_history()
         dct_data['message'] = 'Success'
+        dct_data['user'] = current_user.username
         dct_data['results'] = df_participants.to_dict(orient='record')
     dct_data['status'] = status
     return jsonify(dct_data), status
 
 
 @csrf.exempt
-@app.route('/study_participants', methods=['POST'])
 @login_required
+@app.route('/study_participants', methods=['POST'])
 def api_randomize_participant():
     """
     .. http:post:: /study_participants
@@ -343,7 +344,7 @@ def api_randomize_participant():
                 dct_data['results'] = df_participant.to_dict(orient='record')
             else:
                 df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
-                                                    ('user', 'api')] +
+                                                    ('user', current_user.username)] +
                                                    [('f_' + factor,
                                                      request.args.get(factor)) for factor in lst_factors]),
                                               index=[0])
@@ -474,6 +475,9 @@ def api_get_config():
     if ('api_key' not in request.args):
         status = 401
         dct_data['message'] = "Please pass your API key with your request."
+    elif not current_user.is_authenticated:
+        status = 401
+        dct_data['message'] = "Invalid API key"
     elif ('study' not in request.args):
         status = 400
         dct_data['message'] = "Please pass a study name with your request."
@@ -484,6 +488,7 @@ def api_get_config():
     else:
         study = Study(request.args.get('study'))
         dct_data['message'] = 'Success'
+        dct_data['user'] = current_user.username
         dct_data['results'] = study.get_config()
 
     dct_data['status'] = status
