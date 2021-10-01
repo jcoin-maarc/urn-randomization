@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon_io/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="manifest" href="../static/favicon_io/site.webmanifest">
     {{ bootstrap.load_css() }}
     <style>
@@ -26,12 +27,13 @@
 </head>
 <body>
     {{ render_messages(container=False, dismissible=True) }}
+    {% if current_user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        {% if current_user.is_authenticated %}
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {{ render_nav_item('list_participants', 'Participants', use_li=True) }}
@@ -42,14 +44,25 @@
                 </ul>
 
             </div>
-        {% else %}
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            <a href="{{ url_for('google.login') }}">Login with Google</a>
-            </ul>
-        </div>
-        {% endif %}
     </nav>
+    {% else %}
+    <section class="vh-100" style="background-color: #350E20FF;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Randomize participants with Urn Randomization</h3>
+            <a href="{{ url_for('google.login') }}" class="btn btn-lg btn-block btn-primary" style="background-color: #155F83FF;"><i class="fab fa-google me-2"></i> Login with Google</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    {% endif %}
+
 
     {% if current_user.is_authenticated %}
     <main class="container">
@@ -67,4 +80,3 @@
     {{ bootstrap.load_js() }}
 </body>
 </html>
- 
