@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+=======
+from urand import Study, db
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
 import os
 import numpy as np
 from numpy.random import Generator, PCG64
 import pandas as pd
 import glob
 import shutil
+<<<<<<< HEAD
 import ast
 from multiprocessing import Pool
 import click
@@ -12,6 +17,11 @@ import sys
 sys.path.append("../")
 from urand import Study, db
 import urand
+=======
+import urand
+import ast
+from multiprocessing import Pool
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
 
 
 def simulate_assignments(n_participants, n_simulations, factor_combination_seed, starting_seed, simulation_label,
@@ -84,6 +94,7 @@ def process_isolated_trial(trial_starting_seed, trial_factor_combination_seed,
 	pdf_trial_data.to_csv(os.path.join(simulation_data_folder, 'trial_{0}.csv'.format(trial_no)),
 	                      index=False)
 
+<<<<<<< HEAD
 	pdf_stats = None
 	study = urand.Study(study_name, memory=True)
 	study.starting_seed = pdf_trial_data['starting_seed'].values[0]
@@ -114,6 +125,11 @@ def process_isolated_trial(trial_starting_seed, trial_factor_combination_seed,
 def simulate_assignments_mproc(n_participants: int, n_simulations: int, study_name: str,
                                simulation_label: str, factor_combination_seed: int, starting_seed: int,
                                fixed_participants: bool = False, nproc: int = 4):
+=======
+
+def simulate_assignments_mproc(n_participants, n_simulations, factor_combination_seed, starting_seed, simulation_label,
+                               study_name='Test Study', fixed_participants=True, nproc=4):
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
 	""" Simulates n_simulations assignments, with multiprocessing, each with n_participants participants.
 		Assignment data is exported to simulation_label as csv files.
 		:param n_participants: No. of participants in each trial
@@ -190,8 +206,15 @@ def estimate_study_imbalance(simulation_label, study_name='Test Study'):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
 	simulate_assignments_mproc()
 # 	# simulate_assignments(30, 4, 100, 100,
 # 	#                      1, fixed_participants=True)
 # 	simulate_assignments_mproc(500, 200, 100, 100, "mproc_1", nproc=8, fixed_participants=False)
 # 	# estimate_study_imbalance("mproc")
+=======
+	# simulate_assignments(30, 4, 100, 100,
+	#                      1, fixed_participants=True)
+	# simulate_assignments_mproc(500, 200, 100, 100, "mproc", nproc=8, fixed_participants=False)
+	estimate_study_imbalance("mproc")
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6

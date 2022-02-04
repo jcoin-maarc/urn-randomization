@@ -12,8 +12,11 @@ import pandas as pd
 import scipy.stats as stats
 import sys
 
+<<<<<<< HEAD
 plugins = config.plugins
 
+=======
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
 
 class Study:
     """Study for which treatments are to be assigned"""
@@ -121,6 +124,7 @@ class Study:
         urns['total_balls'] = urns[ball_cols].sum(axis=1)
         return urns
 
+<<<<<<< HEAD
     def compute_d(self, urns):
         """"Compute D for urns"""
         ball_cols = ['balls_trt_' + trt for trt in self.treatments]
@@ -141,6 +145,8 @@ class Study:
                                                  axis=0), axis=1)[0])
         return urns
 
+=======
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
     def get_urns(self, participant):
         """Returns list of urns associsated with the participant,
         constructed from their assignment history"""
@@ -150,7 +156,10 @@ class Study:
                  if col.startswith('f_')}
         urns = self._get_assignments(fdict)
         urns = self.compute_no_balls(urns)
+<<<<<<< HEAD
         urns = self.compute_d(urns)
+=======
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
         return urns
 
     def get_study_urns(self):
@@ -158,11 +167,25 @@ class Study:
             Build list of urns from assignment history.
         """
         pdf_urns = self._get_assignments({})
+<<<<<<< HEAD
         pdf_urns = self.compute_no_balls(pdf_urns)
         pdf_urns = self.compute_d(pdf_urns)
         return pdf_urns
 
     def export_history(self, file=None):
+=======
+
+        pdf_urns = self.compute_no_balls(pdf_urns)
+        lst_balls_col = ['balls_trt_' + trt for trt in self.treatments]
+        if self.D == 'range':
+            pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].max(axis=1) - pdf_urns[lst_balls_col].min(axis=1))
+                                       .div(pdf_urns['total_balls']))
+        else:
+            pdf_urns = pdf_urns.assign(d=(pdf_urns[lst_balls_col].var(axis=1)).div(pdf_urns['total_balls']))
+        return pdf_urns
+
+    def export_history(self, file):
+>>>>>>> 27ac8d0292dbced1a745bd76e2869d150bf369d6
         """Exports patient assignment history table as a csv file"""
         pdf = db.get_participants(self.participant, self.session)
         if file is not None:
