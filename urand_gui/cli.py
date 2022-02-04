@@ -17,7 +17,7 @@ def create_db():
     print("Database tables created")
 
     for key in urand_config:
-        if key not in ['db', 'w', 'alpha', 'beta', 'D', 'urn_selection']:
+        if key not in ["db", "w", "alpha", "beta", "D", "urn_selection"]:
             query = Study.query.filter_by(name=key)
             try:
                 ety_study = query.one()
@@ -29,8 +29,8 @@ def create_db():
 
 
 @click.command(name="add_user")
-@click.argument('uname')
-@click.argument('email')
+@click.argument("uname")
+@click.argument("email")
 @with_appcontext
 def add_user(uname, email):
     """Adds a user"""
@@ -56,7 +56,7 @@ def list_users():
 
 
 @click.command(name="delete_user")
-@click.argument('email')
+@click.argument("email")
 @with_appcontext
 def delete_user(email):
     """Deletes user linked to email"""

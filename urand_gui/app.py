@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
-from flask import flash, redirect, url_for, render_template, request,  jsonify, render_template, request, Response
+from flask import (
+    flash,
+    redirect,
+    url_for,
+    render_template,
+    request,
+    jsonify,
+    render_template,
+    request,
+    Response,
+)
 from flask_wtf import CSRFProtect
 from flask_login import login_required, logout_user, current_user
 
@@ -19,25 +29,28 @@ from urand_gui import study, Study, app, login_manager, urand_config as config
 
 csrf = CSRFProtect(app)
 
-lst_col_to_defer = ['bg_state']
-lst_numeric_col = ['id']
-lst_date_col = ['datetime']
-lst_col_to_add = [col.name for col
-                  in study.participant.__table__.columns if col.name not in lst_col_to_defer]
+lst_col_to_defer = ["bg_state"]
+lst_numeric_col = ["id"]
+lst_date_col = ["datetime"]
+lst_col_to_add = [
+    col.name
+    for col in study.participant.__table__.columns
+    if col.name not in lst_col_to_defer
+]
 lst_date_col_index = [lst_col_to_add.index(col) for col in lst_date_col]
 lst_numeric_col_index = [lst_col_to_add.index(col) for col in lst_numeric_col]
 
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @login_manager.request_loader
 def load_user(request):
     """Attempt to authenticate user using API key"""
 
-    api_key = request.args.get('api_key')
+    api_key = request.args.get("api_key")
     if api_key:
         user = User.query.filter_by(api_key=api_key).first()
         if user:
@@ -45,47 +58,53 @@ def load_user(request):
     return None
 
 
-@app.route('/logout')
+@app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    flash('You have logged out')
-    return redirect(url_for('index'))
+    flash("You have logged out")
+    return redirect(url_for("index"))
 
 
 @login_manager.unauthorized_handler
 def unauthorized():
     """Respond to unauthorized requests"""
 
-    if request.args.get('api_key'):
-        return jsonify({"message": "Unauthorized request",
-                        "status": 401}), 401
-    return redirect(url_for('index'))
+    if request.args.get("api_key"):
+        return jsonify({"message": "Unauthorized request", "status": 401}), 401
+    return redirect(url_for("index"))
 
 
 # TODO: Fetch username from currentusername
-@app.route('/randomize_participant', methods=['GET', 'POST'])
+@app.route("/randomize_participant", methods=["GET", "POST"])
 @login_required
 def randomize_participant():
-    """This function renders Randomize Participant form with which the end user can randomize new participants
-    """
+    """This function renders Randomize Participant form with which the end user can randomize new participants"""
     form = urand_forms.FrmRandomizeParticipant(user=current_user.username)
     if form.validate_on_submit():
         participant = study.participant()
         form.populate_obj(participant)
         pdf_participants = pd.DataFrame([participant.__dict__], index=[0])
-        pdf_participants = pdf_participants[[col for col in pdf_participants.columns
-                                             if col in [c.name for c in study.participant.__table__.columns]]]
+        pdf_participants = pdf_participants[
+            [
+                col
+                for col in pdf_participants.columns
+                if col in [c.name for c in study.participant.__table__.columns]
+            ]
+        ]
         study.upload_new_participants(pdf=pdf_participants)
         pdf_participant = study.get_participant(participant.id)
-        flash("Participant id {0} has been randomized to treatment {1}".format(pdf_participant['id'].values[0],
-                                                                               pdf_participant['trt'].values[0]),
-              category="info")
-        return redirect(url_for('list_participants'))
-    return render_template('frm_randomize_participant.html', participant_form=form)
+        flash(
+            "Participant id {0} has been randomized to treatment {1}".format(
+                pdf_participant["id"].values[0], pdf_participant["trt"].values[0]
+            ),
+            category="info",
+        )
+        return redirect(url_for("list_participants"))
+    return render_template("frm_randomize_participant.html", participant_form=form)
 
 
-@app.route('/study_participants', methods=['GET'])
+@app.route("/study_participants", methods=["GET"])
 def api_get_participants():
     """
     .. http:get:: /study_participants
@@ -184,30 +203,29 @@ def api_get_participants():
     """
     dct_data = {}
     status = 200
-    if ('api_key' not in request.args):
-        return jsonify({"message": "Please pass an API key.",
-                        'status': 401}), 401
+    if "api_key" not in request.args:
+        return jsonify({"message": "Please pass an API key.", "status": 401}), 401
     if current_user.is_authenticated:
-        if ('study' not in request.args):
+        if "study" not in request.args:
             status = 400
-            dct_data['message'] = "Please pass a study name with your request."
+            dct_data["message"] = "Please pass a study name with your request."
 
-        elif request.args.get('study') not in config:
+        elif request.args.get("study") not in config:
             status = 404
-            dct_data['message'] = "Requested study does not exist."
+            dct_data["message"] = "Requested study does not exist."
         else:
-            study = Study(request.args.get('study'))
+            study = Study(request.args.get("study"))
             df_participants = study.export_history()
-            dct_data['message'] = 'Success'
-            dct_data['results'] = df_participants.to_dict(orient='record')
-        dct_data['status'] = status
+            dct_data["message"] = "Success"
+            dct_data["results"] = df_participants.to_dict(orient="record")
+        dct_data["status"] = status
         return jsonify(dct_data), status
     else:
         return login_manager.unauthorized()
 
 
 @csrf.exempt
-@app.route('/study_participants', methods=['POST'])
+@app.route("/study_participants", methods=["POST"])
 def api_randomize_participant():
     """
     .. http:post:: /study_participants
@@ -306,58 +324,76 @@ def api_randomize_participant():
     """
     dct_data = {}
     status = 200
-    if ('api_key' not in request.args):
-        return jsonify({"message": "Please pass an API key.",
-                        'status': 401}), 401
+    if "api_key" not in request.args:
+        return jsonify({"message": "Please pass an API key.", "status": 401}), 401
     if current_user.is_authenticated:
-        if ('study' not in request.args):
+        if "study" not in request.args:
             status = 400
-            dct_data['message'] = "Please pass a study name with your request."
+            dct_data["message"] = "Please pass a study name with your request."
 
-        elif request.args.get('study') not in config:
+        elif request.args.get("study") not in config:
             status = 404
-            dct_data['message'] = "Requested study does not exist."
+            dct_data["message"] = "Requested study does not exist."
         else:
-            if 'id' not in request.args:
+            if "id" not in request.args:
                 status = 400
-                dct_data['message'] = "Please pass the participant id with your request."
+                dct_data[
+                    "message"
+                ] = "Please pass the participant id with your request."
             if status == 200:
-                study = Study(request.args.get('study'))
+                study = Study(request.args.get("study"))
                 lst_factors = list(study.factors.keys())
                 for factor in lst_factors:
                     if factor not in request.args:
                         status = 400
-                        dct_data['message'] = "Please pass a value for factor {0} with your request.".format(factor)
+                        dct_data[
+                            "message"
+                        ] = "Please pass a value for factor {0} with your request.".format(
+                            factor
+                        )
                         break
                     if request.args.get(factor) not in study.factors[factor]:
                         status = 400
-                        dct_data['message'] = "Invalid level supplied for factor {0}. " +\
-                                              "Allowed level are: [{1}].".format(factor,
-                                                                    ", ".join(study.factors[factor]))
+                        dct_data["message"] = (
+                            "Invalid level supplied for factor {0}. "
+                            + "Allowed level are: [{1}].".format(
+                                factor, ", ".join(study.factors[factor])
+                            )
+                        )
                         break
 
-                if study.get_participant(request.args.get('id')).shape[0] > 0:
+                if study.get_participant(request.args.get("id")).shape[0] > 0:
                     status = 400
-                    dct_data['message'] = f"Participant {request.args.get('id')} is already assigned"
-                    df_participant = study.get_participant(request.args.get('id'))
-                    dct_data['results'] = df_participant.to_dict(orient='record')
+                    dct_data[
+                        "message"
+                    ] = f"Participant {request.args.get('id')} is already assigned"
+                    df_participant = study.get_participant(request.args.get("id"))
+                    dct_data["results"] = df_participant.to_dict(orient="record")
                 else:
-                    df_participant = pd.DataFrame(dict([('id', request.args.get('id')),
-                                                        ('user', current_user.username)] +
-                                                       [('f_' + factor,
-                                                         request.args.get(factor)) for factor in lst_factors]),
-                                                  index=[0])
+                    df_participant = pd.DataFrame(
+                        dict(
+                            [
+                                ("id", request.args.get("id")),
+                                ("user", current_user.username),
+                            ]
+                            + [
+                                ("f_" + factor, request.args.get(factor))
+                                for factor in lst_factors
+                            ]
+                        ),
+                        index=[0],
+                    )
                     study.upload_new_participants(pdf=df_participant)
-                    df_participant = study.get_participant(request.args.get('id'))
-                    dct_data['message'] = "Success"
-                    dct_data['results'] = df_participant.to_dict(orient='record')
-        dct_data['status'] = status
+                    df_participant = study.get_participant(request.args.get("id"))
+                    dct_data["message"] = "Success"
+                    dct_data["results"] = df_participant.to_dict(orient="record")
+        dct_data["status"] = status
         return jsonify(dct_data), status
     else:
         return login_manager.unauthorized()
 
 
-@app.route('/study_config', methods=['GET'])
+@app.route("/study_config", methods=["GET"])
 def api_get_config():
     """
     .. http:get:: /study_config
@@ -469,44 +505,54 @@ def api_get_config():
     :statuscode 404: Study not found
     :return: (status Status code, message Status message/ error info, results Study configuration)
     :rtype: (str, str, dict)
-            """
+    """
     dct_data = {}
     status = 200
-    if ('api_key' not in request.args):
-        return jsonify({"message": "Please pass an API key.",
-                        'status': 401}), 401
+    if "api_key" not in request.args:
+        return jsonify({"message": "Please pass an API key.", "status": 401}), 401
     if current_user.is_authenticated:
-        if ('study' not in request.args):
+        if "study" not in request.args:
             status = 400
-            dct_data['message'] = "Please pass a study name with your request."
+            dct_data["message"] = "Please pass a study name with your request."
 
-        elif request.args.get('study') not in config:
+        elif request.args.get("study") not in config:
             status = 404
-            dct_data['message'] = "Requested study does not exist."
+            dct_data["message"] = "Requested study does not exist."
         else:
-            study = Study(request.args.get('study'))
-            dct_data['message'] = 'Success'
-            dct_data['user'] = current_user.username
-            dct_data['results'] = study.get_config()
+            study = Study(request.args.get("study"))
+            dct_data["message"] = "Success"
+            dct_data["user"] = current_user.username
+            dct_data["results"] = study.get_config()
 
-        dct_data['status'] = status
+        dct_data["status"] = status
         return jsonify(dct_data), status
     else:
         return login_manager.unauthorized()
 
 
-@app.route("/participants", methods=['GET', 'POST'])
+@app.route("/participants", methods=["GET", "POST"])
 @login_required
 def list_participants():
     """List randomized participants"""
-    script_plt, div_plt, js_resources, css_resources = plot_utils.plt_factor_treatment_assignments(study)
-    return render_template("tbl_participant.html", project=study.study_name,
-                           div_plt=div_plt,
-                           script_plt=script_plt,
-                           js_resources=js_resources,
-                           css_resources=css_resources,
-                           colnames=[c.info.get('label', c.name) for c in study.participant.__table__.columns
-                                     if (c.name not in ['bg_state'])])
+    (
+        script_plt,
+        div_plt,
+        js_resources,
+        css_resources,
+    ) = plot_utils.plt_factor_treatment_assignments(study)
+    return render_template(
+        "tbl_participant.html",
+        project=study.study_name,
+        div_plt=div_plt,
+        script_plt=script_plt,
+        js_resources=js_resources,
+        css_resources=css_resources,
+        colnames=[
+            c.info.get("label", c.name)
+            for c in study.participant.__table__.columns
+            if (c.name not in ["bg_state"])
+        ],
+    )
 
 
 @app.route("/dtbl_participants")
@@ -514,12 +560,24 @@ def list_participants():
 def dtbl_participants():
     """Return server side data."""
     # defining columns
-    columns = ([ColumnDT(study.participant.__dict__[col], column_name=col,
-                         search_method='numeric' if col in lst_numeric_col else (
-                             'date' if col in lst_date_col else 'string_contains')) for col in lst_col_to_add])
+    columns = [
+        ColumnDT(
+            study.participant.__dict__[col],
+            column_name=col,
+            search_method="numeric"
+            if col in lst_numeric_col
+            else ("date" if col in lst_date_col else "string_contains"),
+        )
+        for col in lst_col_to_add
+    ]
     # defining the initial query depending on your purpose
-    query = study.session.query(*[study.participant.__dict__[c.name]
-                                  for c in study.participant.__table__.columns if c not in lst_col_to_defer])
+    query = study.session.query(
+        *[
+            study.participant.__dict__[c.name]
+            for c in study.participant.__table__.columns
+            if c not in lst_col_to_defer
+        ]
+    )
 
     # GET parameters
     params = request.args.to_dict()
@@ -532,5 +590,5 @@ def dtbl_participants():
     return jsonify(dct_result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

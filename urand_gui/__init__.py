@@ -15,12 +15,12 @@ study = Study("CHS JCOIN")
 
 app = Flask(__name__)
 app.config.from_object(FlaskConfig)
-app.register_blueprint(blueprint, url_prefix='/login')
+app.register_blueprint(blueprint, url_prefix="/login")
 app.cli.add_command(create_db)
 app.cli.add_command(add_user)
 app.cli.add_command(list_users)
 app.cli.add_command(delete_user)
-app.config['SQLALCHEMY_DATABASE_URI'] = urand_config['db'].get()
+app.config["SQLALCHEMY_DATABASE_URI"] = urand_config["db"].get()
 db.init_app(app)
 login_manager.init_app(app)
 bootstrap = Bootstrap(app)
@@ -28,25 +28,25 @@ bootstrap = Bootstrap(app)
 
 @login_manager.request_loader
 def load_user(request):
-	"""Attempt to authenticate user using API key"""
+    """Attempt to authenticate user using API key"""
 
-	api_key = request.form.get('api_key')
-	if api_key:
-		user = User.query.filter_by(api_key=api_key).first()
-		if user:
-			return user
+    api_key = request.form.get("api_key")
+    if api_key:
+        user = User.query.filter_by(api_key=api_key).first()
+        if user:
+            return user
 
-	return None
+    return None
 
 
 @login_manager.unauthorized_handler
 def unauthorized():
-	"""Respond to unauthorized requests"""
+    """Respond to unauthorized requests"""
 
-	if request.form.get('api_key'):
-		return jsonify({"message": "Unauthorized request"}), 401
+    if request.form.get("api_key"):
+        return jsonify({"message": "Unauthorized request"}), 401
 
-	return redirect(url_for('index'))
+    return redirect(url_for("index"))
 
 
 BaseModelForm = model_form_factory(FlaskForm)
@@ -54,6 +54,6 @@ BaseModelForm = model_form_factory(FlaskForm)
 
 
 class ModelForm(BaseModelForm):
-	@classmethod
-	def get_session(self):
-		return study.session
+    @classmethod
+    def get_session(self):
+        return study.session

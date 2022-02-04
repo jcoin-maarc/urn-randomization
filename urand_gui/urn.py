@@ -7,9 +7,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 # app.config.from_envvar('app-config.cfg')
 
-study = Study('Example Study')
+study = Study("Example Study")
 
-@app.route('/')
+
+@app.route("/")
 def status():
     study_name = study.print_config()
-    return render_template('status.html', study_name=study_name)
+    return render_template("status.html", study_name=study_name)

@@ -10,19 +10,20 @@ from urand import Study
 
 @click.group()
 @click.pass_context
-@click.option('-s', '--study-name', required=True, help='Name of study')
+@click.option("-s", "--study-name", required=True, help="Name of study")
 def cli(ctx, study_name):
     """Perform urn randomization as described by Wei (1978)"""
-    
+
     try:
-        factors = config[study_name]['factors'].get()
+        factors = config[study_name]["factors"].get()
     except ce.NotFoundError:
-        raise click.UsageError('Participant factors for study "{}" not found'.
-                               format(study_name))
-    
+        raise click.UsageError(
+            'Participant factors for study "{}" not found'.format(study_name)
+        )
+
     ctx.ensure_object(dict)
-    ctx.obj['study_name'] = study_name
-    ctx.obj['factors'] = factors
+    ctx.obj["study_name"] = study_name
+    ctx.obj["factors"] = factors
 
 
 def get_factor_val(levels, prompt):
@@ -35,40 +36,52 @@ def get_factor_val(levels, prompt):
 # TODO Allow factor levels to be specified as options
 @cli.command()
 @click.pass_context
-@click.option('--id', prompt='Participant ID', help='Participant ID')
-@click.option('-u', '--user', prompt='Username', help='Username')
+@click.option("--id", prompt="Participant ID", help="Participant ID")
+@click.option("-u", "--user", prompt="Username", help="Username")
 def randomize(ctx, id, user):
     """Randomize new participant"""
-    
+
     factor_vals = {}
-    for factor in ctx.obj['factors']:
-        levels = [str(s) for s in ctx.obj['factors'][factor]]
-        prompt = '{} ({}): '.format(factor.capitalize(), ', '.join(levels))
-        factor_vals['f_{}'.format(factor)] = get_factor_val(levels, prompt)
-    study = Study(ctx.obj['study_name'])
+    for factor in ctx.obj["factors"]:
+        levels = [str(s) for s in ctx.obj["factors"][factor]]
+        prompt = "{} ({}): ".format(factor.capitalize(), ", ".join(levels))
+        factor_vals["f_{}".format(factor)] = get_factor_val(levels, prompt)
+    study = Study(ctx.obj["study_name"])
     participant = study.participant(id=id, user=user, **factor_vals)
     trt = study.randomize(participant).trt
-    print('\nTreatment assigned: {}'.format(trt))
+    print("\nTreatment assigned: {}".format(trt))
 
 
 @cli.command()
 @click.pass_context
-@click.argument('outfile', type=click.Path(exists=False))
+@click.argument("outfile", type=click.Path(exists=False))
 def export(ctx, outfile):
     """Export study history to OUTFILE"""
-    study = Study(ctx.obj['study_name'])
+    study = Study(ctx.obj["study_name"])
     study.export_history(outfile)
 
 
 @cli.command()
 @click.pass_context
-@click.option('--n_participants', type=int, required=True, prompt='No. of participants', help='Study size')
-@click.option('--seed', type=int, required=True, prompt='Random number generator seed', help='Seed')
+@click.option(
+    "--n_participants",
+    type=int,
+    required=True,
+    prompt="No. of participants",
+    help="Study size",
+)
+@click.option(
+    "--seed",
+    type=int,
+    required=True,
+    prompt="Random number generator seed",
+    help="Seed",
+)
 def dummy_study(ctx, n_participants, seed):
     """Populate a study with dummy data"""
-    study = Study(ctx.obj['study_name'], memory=False)
+    study = Study(ctx.obj["study_name"], memory=False)
     study.generate_dummy_participants(n_participants, seed)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli(obj={})
