@@ -7,7 +7,7 @@ tzone = pytz.timezone("America/Chicago")
 
 
 def randomize(study, participant):
-    if study.study_name == "CHS JCOIN":
+    if study.study_name == "CHS JCOIN HUB":
         if datetime.now(tzone).weekday() == 1:
             if participant.trt == "MART":
                 pdf_assignments = study.export_history()

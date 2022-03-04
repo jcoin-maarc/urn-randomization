@@ -210,16 +210,16 @@ class Study:
         else:
             return pdf
 
-    def upload_existing_history(self, **dct_existing_history):
+    def upload_existing_history(self, **kwargs):
         """Load existing history from study that has already started recruiting"""
-        assert ("file" in dct_existing_history) | ("pdf" in dct_existing_history), (
+        assert ("file" in kwargs) | ("pdf" in kwargs), (
             "Neither filename nor dataframe with assignment " "info provided as input"
         )
         pdf_asgmt = (
-            dct_existing_history["pdf"]
-            if ("pdf" in dct_existing_history)
+            kwargs["pdf"]
+            if ("pdf" in kwargs)
             else pd.read_csv(
-                dct_existing_history["file"], dtype=object, encoding="utf8"
+                kwargs["file"], dtype=object, encoding="utf8"
             )
         )
         assert all(

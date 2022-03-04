@@ -63,6 +63,15 @@ def export(ctx, outfile):
 
 @cli.command()
 @click.pass_context
+@click.argument("infile", type=click.Path(exists=False))
+def upload_participants(ctx, infile):
+    """Export study history to OUTFILE"""
+    study = Study(ctx.obj["study_name"])
+    study.upload_existing_history(file=infile)
+
+
+@cli.command()
+@click.pass_context
 @click.option(
     "--n_participants",
     type=int,

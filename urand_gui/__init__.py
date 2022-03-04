@@ -11,7 +11,7 @@ from .oauth import blueprint
 from .models import db, login_manager, User
 from .cli import create_db, add_user, list_users, delete_user
 
-study = Study("CHS JCOIN")
+study = Study("CHS JCOIN HUB")
 
 app = Flask(__name__)
 app.config.from_object(FlaskConfig)
@@ -50,7 +50,6 @@ def unauthorized():
 
 
 BaseModelForm = model_form_factory(FlaskForm)
-# study = Study("Example Study")
 
 
 class ModelForm(BaseModelForm):

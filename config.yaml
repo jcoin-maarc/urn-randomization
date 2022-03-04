@@ -28,6 +28,44 @@
         sex:
             [male, female]
 
+"CHS JCOIN HUB":
+    starting_seed: 100
+    treatments:
+        - MART
+        - RMC-Q
+        - RMC-A
+
+    factors:
+        local_site:
+          [ "11=Cook County – Chicago", "30=Dupage County", "40=Grundy County", "50=Mclean County", "60=Tazewell County", "70=Will County" ]
+        electronic_monitoring:
+          [ "1=Yes", "2=Other" ]
+        days_in_jail:
+          [ "1=Low (0-12)", "2=Moderate (13-90)", "3=High (91+)" ]
+        under_50:
+          [ "1=yes (18-49)", "2=Other (50 or older)" ]
+        hispanic:
+          [ "1=Yes", "2=Other" ]
+        african_am :
+          [ "1=Yes (including mixed)", "2=Other" ]
+        sex:
+          [ "1=Male", "2=Other" ]
+        overdose_hist:
+          [ "1=yes (1+)", "2=No (0)" ]
+        prior_sutx:
+          [ "1=any MOUD treatment (EU15=1+)", "2= any other SUD treatment [EU10>0]", "3=none" ]
+        days_ou:
+          [ "1=low (0-12)", "2=moderate(13-44)",  "3=high (45 or more)" ]
+        days_stu:
+          [ "1=low (0-12)", "2=moderate(13-44)", "3=high (45 or more)" ]
+        sud:
+          [ "0=low(0)", "2= moderate (1-2)", "3= high (3-5)" ]
+        crime_violence:
+          [ "1=low (0)", "2=Moderate (1-2)", "3=High (3+)" ]
+        com_supervision:
+          ["1=yes (>0 days)", "2=other"]
+
+
 # A short string identifying the study
 "CHS JCOIN":
 
