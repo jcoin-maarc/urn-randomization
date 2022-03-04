@@ -3,7 +3,7 @@ import os
 from wtforms_alchemy import model_form_factory
 from flask_wtf import FlaskForm
 from flask import Flask, request, redirect, jsonify, url_for
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap4
 from urand.config import config as urand_config
 from urand.study import Study
 from .config import Config as FlaskConfig
@@ -23,7 +23,7 @@ app.cli.add_command(delete_user)
 app.config["SQLALCHEMY_DATABASE_URI"] = urand_config["db"].get()
 db.init_app(app)
 login_manager.init_app(app)
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap4(app)
 
 
 @login_manager.request_loader

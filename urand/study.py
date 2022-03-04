@@ -254,7 +254,7 @@ class Study:
                 self.session,
             )
             dct_participant = lstdct_participants[pdf_asgmt.shape[0] - 1]
-            dct_participant["bg_state"] = PCG64(self.starting_seed).state
+            dct_participant["bg_state"] = self.get_bg_state()
             db.add_participants(
                 self.participant,
                 [dct_participant],
