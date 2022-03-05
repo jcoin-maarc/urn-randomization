@@ -1,0 +1,73 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter {\sphinxsymbolsname}
+  \item \spxentry{\sphinxhyphen{}\sphinxhyphen{}id \textless{}id\textgreater{}}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}randomize command line option}, \hyperpage{7}
+  \item \spxentry{\sphinxhyphen{}\sphinxhyphen{}n\_participants \textless{}n\_participants\textgreater{}}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}dummy\sphinxhyphen{}study command line option}, 
+		\hyperpage{6}
+  \item \spxentry{\sphinxhyphen{}\sphinxhyphen{}seed \textless{}seed\textgreater{}}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}dummy\sphinxhyphen{}study command line option}, 
+		\hyperpage{6}
+  \item \spxentry{\sphinxhyphen{}\sphinxhyphen{}study\sphinxhyphen{}name \textless{}study\_name\textgreater{}}
+    \subitem \spxentry{urand/cli.py command line option}, \hyperpage{6}
+  \item \spxentry{\sphinxhyphen{}\sphinxhyphen{}user \textless{}user\textgreater{}}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}randomize command line option}, \hyperpage{7}
+  \item \spxentry{\sphinxhyphen{}s}
+    \subitem \spxentry{urand/cli.py command line option}, \hyperpage{6}
+  \item \spxentry{\sphinxhyphen{}u}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}randomize command line option}, \hyperpage{7}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{EMAIL}
+    \subitem \spxentry{urand\_gui/cli.py\sphinxhyphen{}add\_user command line option}, 
+		\hyperpage{5}
+    \subitem \spxentry{urand\_gui/cli.py\sphinxhyphen{}delete\_user command line option}, 
+		\hyperpage{6}
+
+  \indexspace
+  \bigletter I
+  \item \spxentry{INFILE}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}upload\sphinxhyphen{}participants command line option}, 
+		\hyperpage{7}
+
+  \indexspace
+  \bigletter O
+  \item \spxentry{OUTFILE}
+    \subitem \spxentry{urand/cli.py\sphinxhyphen{}export command line option}, \hyperpage{7}
+
+  \indexspace
+  \bigletter U
+  \item \spxentry{UNAME}
+    \subitem \spxentry{urand\_gui/cli.py\sphinxhyphen{}add\_user command line option}, 
+		\hyperpage{5}
+  \item \spxentry{urand/cli.py command line option}
+    \subitem \spxentry{\sphinxhyphen{}\sphinxhyphen{}study\sphinxhyphen{}name \textless{}study\_name\textgreater{}}, 
+		\hyperpage{6}
+    \subitem \spxentry{\sphinxhyphen{}s}, \hyperpage{6}
+  \item \spxentry{urand/cli.py\sphinxhyphen{}dummy\sphinxhyphen{}study command line option}
+    \subitem \spxentry{\sphinxhyphen{}\sphinxhyphen{}n\_participants \textless{}n\_participants\textgreater{}}, 
+		\hyperpage{6}
+    \subitem \spxentry{\sphinxhyphen{}\sphinxhyphen{}seed \textless{}seed\textgreater{}}, 
+		\hyperpage{6}
+  \item \spxentry{urand/cli.py\sphinxhyphen{}export command line option}
+    \subitem \spxentry{OUTFILE}, \hyperpage{7}
+  \item \spxentry{urand/cli.py\sphinxhyphen{}randomize command line option}
+    \subitem \spxentry{\sphinxhyphen{}\sphinxhyphen{}id \textless{}id\textgreater{}}, \hyperpage{7}
+    \subitem \spxentry{\sphinxhyphen{}\sphinxhyphen{}user \textless{}user\textgreater{}}, 
+		\hyperpage{7}
+    \subitem \spxentry{\sphinxhyphen{}u}, \hyperpage{7}
+  \item \spxentry{urand/cli.py\sphinxhyphen{}upload\sphinxhyphen{}participants command line option}
+    \subitem \spxentry{INFILE}, \hyperpage{7}
+  \item \spxentry{urand\_gui/cli.py\sphinxhyphen{}add\_user command line option}
+    \subitem \spxentry{EMAIL}, \hyperpage{5}
+    \subitem \spxentry{UNAME}, \hyperpage{5}
+  \item \spxentry{urand\_gui/cli.py\sphinxhyphen{}delete\_user command line option}
+    \subitem \spxentry{EMAIL}, \hyperpage{6}
+
+\end{sphinxtheindex}
