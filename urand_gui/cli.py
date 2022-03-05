@@ -5,15 +5,9 @@ from sqlalchemy.orm.exc import NoResultFound
 from flask.cli import with_appcontext
 from urand_gui.models import db, User, Study
 from urand_gui import urand_config
-from flask.cli import AppGroup
 
 
-@click.group()
-def cli():
-    pass
-
-
-@cli.command(name="createdb")
+@click.command(name="createdb")
 @with_appcontext
 def create_db():
     """Initializes flask app DB with available studies & creates user tables"""
@@ -33,7 +27,7 @@ def create_db():
                 db.session.commit()
 
 
-@cli.command(name="add_user")
+@click.command(name="add_user")
 @click.argument("uname")
 @click.argument("email")
 @with_appcontext
@@ -51,7 +45,7 @@ def add_user(uname, email):
         print(ex)
 
 
-@cli.command(name="list_users")
+@click.command(name="list_users")
 @with_appcontext
 def list_users():
     """Lists available users"""
@@ -60,7 +54,7 @@ def list_users():
     print(pdf_user)
 
 
-@cli.command(name="delete_user")
+@click.command(name="delete_user")
 @click.argument("email")
 @with_appcontext
 def delete_user(email):
@@ -73,7 +67,3 @@ def delete_user(email):
         print("Successfully deleted user")
     except NoResultFound:
         print("User not found")
-
-
-if __name__ == "__main__":
-    cli(obj={})
