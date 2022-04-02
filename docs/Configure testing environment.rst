@@ -7,10 +7,15 @@ Install required packages
 Create a conda or virtual environment and install the packages in requirements.txt
 
 ``conda create --name my-env-name python=3.9``
+
 ``conda activate my-env-name``
+
 ``pip install -r requirements.txt``
+
 ``pip uninstall datatables sqlalchemy-datatables``
+
 ``pip install sqlalchemy-datatables``
+
 ``pip uninstall Flask-Bootstrap``
 
 
